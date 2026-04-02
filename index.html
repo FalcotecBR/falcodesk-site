@@ -1,0 +1,2367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Falcodesk — Central Operacional para Serviços Técnicos</title>
+  <meta name="description" content="Centralize chamados, serviços, documentos e acompanhamento do cliente em um único ambiente operacional.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       TOKENS
+    ============================================================ */
+    :root {
+      --bg-base:     #020817;
+      --bg-surface:  #0a1628;
+      --bg-elevated: #0f1e38;
+      --bg-card:     #0c1a30;
+      --bg-inset:    #060e1e;
+
+      --accent:       #06b6d4;
+      --accent-light: #22d3ee;
+      --accent-dim:   #0891b2;
+      --teal:         #14b8a6;
+      --sky:          #38bdf8;
+
+      --accent-glow:       rgba(6, 182, 212, 0.10);
+      --accent-glow-hover: rgba(6, 182, 212, 0.20);
+      --teal-glow:         rgba(20, 184, 166, 0.08);
+
+      --text-primary:   #dde6f0;
+      --text-secondary: #8ba3be;
+      --text-muted:     #445e78;
+      --text-accent:    #67e8f9;
+
+      --border:        rgba(100, 140, 180, 0.07);
+      --border-mid:    rgba(100, 140, 180, 0.12);
+      --border-accent: rgba(6, 182, 212, 0.20);
+      --border-strong: rgba(100, 140, 180, 0.16);
+
+      --r-btn:   20px;
+      --r-card:  24px;
+      --r-panel: 32px;
+
+      --shadow-card:  0 2px 12px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.03) inset;
+      --shadow-panel: 0 8px 48px rgba(0,0,0,0.65), 0 1px 0 rgba(255,255,255,0.04) inset;
+      --shadow-glow:  0 0 48px rgba(6, 182, 212, 0.07);
+    }
+
+    /* ============================================================
+       RESET
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Google Sans Flex', sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Subtle grid */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(100,160,220,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100,160,220,0.022) 1px, transparent 1px);
+      background-size: 64px 64px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ============================================================
+       TYPOGRAPHY
+    ============================================================ */
+    h1, h2, h3, h4 {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.18;
+    }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-family: 'Google Sans Flex', sans-serif;
+    }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 22px 0;
+      transition: padding 0.4s ease, background 0.4s ease, border-color 0.4s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .nav.scrolled {
+      padding: 13px 0;
+      background: rgba(2, 8, 23, 0.90);
+      backdrop-filter: blur(24px) saturate(1.4);
+      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      border-bottom-color: var(--border);
+    }
+    .nav-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-logo-mark {
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, var(--accent), var(--teal));
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      color: #020817;
+      letter-spacing: -0.04em;
+      flex-shrink: 0;
+    }
+    .nav-logo-text {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
+    }
+    .nav-logo-text span { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 22px;
+      background: var(--accent);
+      color: #020817;
+      font-weight: 600;
+      font-size: 13px;
+      border-radius: var(--r-btn);
+      text-decoration: none;
+      transition: all 0.22s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav-cta:hover {
+      background: var(--accent-light);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(6,182,212,0.28);
+    }
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #020817;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      border-radius: var(--r-btn);
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(6,182,212,0.32);
+    }
+    .btn-primary:hover::after { opacity: 1; }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      border-radius: var(--r-btn);
+      text-decoration: none;
+      border: 1px solid var(--border-mid);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .btn-ghost:hover {
+      color: var(--text-primary);
+      border-color: var(--border-accent);
+      background: rgba(6,182,212,0.05);
+      transform: translateY(-1px);
+    }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .section { position: relative; z-index: 1; }
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+    .sep {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-mid) 30%, var(--border-mid) 70%, transparent);
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* ============================================================
+       SCROLL REVEAL
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1),
+                  transform 0.75s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-scale {
+      opacity: 0;
+      transform: translateY(16px) scale(0.975);
+      transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1),
+                  transform 0.65s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-scale.visible { opacity: 1; transform: translateY(0) scale(1); }
+    [data-d="1"] { transition-delay: 0.08s; }
+    [data-d="2"] { transition-delay: 0.17s; }
+    [data-d="3"] { transition-delay: 0.26s; }
+    [data-d="4"] { transition-delay: 0.34s; }
+    [data-d="5"] { transition-delay: 0.42s; }
+    [data-d="6"] { transition-delay: 0.50s; }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      padding: 168px 0 96px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 55% at 50% -5%, rgba(6,182,212,0.07) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 35% at 78% 45%, rgba(20,184,166,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 35% 25% at 20% 70%, rgba(56,189,248,0.04) 0%, transparent 60%);
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 30px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 11px;
+      background: rgba(6,182,212,0.07);
+      border: 1px solid rgba(6,182,212,0.16);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-accent);
+      letter-spacing: 0.01em;
+    }
+    .chip-dot {
+      width: 5px; height: 5px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .hero-title {
+      font-size: clamp(27px, 3.2vw, 43px);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 22px;
+      letter-spacing: -0.03em;
+      line-height: 1.16;
+    }
+    .hero-title em { font-style: normal; color: var(--accent); }
+    .hero-subtitle {
+      font-size: 15.5px;
+      line-height: 1.72;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+    .hero-complement {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      padding-left: 14px;
+      border-left: 2px solid rgba(6,182,212,0.28);
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* ============================================================
+       HERO MOCKUP
+    ============================================================ */
+    .hero-mockup { position: relative; }
+    .mockup-float {
+      position: absolute;
+      border-radius: 16px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-mid);
+      box-shadow: var(--shadow-card);
+      padding: 12px 14px;
+      pointer-events: none;
+    }
+    .mockup-float-tl {
+      top: -18px; left: -22px;
+      z-index: 2;
+      animation: float-tl 4s ease-in-out infinite;
+    }
+    .mockup-float-br {
+      bottom: -16px; right: -20px;
+      z-index: 2;
+      animation: float-br 4.5s ease-in-out infinite 0.8s;
+    }
+    @keyframes float-tl {
+      0%,100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+    @keyframes float-br {
+      0%,100% { transform: translateY(0px); }
+      50% { transform: translateY(5px); }
+    }
+    .mockup-float-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .mockup-float-val {
+      font-family: 'Raleway', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .mockup-float-badge {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 100px;
+      margin-top: 5px;
+      display: inline-block;
+      background: rgba(16,185,129,0.12);
+      color: #34d399;
+    }
+    .mockup-float-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+    .status-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .status-dot.green  { background: #10b981; box-shadow: 0 0 6px rgba(16,185,129,0.5); }
+    .status-dot.amber  { background: #f59e0b; box-shadow: 0 0 6px rgba(245,158,11,0.5); }
+    .status-dot.cyan   { background: var(--accent); box-shadow: 0 0 6px rgba(6,182,212,0.5); }
+    .status-dot.red    { background: #ef4444; box-shadow: 0 0 6px rgba(239,68,68,0.5); }
+
+    .mockup-wrapper {
+      border-radius: var(--r-panel);
+      overflow: hidden;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-mid);
+      box-shadow: var(--shadow-panel), 0 0 80px rgba(6,182,212,0.05);
+      transition: transform 0.08s ease;
+      will-change: transform;
+    }
+    .mockup-titlebar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      background: var(--bg-inset);
+      border-bottom: 1px solid var(--border);
+    }
+    .mockup-dots { display: flex; gap: 5px; }
+    .mockup-dot { width: 9px; height: 9px; border-radius: 50%; }
+    .mockup-dot:nth-child(1) { background: #ef4444; opacity: 0.55; }
+    .mockup-dot:nth-child(2) { background: #f59e0b; opacity: 0.55; }
+    .mockup-dot:nth-child(3) { background: #22c55e; opacity: 0.55; }
+    .mockup-url {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      background: var(--bg-elevated);
+      padding: 3px 14px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+    }
+    .mockup-toolbar { display: flex; gap: 8px; }
+    .mockup-tool-pill {
+      width: 36px; height: 6px;
+      background: var(--border-mid);
+      border-radius: 100px;
+    }
+    .mockup-layout {
+      display: grid;
+      grid-template-columns: 168px 1fr;
+      height: 370px;
+    }
+    .mockup-sidebar {
+      background: var(--bg-inset);
+      border-right: 1px solid var(--border);
+      padding: 14px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .m-nav {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 14px;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      cursor: default;
+      border-radius: 0;
+      transition: background 0.15s;
+    }
+    .m-nav.active {
+      color: var(--text-accent);
+      background: rgba(6,182,212,0.07);
+      border-left: 2px solid var(--accent);
+    }
+    .m-nav-icon {
+      width: 14px; height: 14px;
+      flex-shrink: 0;
+      opacity: 0.4;
+    }
+    .m-nav.active .m-nav-icon { opacity: 1; }
+    .m-sep { height: 1px; background: var(--border); margin: 8px 14px; }
+    .mockup-content {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow: hidden;
+    }
+    .m-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .m-stat {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+    .m-stat-lbl {
+      font-size: 9px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+    .m-stat-num {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .m-stat-sub {
+      font-size: 9px;
+      margin-top: 4px;
+      padding: 2px 6px;
+      border-radius: 100px;
+      display: inline-block;
+    }
+    .m-stat-sub.up   { background: rgba(16,185,129,0.1); color: #34d399; }
+    .m-stat-sub.cyan { background: rgba(6,182,212,0.1);  color: var(--accent); }
+    .m-stat-sub.warn { background: rgba(245,158,11,0.1); color: #fbbf24; }
+    .m-chart {
+      background: var(--bg-inset);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .m-chart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .m-chart-title {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .m-chart-badge {
+      font-size: 9px;
+      padding: 2px 7px;
+      border-radius: 100px;
+      background: rgba(6,182,212,0.1);
+      border: 1px solid rgba(6,182,212,0.18);
+      color: var(--accent);
+    }
+    .m-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 5px;
+      height: 44px;
+    }
+    .m-bar-group { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+    .m-bar {
+      width: 100%;
+      border-radius: 3px 3px 0 0;
+      min-height: 4px;
+      background: rgba(6,182,212,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    .m-bar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(6,182,212,0.6), rgba(6,182,212,0.15));
+    }
+    .m-bar.active { background: rgba(6,182,212,0.4); }
+    .m-bar.active::after { background: linear-gradient(180deg, var(--accent), rgba(6,182,212,0.3)); }
+    .m-bar-lbl { font-size: 8px; color: var(--text-muted); }
+    .m-tickets {
+      background: var(--bg-inset);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      flex: 1;
+    }
+    .m-ticket-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .m-ticket-htitle {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-secondary);
+    }
+    .m-ticket-count {
+      font-size: 9px;
+      padding: 2px 8px;
+      border-radius: 100px;
+      background: rgba(6,182,212,0.08);
+      border: 1px solid rgba(6,182,212,0.16);
+      color: var(--accent);
+    }
+    .m-ticket {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .m-ticket:last-child { border-bottom: none; }
+    .m-badge {
+      font-size: 8px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 100px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .m-badge.critical { background: rgba(239,68,68,0.12);   color: #f87171; }
+    .m-badge.progress { background: rgba(6,182,212,0.12);   color: var(--accent); }
+    .m-badge.open     { background: rgba(245,158,11,0.12);  color: #fbbf24; }
+    .m-badge.done     { background: rgba(16,185,129,0.12);  color: #34d399; }
+    .m-ticket-info { flex: 1; min-width: 0; }
+    .m-ticket-name {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .m-ticket-meta { font-size: 9px; color: var(--text-muted); }
+    .m-ticket-time { font-size: 9px; color: var(--text-muted); flex-shrink: 0; }
+
+    /* ============================================================
+       SECTION — PAIN
+    ============================================================ */
+    .s-pain { padding: 120px 0; }
+    .s-pain-header { max-width: 660px; margin-bottom: 56px; }
+    .s-pain-title {
+      font-size: clamp(26px, 3vw, 40px);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: 12px;
+    }
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+    .pain-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .pain-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(239,68,68,0.28), transparent);
+    }
+    .pain-card:hover {
+      border-color: rgba(239,68,68,0.18);
+      transform: translateY(-3px);
+    }
+    .pain-icon {
+      width: 42px; height: 42px;
+      border-radius: 11px;
+      background: rgba(239,68,68,0.07);
+      border: 1px solid rgba(239,68,68,0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+    .pain-card-title {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 7px;
+    }
+    .pain-card-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+    .pain-close {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--r-card);
+      padding: 36px 44px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .pain-close::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 50% 110%, rgba(6,182,212,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .pain-close-text {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: clamp(17px, 2vw, 23px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.45;
+      position: relative;
+    }
+    .pain-close-text em { font-style: normal; color: var(--accent); }
+
+    /* ============================================================
+       SECTION — VALUE PROP / GRANDEZAS
+    ============================================================ */
+    .s-value { padding: 120px 0; }
+    .s-value::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(6,182,212,0.015) 50%, transparent);
+      pointer-events: none;
+    }
+    .sh-center { text-align: center; max-width: 780px; margin: 0 auto 64px; }
+    .sh-title { font-size: clamp(24px, 2.8vw, 36px); margin-top: 12px; color: var(--text-primary); }
+    .sh-sub { font-size: 15px; color: var(--text-secondary); margin-top: 16px; line-height: 1.68; }
+
+    /* grandeza layout */
+    .value-grandeza { display: flex; flex-direction: column; gap: 88px; }
+    .vg-block {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .vg-block.rev { grid-template-columns: 1.2fr 1fr; }
+    .vg-block.rev .vg-copy { order: 2; }
+    .vg-block.rev .vg-mock { order: 1; }
+
+    .vg-label {
+      display: flex; align-items: center; gap: 9px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 12px;
+    }
+    .vg-label::before {
+      content: ''; display: inline-block;
+      width: 22px; height: 1px; background: var(--accent);
+    }
+    .vg-title {
+      font-size: clamp(20px, 2.3vw, 28px);
+      font-weight: 700; color: var(--text-primary);
+      letter-spacing: -0.03em; line-height: 1.22;
+      margin-bottom: 16px;
+    }
+    .vg-desc {
+      font-size: 15px; color: var(--text-secondary);
+      line-height: 1.72; margin-bottom: 30px;
+    }
+    .vg-feats { display: flex; flex-direction: column; gap: 13px; }
+    .vg-feat { display: flex; align-items: flex-start; gap: 11px; }
+    .vg-feat-ico {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: rgba(6,182,212,0.07);
+      border: 1px solid rgba(6,182,212,0.15);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px; font-size: 12px;
+    }
+    .vg-feat-body {
+      font-size: 13.5px; color: var(--text-secondary);
+      line-height: 1.58; padding-top: 3px;
+    }
+    .vg-feat-body strong { color: var(--text-primary); font-weight: 600; }
+
+    /* section mockup shell */
+    .sv-mock {
+      border-radius: var(--r-panel); overflow: hidden;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-mid);
+      box-shadow: var(--shadow-panel), 0 0 64px rgba(6,182,212,0.045);
+    }
+    .sv-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 11px 16px; background: var(--bg-inset);
+      border-bottom: 1px solid var(--border);
+    }
+    .sv-url {
+      font-size: 11px; color: var(--text-muted);
+      background: var(--bg-elevated); padding: 3px 13px;
+      border-radius: 100px; border: 1px solid var(--border);
+    }
+    .sv-body { display: grid; height: 330px; }
+    .sv-body-exec { grid-template-columns: 148px 1fr; }
+    .sv-body-doc  { grid-template-columns: 164px 1fr; }
+    .sv-sidebar {
+      background: var(--bg-inset); border-right: 1px solid var(--border);
+      padding: 12px 0; display: flex; flex-direction: column;
+      gap: 2px; overflow: hidden;
+    }
+    .sv-content { padding: 13px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+
+    /* Mockup 1 – Execution */
+    .exec-queue { display: flex; flex-direction: column; border-radius: 10px; border: 1px solid var(--border); overflow: hidden; }
+    .exec-qhead {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 12px; border-bottom: 1px solid var(--border);
+      background: var(--bg-elevated);
+    }
+    .exec-qtitle { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-secondary); }
+    .exec-qcount { font-size: 9px; padding: 2px 8px; border-radius: 100px; background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.16); color: var(--accent); }
+    .exec-row {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 12px; border-bottom: 1px solid var(--border);
+    }
+    .exec-row:last-child { border-bottom: none; }
+    .exec-pri { width: 3px; height: 32px; border-radius: 2px; flex-shrink: 0; }
+    .exec-pri.red   { background: #ef4444; }
+    .exec-pri.amber { background: #f59e0b; }
+    .exec-pri.cyan  { background: var(--accent); }
+    .exec-pri.slate { background: var(--text-muted); }
+    .exec-info { flex: 1; min-width: 0; }
+    .exec-name { font-size: 11px; font-weight: 500; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .exec-meta { font-size: 9px; color: var(--text-muted); margin-top: 2px; }
+    .exec-sla { font-size: 9px; padding: 2px 7px; border-radius: 100px; white-space: nowrap; flex-shrink: 0; }
+    .exec-sla.late { background: rgba(239,68,68,0.1); color: #f87171; }
+    .exec-sla.warn { background: rgba(245,158,11,0.1); color: #fbbf24; }
+    .exec-sla.ok   { background: rgba(16,185,129,0.1); color: #34d399; }
+    .exec-svc { display: flex; flex-direction: column; gap: 6px; }
+    .exec-svc-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 2px; }
+    .exec-svc-item { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 9px; background: var(--bg-elevated); border: 1px solid var(--border); }
+    .exec-svc-name { font-size: 11px; font-weight: 500; color: var(--text-primary); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .exec-svc-tag { font-size: 9px; padding: 2px 7px; border-radius: 100px; flex-shrink: 0; }
+    .exec-svc-tag.active { background: rgba(6,182,212,0.1); color: var(--accent); }
+    .exec-svc-tag.review { background: rgba(245,158,11,0.1); color: #fbbf24; }
+
+    /* Mockup 2 – Documents & Planning */
+    .doc-tree { padding: 10px; display: flex; flex-direction: column; gap: 3px; overflow: hidden; }
+    .doc-client-lbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); padding: 5px 4px 3px; }
+    .doc-file { display: flex; align-items: center; gap: 7px; padding: 5px 7px; border-radius: 6px; font-size: 11px; color: var(--text-secondary); }
+    .doc-file.active { background: rgba(6,182,212,0.07); color: var(--text-accent); }
+    .doc-sep { height: 1px; background: var(--border); margin: 5px 0; }
+    .doc-viewer { background: var(--bg-elevated); border: 1px solid var(--border-accent); border-radius: 10px; padding: 12px 14px; }
+    .doc-viewer-name { font-size: 11px; font-weight: 600; color: var(--text-primary); margin-bottom: 5px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .doc-viewer-meta { font-size: 9px; color: var(--text-muted); margin-bottom: 10px; }
+    .doc-lines { display: flex; flex-direction: column; gap: 5px; }
+    .doc-line { height: 7px; border-radius: 4px; background: var(--border-mid); }
+    .doc-line.short { width: 55%; }
+    .doc-line.mid   { width: 75%; }
+    .tl-block { display: flex; flex-direction: column; border-radius: 10px; border: 1px solid var(--border); overflow: hidden; }
+    .tl-block-head { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-bottom: 1px solid var(--border); background: var(--bg-elevated); }
+    .tl-block-title { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-secondary); }
+    .tl-entry { display: flex; align-items: flex-start; gap: 9px; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+    .tl-entry:last-child { border-bottom: none; }
+    .tl-tag { font-size: 9px; padding: 2px 7px; border-radius: 100px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
+    .tl-tag.cyan  { background: rgba(6,182,212,0.1); color: var(--accent); }
+    .tl-tag.teal  { background: rgba(20,184,166,0.1); color: var(--teal); }
+    .tl-tag.amber { background: rgba(245,158,11,0.1); color: #fbbf24; }
+    .tl-entry-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+    .tl-entry-meta { font-size: 9px; color: var(--text-muted); margin-top: 2px; }
+
+    /* Mockup 3 – Visibility & Control */
+    .sv-body-vis { display: flex; flex-direction: column; height: 330px; }
+    .vis-top { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 12px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+    .vis-stat { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 9px; padding: 9px 11px; }
+    .vis-stat-lbl { font-size: 8px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 3px; }
+    .vis-stat-val { font-family: 'Raleway', sans-serif; font-size: 20px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.04em; line-height: 1; }
+    .vis-stat-sub { font-size: 9px; margin-top: 3px; padding: 1px 6px; border-radius: 100px; display: inline-block; }
+    .vis-stat-sub.up   { background: rgba(16,185,129,0.1); color: #34d399; }
+    .vis-stat-sub.cyan { background: rgba(6,182,212,0.1); color: var(--accent); }
+    .vis-stat-sub.warn { background: rgba(245,158,11,0.1); color: #fbbf24; }
+    .vis-middle { display: grid; grid-template-columns: 1fr 1fr; flex: 1; overflow: hidden; }
+    .vis-team { border-right: 1px solid var(--border); padding: 12px; display: flex; flex-direction: column; gap: 8px; overflow: hidden; }
+    .vis-team-head { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: var(--text-muted); margin-bottom: 2px; }
+    .vis-member { display: flex; align-items: center; gap: 8px; }
+    .vis-avatar { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: #020817; }
+    .vis-member-info { flex: 1; min-width: 0; }
+    .vis-member-name { font-size: 10px; font-weight: 500; color: var(--text-primary); }
+    .vis-member-task { font-size: 9px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .vis-member-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .vis-portal { padding: 12px; display: flex; flex-direction: column; gap: 7px; overflow: hidden; }
+    .vis-portal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px; }
+    .vis-portal-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: var(--accent); }
+    .vis-portal-badge { font-size: 9px; padding: 2px 7px; border-radius: 100px; background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.16); color: var(--accent); }
+    .vis-portal-item { display: flex; align-items: center; gap: 7px; padding: 7px 9px; border-radius: 8px; background: rgba(6,182,212,0.04); border: 1px solid rgba(6,182,212,0.09); }
+    .vis-portal-item-info { flex: 1; min-width: 0; }
+    .vis-portal-item-name { font-size: 10px; font-weight: 500; color: var(--text-primary); }
+    .vis-portal-item-meta { font-size: 9px; color: var(--text-muted); margin-top: 1px; }
+
+    /* ============================================================
+       SECTION — BENEFITS
+    ============================================================ */
+    .s-benefits { padding: 120px 0; }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+    .b-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 28px 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .b-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 55%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .b-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card);
+    }
+    .b-card:hover::before { opacity: 1; }
+    .b-icon {
+      width: 54px; height: 54px;
+      border-radius: 15px;
+      background: rgba(6,182,212,0.06);
+      border: 1px solid rgba(6,182,212,0.11);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      font-size: 24px;
+    }
+    .b-title { font-size: 13.5px; font-weight: 600; color: var(--text-primary); margin-bottom: 9px; line-height: 1.35; }
+    .b-desc  { font-size: 12px; color: var(--text-secondary); line-height: 1.65; }
+
+    /* ============================================================
+       SECTION — HOW IT WORKS
+    ============================================================ */
+    .s-how { padding: 120px 0; }
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+      position: relative;
+    }
+    .how-grid::before {
+      content: '';
+      position: absolute;
+      top: 35px; left: 12%; right: 12%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-accent) 20%, var(--border-accent) 80%, transparent);
+      pointer-events: none;
+    }
+    .h-step {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 28px 18px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .h-step:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card), var(--shadow-glow);
+    }
+    .h-num {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent);
+      position: relative; z-index: 1;
+    }
+    .h-title { font-size: 13.5px; font-weight: 600; color: var(--text-primary); margin-bottom: 9px; line-height: 1.3; }
+    .h-desc  { font-size: 12px; color: var(--text-secondary); line-height: 1.65; }
+
+    /* ============================================================
+       SECTION — DIFFERENTIAL
+    ============================================================ */
+    .s-diff { padding: 120px 0; }
+    .diff-table {
+      display: grid;
+      grid-template-columns: 1fr 64px 1fr;
+      gap: 0;
+      margin-top: 0;
+    }
+    .diff-col {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      overflow: hidden;
+    }
+    .diff-col.bright {
+      border-color: var(--border-accent);
+      box-shadow: var(--shadow-glow);
+    }
+    .diff-colhead {
+      padding: 18px 26px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .diff-colhead-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+    .diff-col.dim  .diff-colhead-label { color: var(--text-muted); }
+    .diff-col.bright .diff-colhead-label { color: var(--accent); }
+    .diff-vs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+    .diff-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 14px 26px;
+      border-bottom: 1px solid var(--border);
+    }
+    .diff-row:last-child { border-bottom: none; }
+    .diff-row-ico {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .diff-col.dim   .diff-row-ico { background: rgba(239,68,68,0.1);   color: #f87171; }
+    .diff-col.bright .diff-row-ico { background: rgba(16,185,129,0.1); color: #34d399; }
+    .diff-row-text { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+    .diff-footer {
+      text-align: center;
+      margin-top: 52px;
+    }
+    .diff-footer-line {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: clamp(18px, 2vw, 24px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
+    .diff-footer-line em { font-style: normal; color: var(--accent); }
+
+    /* ============================================================
+       SECTION — FOR WHOM
+    ============================================================ */
+    .s-whom { padding: 120px 0; }
+    .whom-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+    .w-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 28px 18px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .w-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card);
+    }
+    .w-icon {
+      width: 50px; height: 50px;
+      border-radius: 14px;
+      background: rgba(6,182,212,0.06);
+      border: 1px solid rgba(6,182,212,0.11);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 22px;
+    }
+    .w-title { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 7px; line-height: 1.3; }
+    .w-desc  { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+
+    /* ============================================================
+       SECTION — PERCEIVED GAIN
+    ============================================================ */
+    .s-gain { padding: 120px 0; }
+    .gain-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .gain-items { display: flex; flex-direction: column; gap: 14px; }
+    .g-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px 22px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+    .g-item:hover {
+      border-color: var(--border-accent);
+      transform: translateX(4px);
+      box-shadow: var(--shadow-card);
+    }
+    .g-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: rgba(6,182,212,0.07);
+      border: 1px solid rgba(6,182,212,0.13);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 17px;
+    }
+    .g-title { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+    .g-desc  { font-size: 12.5px; color: var(--text-secondary); line-height: 1.55; }
+    .gain-statement {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--r-panel);
+      padding: 52px 44px;
+      position: relative;
+      overflow: hidden;
+    }
+    .gain-statement::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 90% 90% at 50% 50%, rgba(6,182,212,0.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .gain-quote {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: clamp(19px, 2.2vw, 27px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.38;
+      position: relative; z-index: 1;
+      margin-top: 20px;
+    }
+    .gain-quote em { font-style: normal; color: var(--accent); }
+
+    /* ============================================================
+       SECTION — FINAL CTA
+    ============================================================ */
+    .s-cta { padding: 120px 0; }
+    .cta-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--r-panel);
+      padding: 88px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 75% 65% at 50% -10%, rgba(6,182,212,0.09) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 45% at 50% 110%, rgba(20,184,166,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cta-panel-title {
+      font-size: clamp(24px, 2.8vw, 38px);
+      font-weight: 700;
+      color: var(--text-primary);
+      max-width: 720px;
+      margin: 0 auto 18px;
+      line-height: 1.22;
+      position: relative; z-index: 1;
+    }
+    .cta-panel-sub {
+      font-size: 15.5px;
+      color: var(--text-secondary);
+      max-width: 580px;
+      margin: 0 auto 44px;
+      line-height: 1.72;
+      position: relative; z-index: 1;
+    }
+    .cta-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      position: relative; z-index: 1;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 64px 0 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      gap: 52px;
+      align-items: start;
+      margin-bottom: 52px;
+    }
+    .footer-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      text-decoration: none;
+    }
+    .footer-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; max-width: 270px; }
+    .footer-eco  { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
+    .footer-eco strong { color: var(--text-secondary); }
+    .f-col-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+    .f-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .f-links a {
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .f-links a:hover { color: var(--text-primary); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copy { font-size: 12px; color: var(--text-muted); }
+    .footer-live {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .live-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 7px rgba(16,185,129,0.6);
+      animation: live-pulse 2.2s ease-in-out infinite;
+    }
+    @keyframes live-pulse {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1100px) {
+      .hero-inner          { grid-template-columns: 1fr; }
+      .hero-mockup         { display: none; }
+      .benefits-grid       { grid-template-columns: repeat(3, 1fr); }
+      .how-grid            { grid-template-columns: repeat(3, 1fr); }
+      .whom-grid           { grid-template-columns: repeat(3, 1fr); }
+      .diff-table          { grid-template-columns: 1fr; gap: 20px; }
+      .diff-vs             { display: none; }
+      .gain-grid           { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid         { grid-template-columns: 1fr 1fr; }
+      .vg-block,
+      .vg-block.rev        { grid-template-columns: 1fr; gap: 40px; }
+      .vg-block.rev .vg-copy { order: 1; }
+      .vg-block.rev .vg-mock { order: 2; }
+    }
+    @media (max-width: 768px) {
+      .nav-links           { display: none; }
+      .pain-grid           { grid-template-columns: 1fr; }
+      .benefits-grid       { grid-template-columns: repeat(2, 1fr); }
+      .how-grid            { grid-template-columns: repeat(2, 1fr); }
+      .how-grid::before    { display: none; }
+      .whom-grid           { grid-template-columns: repeat(2, 1fr); }
+      .cta-panel           { padding: 52px 28px; }
+      .footer-grid         { grid-template-columns: 1fr; gap: 36px; }
+      .container           { padding: 0 20px; }
+      .sv-body             { height: auto; min-height: 260px; }
+      .sv-body-vis         { height: auto; }
+      .vis-top             { grid-template-columns: repeat(2, 1fr); }
+      .vis-middle          { grid-template-columns: 1fr; }
+      .vis-team            { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+    @media (max-width: 480px) {
+      .benefits-grid { grid-template-columns: 1fr; }
+      .how-grid      { grid-template-columns: 1fr; }
+      .whom-grid     { grid-template-columns: 1fr 1fr; }
+      .hero          { padding: 140px 0 72px; }
+      .sv-body-exec,
+      .sv-body-doc   { grid-template-columns: 1fr; }
+      .sv-sidebar    { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+============================================================ -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark">FD</div>
+      <span class="nav-logo-text">Falco<span>desk</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#s-valor">Plataforma</a></li>
+      <li><a href="#s-como">Como funciona</a></li>
+      <li><a href="#s-diff">Diferencial</a></li>
+      <li><a href="#s-quem">Para quem</a></li>
+    </ul>
+    <a href="#s-cta" class="nav-cta">Agendar demonstração</a>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="hero section" id="hero">
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-inner">
+
+      <!-- LEFT: copy -->
+      <div class="hero-content">
+        <div class="hero-chips reveal" data-d="1">
+          <span class="chip"><span class="chip-dot"></span>operação centralizada</span>
+          <span class="chip"><span class="chip-dot"></span>histórico confiável</span>
+          <span class="chip"><span class="chip-dot"></span>controle institucional</span>
+          <span class="chip"><span class="chip-dot"></span>transparência com o cliente</span>
+        </div>
+        <h1 class="hero-title reveal" data-d="2">
+          Sua operação não precisa mais viver espalhada em <em>WhatsApp</em>, planilhas, tarefas soltas e cobrança sem contexto.
+        </h1>
+        <p class="hero-subtitle reveal" data-d="3">
+          Centralize chamados, serviços, documentos e acompanhamento do cliente em um único ambiente operacional. A Falcodesk organiza a rotina técnica da sua empresa com mais clareza, histórico, controle e transparência.
+        </p>
+        <p class="hero-complement reveal" data-d="4">
+          Tudo em uma interface pensada para leitura rápida, execução contínua e tomada de decisão.
+        </p>
+        <div class="hero-actions reveal" data-d="5">
+          <a href="#s-cta" class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Quero ver a Falcodesk em ação
+          </a>
+          <a href="#s-cta" class="btn-ghost">Falar com o time →</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: mockup -->
+      <div class="hero-mockup reveal" data-d="3">
+
+        <!-- Floating badge TL -->
+        <div class="mockup-float mockup-float-tl">
+          <div class="mockup-float-label">Chamados abertos</div>
+          <div class="mockup-float-val">24</div>
+          <div class="mockup-float-badge">+3 hoje</div>
+        </div>
+
+        <!-- Floating badge BR -->
+        <div class="mockup-float mockup-float-br">
+          <div class="mockup-float-status">
+            <span class="status-dot green"></span>
+            <span>Plataforma operando normalmente</span>
+          </div>
+        </div>
+
+        <div class="mockup-wrapper" id="mockupEl">
+          <!-- Titlebar -->
+          <div class="mockup-titlebar">
+            <div class="mockup-dots">
+              <div class="mockup-dot"></div>
+              <div class="mockup-dot"></div>
+              <div class="mockup-dot"></div>
+            </div>
+            <div class="mockup-url">app.falcodesk.com.br · chamados</div>
+            <div class="mockup-toolbar">
+              <div class="mockup-tool-pill"></div>
+              <div class="mockup-tool-pill"></div>
+            </div>
+          </div>
+
+          <!-- Layout: sidebar + content -->
+          <div class="mockup-layout">
+
+            <!-- Sidebar -->
+            <div class="mockup-sidebar">
+              <div class="m-nav active">
+                <svg class="m-nav-icon" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1.2"/><rect x="9" y="1" width="6" height="6" rx="1.2"/><rect x="1" y="9" width="6" height="6" rx="1.2"/><rect x="9" y="9" width="6" height="6" rx="1.2"/></svg>
+                Dashboard
+              </div>
+              <div class="m-nav">
+                <svg class="m-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><path d="M8 4v4l3 2"/></svg>
+                Chamados
+              </div>
+              <div class="m-nav">
+                <svg class="m-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"/><path d="M5 6h6M5 9h4"/></svg>
+                Serviços
+              </div>
+              <div class="m-nav">
+                <svg class="m-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 2h7l3 3v9a1 1 0 01-1 1H3a1 1 0 01-1-1V3a1 1 0 011-1z"/></svg>
+                Documentos
+              </div>
+              <div class="m-sep"></div>
+              <div class="m-nav">
+                <svg class="m-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6.5" cy="5.5" r="3"/><path d="M2 13.5c0-2.5 2-4 4.5-4s4.5 1.5 4.5 4"/><circle cx="12" cy="5" r="2.5"/><path d="M13.5 11.5c1 .5 2 1.5 2 3"/></svg>
+                Clientes
+              </div>
+              <div class="m-nav">
+                <svg class="m-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="2 12 5 7 8 10 11 5 14 8"/></svg>
+                Relatórios
+              </div>
+            </div>
+
+            <!-- Main content -->
+            <div class="mockup-content">
+              <!-- Stats -->
+              <div class="m-stats">
+                <div class="m-stat">
+                  <div class="m-stat-lbl">Abertos</div>
+                  <div class="m-stat-num">24</div>
+                  <div class="m-stat-sub warn">4 críticos</div>
+                </div>
+                <div class="m-stat">
+                  <div class="m-stat-lbl">Em execução</div>
+                  <div class="m-stat-num">11</div>
+                  <div class="m-stat-sub cyan">↑ 8%</div>
+                </div>
+                <div class="m-stat">
+                  <div class="m-stat-lbl">Resolvidos</div>
+                  <div class="m-stat-num">37</div>
+                  <div class="m-stat-sub up">este mês</div>
+                </div>
+              </div>
+
+              <!-- Chart -->
+              <div class="m-chart">
+                <div class="m-chart-header">
+                  <span class="m-chart-title">Chamados — últimos 7 dias</span>
+                  <span class="m-chart-badge">+12%</span>
+                </div>
+                <div class="m-bars">
+                  <div class="m-bar-group"><div class="m-bar" style="height:28px"></div><span class="m-bar-lbl">S</span></div>
+                  <div class="m-bar-group"><div class="m-bar" style="height:36px"></div><span class="m-bar-lbl">T</span></div>
+                  <div class="m-bar-group"><div class="m-bar" style="height:22px"></div><span class="m-bar-lbl">Q</span></div>
+                  <div class="m-bar-group"><div class="m-bar" style="height:40px"></div><span class="m-bar-lbl">Q</span></div>
+                  <div class="m-bar-group"><div class="m-bar" style="height:32px"></div><span class="m-bar-lbl">S</span></div>
+                  <div class="m-bar-group"><div class="m-bar" style="height:18px"></div><span class="m-bar-lbl">S</span></div>
+                  <div class="m-bar-group"><div class="m-bar active" style="height:44px"></div><span class="m-bar-lbl" style="color:var(--accent)">D</span></div>
+                </div>
+              </div>
+
+              <!-- Ticket list -->
+              <div class="m-tickets">
+                <div class="m-ticket-head">
+                  <span class="m-ticket-htitle">Chamados recentes</span>
+                  <span class="m-ticket-count">24 abertos</span>
+                </div>
+                <div class="m-ticket">
+                  <span class="m-badge critical">Crítico</span>
+                  <div class="m-ticket-info">
+                    <div class="m-ticket-name">Falha no servidor principal</div>
+                    <div class="m-ticket-meta">TechCorp Brasil · #4821</div>
+                  </div>
+                  <span class="m-ticket-time">12min</span>
+                </div>
+                <div class="m-ticket">
+                  <span class="m-badge progress">Em progresso</span>
+                  <div class="m-ticket-info">
+                    <div class="m-ticket-name">Migração de banco de dados</div>
+                    <div class="m-ticket-meta">Grupo Logística · #4819</div>
+                  </div>
+                  <span class="m-ticket-time">1h</span>
+                </div>
+                <div class="m-ticket">
+                  <span class="m-badge open">Aberto</span>
+                  <div class="m-ticket-info">
+                    <div class="m-ticket-name">Configuração de firewall</div>
+                    <div class="m-ticket-meta">Retail Solutions · #4817</div>
+                  </div>
+                  <span class="m-ticket-time">3h</span>
+                </div>
+                <div class="m-ticket">
+                  <span class="m-badge done">Resolvido</span>
+                  <div class="m-ticket-info">
+                    <div class="m-ticket-name">Atualização de certificados</div>
+                    <div class="m-ticket-meta">FinTech SA · #4815</div>
+                  </div>
+                  <span class="m-ticket-time">6h</span>
+                </div>
+              </div>
+            </div>
+          </div><!-- /layout -->
+        </div><!-- /mockup-wrapper -->
+      </div><!-- /hero-mockup -->
+
+    </div><!-- /hero-inner -->
+  </div><!-- /container -->
+</section>
+
+<div class="sep"></div>
+
+<!-- ============================================================
+     PAIN / IDENTIFICATION
+============================================================ -->
+<section class="section s-pain" id="s-dor">
+  <div class="container">
+    <div class="s-pain-header">
+      <span class="eyebrow reveal">Problema real</span>
+      <h2 class="s-pain-title reveal" data-d="1">Quando a operação cresce, a desorganização cresce junto.</h2>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card reveal-scale" data-d="1">
+        <div class="pain-icon">📨</div>
+        <div class="pain-card-title">Chamados por múltiplos canais</div>
+        <div class="pain-card-desc">WhatsApp, e-mail, Telegram e ligação ao mesmo tempo. Sem rastreabilidade, sem histórico, sem controle real sobre o que está aberto.</div>
+      </div>
+      <div class="pain-card reveal-scale" data-d="2">
+        <div class="pain-icon">🌀</div>
+        <div class="pain-card-title">Demandas sem contexto</div>
+        <div class="pain-card-desc">A equipe executa sem saber o histórico. O que foi feito antes? Por quem? Com qual resultado? Ninguém tem a resposta completa.</div>
+      </div>
+      <div class="pain-card reveal-scale" data-d="3">
+        <div class="pain-icon">📂</div>
+        <div class="pain-card-title">Documentos espalhados</div>
+        <div class="pain-card-desc">Google Drive, e-mail, pastas locais. Cada cliente num lugar diferente. Localizar uma informação leva tempo que não existe.</div>
+      </div>
+      <div class="pain-card reveal-scale" data-d="4">
+        <div class="pain-icon">❓</div>
+        <div class="pain-card-title">Cliente cobrando status</div>
+        <div class="pain-card-desc">O cliente não tem visibilidade. Cobra por mensagem, gera retrabalho e desgasta o relacionamento sem necessidade.</div>
+      </div>
+      <div class="pain-card reveal-scale" data-d="5">
+        <div class="pain-icon">🔲</div>
+        <div class="pain-card-title">Equipe sem visão completa</div>
+        <div class="pain-card-desc">Cada um trabalha no próprio quadrado. Sem leitura do todo, os gargalos só aparecem quando já viraram problema crítico.</div>
+      </div>
+      <div class="pain-card reveal-scale" data-d="6">
+        <div class="pain-icon">📊</div>
+        <div class="pain-card-title">Gestão no meio do ruído</div>
+        <div class="pain-card-desc">Sem painel operacional, a gestão não consegue medir, priorizar ou antecipar. Só reage quando o cliente já está insatisfeito.</div>
+      </div>
+    </div>
+    <div class="pain-close reveal">
+      <p class="pain-close-text">
+        O problema não é só falta de ferramenta. É operar sem <em>um ambiente central confiável</em>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============================================================
+     VALUE PROPOSITION — 3 GRANDEZAS
+============================================================ -->
+<section class="section s-value" id="s-valor">
+  <div class="container">
+
+    <div class="sh-center reveal">
+      <span class="eyebrow">Plataforma</span>
+      <h2 class="sh-title">Três dimensões que organizam sua operação técnica inteira.</h2>
+      <p class="sh-sub">A Falcodesk não é um conjunto de funcionalidades soltas. É uma estrutura construída em torno de três grandezas operacionais — cada uma resolve uma camada diferente. Juntas, formam o ambiente que sua operação precisa para funcionar de verdade.</p>
+    </div>
+
+    <div class="value-grandeza">
+
+      <!-- ── GRANDEZA 01: EXECUÇÃO ─────────────────────────── -->
+      <div class="vg-block reveal">
+        <div class="vg-copy">
+          <span class="vg-label">Grandeza 01 &mdash; Execução</span>
+          <h3 class="vg-title">Chamados registrados, priorizados e serviços em andamento com visão total.</h3>
+          <p class="vg-desc">Toda demanda que chega tem um lugar — com status, responsável e prioridade definidos. Os chamados ficam rastreáveis do início ao fechamento, e os serviços ativos ficam visíveis para toda a equipe. Sem depender de mensagem. Sem contexto perdido no meio da execução.</p>
+          <div class="vg-feats">
+            <div class="vg-feat">
+              <div class="vg-feat-ico">🎫</div>
+              <div class="vg-feat-body"><strong>Chamados com prioridade, SLA e histórico completo</strong> — do primeiro contato ao fechamento, com linha do tempo clara e rastreável.</div>
+            </div>
+            <div class="vg-feat">
+              <div class="vg-feat-ico">⚙️</div>
+              <div class="vg-feat-body"><strong>Serviços ativos com status, responsável e prazo visível</strong> — contratos e execução contínua em leitura imediata para a equipe.</div>
+            </div>
+          </div>
+        </div>
+        <div class="vg-mock">
+          <div class="sv-mock">
+            <div class="sv-bar">
+              <div class="mockup-dots"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div></div>
+              <div class="sv-url">app.falcodesk.com.br · chamados</div>
+              <div class="mockup-toolbar"><div class="mockup-tool-pill"></div><div class="mockup-tool-pill"></div></div>
+            </div>
+            <div class="sv-body sv-body-exec">
+              <div class="sv-sidebar">
+                <div class="m-nav active">📋 Chamados</div>
+                <div class="m-nav">⚙️ Serviços</div>
+                <div class="m-sep"></div>
+                <div class="m-nav">👤 Clientes</div>
+                <div class="m-nav">📊 Relatórios</div>
+                <div class="m-nav">🗓️ Planejamento</div>
+              </div>
+              <div class="sv-content">
+                <div class="exec-queue">
+                  <div class="exec-qhead">
+                    <span class="exec-qtitle">Fila de chamados</span>
+                    <span class="exec-qcount">18 abertos</span>
+                  </div>
+                  <div class="exec-row">
+                    <div class="exec-pri red"></div>
+                    <div class="exec-info">
+                      <div class="exec-name">Servidor fora do ar — produção</div>
+                      <div class="exec-meta">TechCorp · #5021 · Ana Lima</div>
+                    </div>
+                    <span class="exec-sla late">Atrasado</span>
+                  </div>
+                  <div class="exec-row">
+                    <div class="exec-pri amber"></div>
+                    <div class="exec-info">
+                      <div class="exec-name">Lentidão no sistema ERP</div>
+                      <div class="exec-meta">Logística SA · #5019 · Pedro R.</div>
+                    </div>
+                    <span class="exec-sla warn">2h restantes</span>
+                  </div>
+                  <div class="exec-row">
+                    <div class="exec-pri cyan"></div>
+                    <div class="exec-info">
+                      <div class="exec-name">Configuração de VPN remota</div>
+                      <div class="exec-meta">Retail Co · #5017 · Carla M.</div>
+                    </div>
+                    <span class="exec-sla ok">Dentro do SLA</span>
+                  </div>
+                  <div class="exec-row">
+                    <div class="exec-pri slate"></div>
+                    <div class="exec-info">
+                      <div class="exec-name">Atualização de licenças Windows</div>
+                      <div class="exec-meta">FinTech SA · #5015 · João A.</div>
+                    </div>
+                    <span class="exec-sla ok">Dentro do SLA</span>
+                  </div>
+                </div>
+                <div class="exec-svc">
+                  <div class="exec-svc-title">Serviços em execução</div>
+                  <div class="exec-svc-item">
+                    <span class="exec-svc-name">Sustentação TechCorp — Mai/25</span>
+                    <span class="exec-svc-tag active">Ativo</span>
+                  </div>
+                  <div class="exec-svc-item">
+                    <span class="exec-svc-name">Managed Services Logística SA</span>
+                    <span class="exec-svc-tag review">Em revisão</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── GRANDEZA 02: BASE ─────────────────────────────── -->
+      <div class="vg-block rev reveal">
+        <div class="vg-copy">
+          <span class="vg-label">Grandeza 02 &mdash; Base</span>
+          <h3 class="vg-title">Documentação organizada e planejamento com previsibilidade real.</h3>
+          <p class="vg-desc">Cada cliente tem sua própria base documental — contratos, relatórios, evidências e registros — localizáveis em segundos, não em horas. O planejamento de entregas e atividades fica estruturado com linha do tempo clara para quem executa e para quem toma decisão.</p>
+          <div class="vg-feats">
+            <div class="vg-feat">
+              <div class="vg-feat-ico">📋</div>
+              <div class="vg-feat-body"><strong>Documentos por cliente, sempre organizados e localizáveis</strong> — contratos, relatórios e evidências em um único lugar por contexto.</div>
+            </div>
+            <div class="vg-feat">
+              <div class="vg-feat-ico">🗓️</div>
+              <div class="vg-feat-body"><strong>Planejamento de atividades com linha do tempo</strong> — entregas e agendamentos visíveis antes de virarem problema.</div>
+            </div>
+          </div>
+        </div>
+        <div class="vg-mock">
+          <div class="sv-mock">
+            <div class="sv-bar">
+              <div class="mockup-dots"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div></div>
+              <div class="sv-url">app.falcodesk.com.br · documentos</div>
+              <div class="mockup-toolbar"><div class="mockup-tool-pill"></div><div class="mockup-tool-pill"></div></div>
+            </div>
+            <div class="sv-body sv-body-doc">
+              <div class="sv-sidebar">
+                <div class="doc-tree">
+                  <div class="doc-client-lbl">TechCorp Brasil</div>
+                  <div class="doc-file active"><span>📄</span> Contrato 2025.pdf</div>
+                  <div class="doc-file"><span>📊</span> Relatório Abr/25</div>
+                  <div class="doc-file"><span>🔐</span> Credenciais VPN</div>
+                  <div class="doc-sep"></div>
+                  <div class="doc-client-lbl">Logística SA</div>
+                  <div class="doc-file"><span>📄</span> SLA Vigente</div>
+                  <div class="doc-file"><span>📊</span> Relatório Mar/25</div>
+                  <div class="doc-sep"></div>
+                  <div class="doc-client-lbl">Retail Co</div>
+                  <div class="doc-file"><span>📄</span> Proposta Técnica</div>
+                  <div class="doc-file"><span>📋</span> Escopo aprovado</div>
+                </div>
+              </div>
+              <div class="sv-content">
+                <div class="doc-viewer">
+                  <div class="doc-viewer-name">
+                    📄 Contrato TechCorp 2025
+                    <span class="m-badge done">Vigente</span>
+                  </div>
+                  <div class="doc-viewer-meta">Atualizado em 02/04/2025 · Por Ana Lima · v2.1</div>
+                  <div class="doc-lines">
+                    <div class="doc-line mid"></div>
+                    <div class="doc-line" style="width:90%"></div>
+                    <div class="doc-line short"></div>
+                    <div class="doc-line mid"></div>
+                    <div class="doc-line" style="width:82%"></div>
+                  </div>
+                </div>
+                <div class="tl-block">
+                  <div class="tl-block-head">
+                    <span class="tl-block-title">Planejamento — Abril / Maio</span>
+                    <span class="exec-qcount">4 eventos</span>
+                  </div>
+                  <div class="tl-entry">
+                    <span class="tl-tag cyan">Hoje</span>
+                    <div>
+                      <div class="tl-entry-name">Reunião de alinhamento TechCorp</div>
+                      <div class="tl-entry-meta">14h00 · Ana Lima</div>
+                    </div>
+                  </div>
+                  <div class="tl-entry">
+                    <span class="tl-tag teal">Sex.</span>
+                    <div>
+                      <div class="tl-entry-name">Entrega relatório mensal — Logística</div>
+                      <div class="tl-entry-meta">Até 18h · Pedro R.</div>
+                    </div>
+                  </div>
+                  <div class="tl-entry">
+                    <span class="tl-tag amber">07/5</span>
+                    <div>
+                      <div class="tl-entry-name">Renovação de contrato — Retail Co</div>
+                      <div class="tl-entry-meta">Prazo limite de assinatura</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── GRANDEZA 03: CONTROLE ─────────────────────────── -->
+      <div class="vg-block reveal">
+        <div class="vg-copy">
+          <span class="vg-label">Grandeza 03 &mdash; Controle</span>
+          <h3 class="vg-title">O gestor lê a operação. O cliente acompanha o próprio contrato.</h3>
+          <p class="vg-desc">A gestão tem um painel com visão real do que está acontecendo agora — atividade da equipe, volume de chamados e status por cliente. E o cliente acessa um portal dedicado com chamados, documentos e histórico do próprio contrato, sem precisar cobrar ninguém por mensagem.</p>
+          <div class="vg-feats">
+            <div class="vg-feat">
+              <div class="vg-feat-ico">👥</div>
+              <div class="vg-feat-body"><strong>Painel gerencial com leitura da equipe e métricas reais</strong> — sem precisar interromper ninguém para entender o que está acontecendo.</div>
+            </div>
+            <div class="vg-feat">
+              <div class="vg-feat-ico">🔗</div>
+              <div class="vg-feat-body"><strong>Portal do cliente com visibilidade do próprio contrato</strong> — chamados, documentos e histórico em acesso dedicado e institucional.</div>
+            </div>
+          </div>
+        </div>
+        <div class="vg-mock">
+          <div class="sv-mock">
+            <div class="sv-bar">
+              <div class="mockup-dots"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div></div>
+              <div class="sv-url">app.falcodesk.com.br · gestão</div>
+              <div class="mockup-toolbar"><div class="mockup-tool-pill"></div><div class="mockup-tool-pill"></div></div>
+            </div>
+            <div class="sv-body sv-body-vis">
+              <div class="vis-top">
+                <div class="vis-stat">
+                  <div class="vis-stat-lbl">Abertos</div>
+                  <div class="vis-stat-val">24</div>
+                  <div class="vis-stat-sub warn">4 críticos</div>
+                </div>
+                <div class="vis-stat">
+                  <div class="vis-stat-lbl">Em execução</div>
+                  <div class="vis-stat-val">11</div>
+                  <div class="vis-stat-sub cyan">↑ 8%</div>
+                </div>
+                <div class="vis-stat">
+                  <div class="vis-stat-lbl">Resolvidos</div>
+                  <div class="vis-stat-val">37</div>
+                  <div class="vis-stat-sub up">este mês</div>
+                </div>
+                <div class="vis-stat">
+                  <div class="vis-stat-lbl">Clientes ativos</div>
+                  <div class="vis-stat-val">12</div>
+                  <div class="vis-stat-sub up">todos OK</div>
+                </div>
+              </div>
+              <div class="vis-middle">
+                <div class="vis-team">
+                  <div class="vis-team-head">Equipe ativa agora</div>
+                  <div class="vis-member">
+                    <div class="vis-avatar" style="background:linear-gradient(135deg,#06b6d4,#0891b2)">AL</div>
+                    <div class="vis-member-info">
+                      <div class="vis-member-name">Ana Lima</div>
+                      <div class="vis-member-task">Chamado #5021 — TechCorp</div>
+                    </div>
+                    <div class="vis-member-dot" style="background:#10b981;box-shadow:0 0 5px rgba(16,185,129,0.5)"></div>
+                  </div>
+                  <div class="vis-member">
+                    <div class="vis-avatar" style="background:linear-gradient(135deg,#14b8a6,#0d9488)">PR</div>
+                    <div class="vis-member-info">
+                      <div class="vis-member-name">Pedro R.</div>
+                      <div class="vis-member-task">Relatório mensal Logística</div>
+                    </div>
+                    <div class="vis-member-dot" style="background:#10b981;box-shadow:0 0 5px rgba(16,185,129,0.5)"></div>
+                  </div>
+                  <div class="vis-member">
+                    <div class="vis-avatar" style="background:linear-gradient(135deg,#38bdf8,#0ea5e9)">CM</div>
+                    <div class="vis-member-info">
+                      <div class="vis-member-name">Carla M.</div>
+                      <div class="vis-member-task">VPN Retail Co · em progresso</div>
+                    </div>
+                    <div class="vis-member-dot" style="background:#f59e0b;box-shadow:0 0 5px rgba(245,158,11,0.5)"></div>
+                  </div>
+                  <div class="vis-member">
+                    <div class="vis-avatar" style="background:linear-gradient(135deg,#818cf8,#6366f1)">JA</div>
+                    <div class="vis-member-info">
+                      <div class="vis-member-name">João A.</div>
+                      <div class="vis-member-task">Licenças FinTech SA</div>
+                    </div>
+                    <div class="vis-member-dot" style="background:#10b981;box-shadow:0 0 5px rgba(16,185,129,0.5)"></div>
+                  </div>
+                </div>
+                <div class="vis-portal">
+                  <div class="vis-portal-head">
+                    <span class="vis-portal-label">Portal do cliente</span>
+                    <span class="vis-portal-badge">Ativo</span>
+                  </div>
+                  <div class="vis-portal-item">
+                    <div class="vis-portal-item-info">
+                      <div class="vis-portal-item-name">TechCorp Brasil</div>
+                      <div class="vis-portal-item-meta">3 chamados · 1 doc novo · acesso: hoje</div>
+                    </div>
+                    <span class="m-badge progress">Em andamento</span>
+                  </div>
+                  <div class="vis-portal-item">
+                    <div class="vis-portal-item-info">
+                      <div class="vis-portal-item-name">Logística SA</div>
+                      <div class="vis-portal-item-meta">1 chamado · relatório disponível</div>
+                    </div>
+                    <span class="m-badge done">Atualizado</span>
+                  </div>
+                  <div class="vis-portal-item">
+                    <div class="vis-portal-item-info">
+                      <div class="vis-portal-item-name">Retail Co</div>
+                      <div class="vis-portal-item-meta">2 chamados · aguardando retorno</div>
+                    </div>
+                    <span class="m-badge open">Pendente</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /value-grandeza -->
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============================================================
+     BENEFITS
+============================================================ -->
+<section class="section s-benefits" id="s-beneficios">
+  <div class="container">
+    <div class="sh-center reveal">
+      <span class="eyebrow">Benefícios</span>
+      <h2 class="sh-title">Mais controle para quem executa. Mais leitura para quem gerencia. Mais transparência para quem contrata.</h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="b-card reveal-scale" data-d="1">
+        <div class="b-icon">🎯</div>
+        <div class="b-title">Centralização operacional</div>
+        <div class="b-desc">Chamados, serviços, documentos e clientes num único ambiente coerente e confiável.</div>
+      </div>
+      <div class="b-card reveal-scale" data-d="2">
+        <div class="b-icon">🕐</div>
+        <div class="b-title">Histórico confiável</div>
+        <div class="b-desc">Tudo registrado. O que foi feito, por quem e quando — sem dependência de memória ou mensagem avulsa.</div>
+      </div>
+      <div class="b-card reveal-scale" data-d="3">
+        <div class="b-icon">📡</div>
+        <div class="b-title">Leitura rápida da operação</div>
+        <div class="b-desc">Painel operacional com visão completa do que está acontecendo agora, sem precisar perguntar à equipe.</div>
+      </div>
+      <div class="b-card reveal-scale" data-d="4">
+        <div class="b-icon">🔍</div>
+        <div class="b-title">Transparência com o cliente</div>
+        <div class="b-desc">Portal dedicado. O cliente vê o que precisa, quando precisa — sem precisar cobrar por mensagem.</div>
+      </div>
+      <div class="b-card reveal-scale" data-d="5">
+        <div class="b-icon">✦</div>
+        <div class="b-title">Mais organização, menos ruído</div>
+        <div class="b-desc">Menos mensagens paralelas, menos retrabalho, menos tempo perdido localizando informação crítica.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============================================================
+     HOW IT WORKS
+============================================================ -->
+<section class="section s-how" id="s-como">
+  <div class="container">
+    <div class="sh-center reveal">
+      <span class="eyebrow">Como funciona</span>
+      <h2 class="sh-title">Uma estrutura simples para sustentar uma operação mais forte.</h2>
+    </div>
+    <div class="how-grid">
+      <div class="h-step reveal" data-d="1">
+        <div class="h-num">01</div>
+        <div class="h-title">Chamados e solicitações</div>
+        <div class="h-desc">Abertura, categorização, prioridade e atribuição. Histórico completo de cada chamado com rastreabilidade total e linha do tempo clara.</div>
+      </div>
+      <div class="h-step reveal" data-d="2">
+        <div class="h-num">02</div>
+        <div class="h-title">Serviços e execução contínua</div>
+        <div class="h-desc">Gestão de contratos ativos, entregas recorrentes e acompanhamento de SLAs por cliente — com visão centralizada.</div>
+      </div>
+      <div class="h-step reveal" data-d="3">
+        <div class="h-num">03</div>
+        <div class="h-title">Documentos e planejamento</div>
+        <div class="h-desc">Base organizada por cliente com planejamento de atividades, agendamentos e registros estruturados e sempre localizáveis.</div>
+      </div>
+      <div class="h-step reveal" data-d="4">
+        <div class="h-num">04</div>
+        <div class="h-title">Portal de acompanhamento</div>
+        <div class="h-desc">O cliente acessa um ambiente dedicado com visibilidade do seu contrato, chamados, documentos e histórico — sem cobrar.</div>
+      </div>
+      <div class="h-step reveal" data-d="5">
+        <div class="h-num">05</div>
+        <div class="h-title">Visão gerencial</div>
+        <div class="h-desc">Painel com leitura operacional completa. Métricas, atividade da equipe e status de cada cliente numa só tela.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============================================================
+     DIFFERENTIAL
+============================================================ -->
+<section class="section s-diff" id="s-diff">
+  <div class="container">
+    <div class="sh-center reveal" style="margin-bottom: 56px;">
+      <span class="eyebrow">Diferencial</span>
+      <h2 class="sh-title">A Falcodesk não foi pensada só para controlar tarefas. Foi pensada para organizar operações técnicas.</h2>
+    </div>
+    <div class="diff-table reveal">
+      <div class="diff-col dim">
+        <div class="diff-colhead">
+          <span class="diff-colhead-label">Ferramentas genéricas</span>
+        </div>
+        <div class="diff-row">
+          <div class="diff-row-ico">✕</div>
+          <div class="diff-row-text">Contexto perdido entre mensagens e ferramentas diferentes</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-row-ico">✕</div>
+          <div class="diff-row-text">Demandas espalhadas em múltiplos ambientes sem conexão</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-row-ico">✕</div>
+          <div class="diff-row-text">Cliente sem visibilidade, cobrando status por mensagem</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-row-ico">✕</div>
+          <div class="diff-row-text">Histórico inconsistente e difícil de recuperar depois</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-row-ico">✕</div>
+          <div class="diff-row-text">Dependência de mensagens paralelas para coordenar a equipe</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-row-ico">✕</div>
+          <div class="diff-row-text">Dificuldade para medir o que realmente está acontecendo</div>
+        </div>
+      </div>
+      <div class="diff-vs">vs</div>
+      <div class="diff-col bright">
+        <div class="diff-colhead">
+          <span class="diff-colhead-label">Falcodesk</span>
+        </div>
+        <div class="diff-row">
+          <div class="diff-row-ico">✓</div>
+          <div class="diff-row-text">Contexto completo em cada chamado — histórico, responsável e timeline integrados</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-row-ico">✓</div>
+          <div class="diff-row-text">Todas as demandas em um ambiente único, coerente e confiável</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-row-ico">✓</div>
+          <div class="diff-row-text">Portal do cliente com visibilidade real — sem precisar cobrar status</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-row-ico">✓</div>
+          <div class="diff-row-text">Histórico estruturado, auditável e sempre acessível por cliente</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-row-ico">✓</div>
+          <div class="diff-row-text">Coordenação centralizada dentro da própria plataforma operacional</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-row-ico">✓</div>
+          <div class="diff-row-text">Painel gerencial com métricas, leitura e dados reais da operação</div>
+        </div>
+      </div>
+    </div>
+    <div class="diff-footer reveal">
+      <p class="diff-footer-line">A Falcodesk une <em>execução</em>, <em>gestão</em> e <em>transparência</em> em um mesmo ambiente.</p>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============================================================
+     FOR WHOM
+============================================================ -->
+<section class="section s-whom" id="s-quem">
+  <div class="container">
+    <div class="sh-center reveal">
+      <span class="eyebrow">Para quem é</span>
+      <h2 class="sh-title">Indicada para operações que precisam de clareza, histórico e acompanhamento contínuo.</h2>
+    </div>
+    <div class="whom-grid">
+      <div class="w-card reveal-scale" data-d="1">
+        <div class="w-icon">🎫</div>
+        <div class="w-title">Suporte e chamados</div>
+        <div class="w-desc">Times que gerenciam demandas de múltiplos clientes com rastreabilidade, histórico e SLA.</div>
+      </div>
+      <div class="w-card reveal-scale" data-d="2">
+        <div class="w-icon">🔧</div>
+        <div class="w-title">Manutenção e sustentação</div>
+        <div class="w-desc">Operações com contratos de manutenção recorrente que precisam de visibilidade e controle contínuo.</div>
+      </div>
+      <div class="w-card reveal-scale" data-d="3">
+        <div class="w-icon">💻</div>
+        <div class="w-title">Serviços técnicos recorrentes</div>
+        <div class="w-desc">Empresas que entregam serviços técnicos contínuos e precisam organizar a execução com processo claro.</div>
+      </div>
+      <div class="w-card reveal-scale" data-d="4">
+        <div class="w-icon">🏢</div>
+        <div class="w-title">Gestão com múltiplos clientes</div>
+        <div class="w-desc">Empresas que gerenciam vários clientes simultaneamente e precisam de leitura operacional clara e rápida.</div>
+      </div>
+      <div class="w-card reveal-scale" data-d="5">
+        <div class="w-icon">📊</div>
+        <div class="w-title">Histórico e transparência</div>
+        <div class="w-desc">Operações onde o cliente precisa de visibilidade e onde o histórico é parte do serviço entregue.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============================================================
+     PERCEIVED GAIN
+============================================================ -->
+<section class="section s-gain" id="s-ganho">
+  <div class="container">
+    <div class="gain-grid">
+
+      <!-- Left: gains list -->
+      <div>
+        <span class="eyebrow reveal">Resultado</span>
+        <h2 class="sh-title reveal" data-d="1" style="text-align:left; max-width:100%; margin:12px 0 44px;">
+          O resultado não é só organização interna. É percepção de estrutura.
+        </h2>
+        <div class="gain-items">
+          <div class="g-item reveal" data-d="2">
+            <div class="g-icon">⚡</div>
+            <div>
+              <div class="g-title">Mais clareza para o time</div>
+              <div class="g-desc">A equipe sabe o que fazer, em qual ordem e com qual contexto. Menos tempo perdido, mais execução real.</div>
+            </div>
+          </div>
+          <div class="g-item reveal" data-d="3">
+            <div class="g-icon">🎯</div>
+            <div>
+              <div class="g-title">Mais controle para a gestão</div>
+              <div class="g-desc">Visão clara da operação. O gestor lê o que está acontecendo sem precisar perguntar para a equipe.</div>
+            </div>
+          </div>
+          <div class="g-item reveal" data-d="4">
+            <div class="g-icon">🤝</div>
+            <div>
+              <div class="g-title">Mais confiança para o cliente</div>
+              <div class="g-desc">O cliente vê o que está sendo feito. Isso reduz cobranças, aumenta confiança e fortalece o relacionamento.</div>
+            </div>
+          </div>
+          <div class="g-item reveal" data-d="5">
+            <div class="g-icon">📈</div>
+            <div>
+              <div class="g-title">Crescimento com processo</div>
+              <div class="g-desc">A operação cresce sem perder o controle. A estrutura sustenta o volume sem gerar caos ou dependência de pessoas.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: statement panel -->
+      <div class="gain-statement reveal" data-d="2">
+        <span class="eyebrow">O impacto real</span>
+        <p class="gain-quote">
+          A operação deixa de parecer <em>improvisada</em>. E começa a transmitir <em>estrutura</em>, <em>estabilidade</em> e <em>profissionalismo</em>.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============================================================
+     FINAL CTA
+============================================================ -->
+<section class="section s-cta" id="s-cta">
+  <div class="container">
+    <div class="cta-panel reveal">
+      <span class="eyebrow" style="display:block; margin-bottom:22px;">Próximo passo</span>
+      <h2 class="cta-panel-title">
+        Sua operação precisa de mais do que tarefas soltas. Precisa de um ambiente confiável para funcionar bem.
+      </h2>
+      <p class="cta-panel-sub">
+        Conheça a Falcodesk e veja como centralizar chamados, serviços, documentos e acompanhamento em uma estrutura pensada para rotina técnica real.
+      </p>
+      <div class="cta-actions">
+        <a href="#" class="btn-primary" style="font-size:15.5px; padding:15px 30px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Quero agendar uma demonstração
+        </a>
+        <a href="#" class="btn-ghost" style="font-size:15.5px; padding:15px 30px;">
+          Falar com o time da Falcotec →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <div>
+        <a href="#" class="footer-logo-wrap">
+          <div class="nav-logo-mark">FD</div>
+          <span class="nav-logo-text">Falco<span>desk</span></span>
+        </a>
+        <p class="footer-desc">Central operacional para empresas que prestam serviços técnicos com clareza, histórico e transparência.</p>
+        <p class="footer-eco">Parte do ecossistema <strong>Falcotec</strong></p>
+      </div>
+
+      <div>
+        <div class="f-col-title">Plataforma</div>
+        <ul class="f-links">
+          <li><a href="#">Chamados</a></li>
+          <li><a href="#">Serviços</a></li>
+          <li><a href="#">Documentos</a></li>
+          <li><a href="#">Portal do cliente</a></li>
+          <li><a href="#">Visão gerencial</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="f-col-title">Empresa</div>
+        <ul class="f-links">
+          <li><a href="#">Sobre a Falcotec</a></li>
+          <li><a href="#">Contato comercial</a></li>
+          <li><a href="#">Política de privacidade</a></li>
+          <li><a href="#">Termos de uso</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="f-col-title">Contato</div>
+        <ul class="f-links">
+          <li><a href="#">comercial@falcotec.com.br</a></li>
+          <li><a href="#">Agendar demonstração</a></li>
+          <li><a href="#">Suporte</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Falcotec. Todos os direitos reservados.</span>
+      <div class="footer-live">
+        <div class="live-dot"></div>
+        Plataforma em operação
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+  // ── NAV SCROLL ──────────────────────────────────────────────
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 32);
+  }, { passive: true });
+
+  // ── SCROLL REVEAL ───────────────────────────────────────────
+  const revealEls = document.querySelectorAll('.reveal, .reveal-scale');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -48px 0px' });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Hero visible immediately
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      document.querySelectorAll('.hero .reveal, .hero .reveal-scale').forEach(el => {
+        el.classList.add('visible');
+      });
+    }, 80);
+  });
+
+  // ── MOUSE PARALLAX ON MOCKUP ─────────────────────────────────
+  const heroSection = document.getElementById('hero');
+  const mockupEl    = document.getElementById('mockupEl');
+
+  if (mockupEl && heroSection) {
+    let targetRY = 0, targetRX = 0, currentRY = 0, currentRX = 0;
+    let raf = null;
+    let isHovered = false;
+
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    function animateMockup() {
+      currentRY = lerp(currentRY, targetRY, 0.08);
+      currentRX = lerp(currentRX, targetRX, 0.08);
+      mockupEl.style.transform =
+        `perspective(1100px) rotateY(${currentRY}deg) rotateX(${currentRX}deg)`;
+      if (Math.abs(currentRY - targetRY) > 0.01 || Math.abs(currentRX - targetRX) > 0.01 || isHovered) {
+        raf = requestAnimationFrame(animateMockup);
+      } else {
+        raf = null;
+      }
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top  + rect.height / 2;
+      const dx = (e.clientX - cx) / (rect.width  / 2);
+      const dy = (e.clientY - cy) / (rect.height / 2);
+      targetRY =  dx * 5;
+      targetRX = -dy * 3.5;
+      if (!raf) raf = requestAnimationFrame(animateMockup);
+    }, { passive: true });
+
+    heroSection.addEventListener('mouseenter', () => { isHovered = true; });
+    heroSection.addEventListener('mouseleave', () => {
+      isHovered = false;
+      targetRY = 0; targetRX = 0;
+      if (!raf) raf = requestAnimationFrame(animateMockup);
+    });
+  }
+
+  // ── SMOOTH SCROLL ───────────────────────────────────────────
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const href = a.getAttribute('href');
+      if (href === '#') return;
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 88;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
