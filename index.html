@@ -1314,6 +1314,209 @@
     }
 
     /* ============================================================
+       SECTION — PRICING
+    ============================================================ */
+    .s-pricing { padding: 120px 0; }
+    .pricing-header {
+      display: flex; flex-wrap: wrap; align-items: end;
+      justify-content: space-between; gap: 24px;
+      max-width: 100%; margin-bottom: 56px;
+    }
+    .pricing-header-copy { max-width: 640px; }
+    .pricing-header-copy .sh-title { text-align: left; margin-bottom: 0; }
+    .pricing-header-copy .sh-sub { text-align: left; margin-top: 14px; }
+    .billing-toggle {
+      display: inline-flex; gap: 4px; padding: 5px;
+      border-radius: 100px;
+      border: 1px solid var(--border-mid);
+      background: var(--bg-inset);
+      flex-shrink: 0;
+    }
+    .billing-toggle button {
+      border: 0; background: transparent;
+      color: var(--text-secondary); padding: 10px 18px;
+      font: inherit; font-size: 13px; font-weight: 600;
+      border-radius: 100px; cursor: pointer;
+      transition: all 0.22s ease;
+    }
+    .billing-toggle button.active {
+      background: rgba(6,182,212,0.14);
+      color: var(--text-accent);
+      box-shadow: 0 0 24px rgba(6,182,212,0.08);
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+    .p-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-panel);
+      padding: 32px 28px;
+      display: flex; flex-direction: column;
+      transition: all 0.35s ease;
+      position: relative; overflow: hidden;
+    }
+    .p-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-mid), transparent);
+    }
+    .p-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card), var(--shadow-glow);
+    }
+    .p-card.featured {
+      border-color: var(--border-accent);
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-panel), 0 0 80px rgba(6,182,212,0.08);
+    }
+    .p-card.featured::before {
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+    .p-card.featured:hover {
+      transform: translateY(-14px);
+      box-shadow: var(--shadow-panel), 0 0 100px rgba(6,182,212,0.12);
+    }
+    .p-tag-row {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 8px;
+      margin-bottom: 18px;
+    }
+    .p-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 12px; border-radius: 100px;
+      font-size: 11px; font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+    }
+    .p-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 12px; border-radius: 100px;
+      font-size: 11px; font-weight: 700;
+      border: 1px solid rgba(6,182,212,0.22);
+      background: rgba(6,182,212,0.1);
+      color: var(--text-accent);
+    }
+    .p-card h3 {
+      font-size: 22px; font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .p-card .p-desc {
+      font-size: 13.5px; color: var(--text-secondary);
+      line-height: 1.65; margin-bottom: 0;
+    }
+    .p-price { margin-top: 20px; }
+    .p-price-value {
+      display: flex; align-items: flex-end; gap: 8px;
+    }
+    .p-currency {
+      font-size: 15px; color: var(--text-muted);
+      padding-bottom: 8px;
+    }
+    .p-amount {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: clamp(32px, 4vw, 44px);
+      font-weight: 800; line-height: 0.95;
+      letter-spacing: -0.04em;
+      color: var(--text-primary);
+    }
+    .p-card.featured .p-amount { color: var(--text-accent); }
+    .p-billing-copy {
+      display: block; margin-top: 8px;
+      font-size: 12px; color: var(--text-muted);
+      line-height: 1.55;
+    }
+    .p-meta {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px; margin: 20px 0 22px;
+    }
+    .p-meta-item {
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 12px 14px;
+      background: var(--bg-inset);
+    }
+    .p-meta-label {
+      display: block; font-size: 9px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--text-muted); margin-bottom: 5px;
+    }
+    .p-meta-value {
+      font-size: 13px; font-weight: 600;
+      color: var(--text-primary);
+    }
+    .p-features {
+      list-style: none; display: flex;
+      flex-direction: column; gap: 10px;
+      margin: 0; padding: 0;
+    }
+    .p-features li {
+      position: relative; padding-left: 18px;
+      font-size: 13px; color: var(--text-secondary);
+      line-height: 1.55;
+    }
+    .p-features li::before {
+      content: ''; position: absolute;
+      left: 0; top: 8px;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--teal));
+      box-shadow: 0 0 10px rgba(6,182,212,0.35);
+    }
+    .p-result {
+      margin-top: 20px; padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(16,185,129,0.14);
+      background: rgba(16,185,129,0.05);
+    }
+    .p-result-label {
+      display: block; margin-bottom: 5px;
+      font-size: 9px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      color: #34d399;
+    }
+    .p-result-text {
+      font-size: 13px; color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .p-cta-row {
+      display: flex; gap: 10px;
+      margin-top: auto; padding-top: 24px;
+    }
+    .p-cta-row .btn-primary,
+    .p-cta-row .btn-ghost {
+      flex: 1; justify-content: center;
+      font-size: 13px; padding: 12px 16px;
+    }
+    .p-addons {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 14px; margin-top: 24px;
+    }
+    .p-addon {
+      background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: var(--r-card); padding: 22px 18px;
+      transition: all 0.3s ease;
+    }
+    .p-addon:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-card);
+    }
+    .p-addon .eyebrow { display: block; margin-bottom: 8px; }
+    .p-addon strong {
+      display: block; font-size: 15px; font-weight: 700;
+      color: var(--text-primary); margin-bottom: 6px;
+      line-height: 1.35;
+    }
+    .p-addon p {
+      font-size: 12.5px; color: var(--text-secondary);
+      line-height: 1.6; margin: 0;
+    }
+
+    /* ============================================================
        RESPONSIVE
     ============================================================ */
     @media (max-width: 1100px) {
@@ -1325,6 +1528,9 @@
       .diff-table          { grid-template-columns: 1fr; gap: 20px; }
       .diff-vs             { display: none; }
       .gain-grid           { grid-template-columns: 1fr; gap: 40px; }
+      .pricing-grid        { grid-template-columns: 1fr; max-width: 480px; }
+      .p-card.featured     { transform: none; }
+      .p-addons            { grid-template-columns: 1fr; }
       .footer-grid         { grid-template-columns: 1fr 1fr; }
       .vg-block,
       .vg-block.rev        { grid-template-columns: 1fr; gap: 40px; }
@@ -1342,6 +1548,8 @@
       .footer-grid         { grid-template-columns: 1fr; gap: 36px; }
       .container           { padding: 0 20px; }
       .sv-body             { height: auto; min-height: 260px; }
+      .pricing-header      { flex-direction: column; align-items: start; }
+      .p-cta-row           { flex-direction: column; }
       .sv-body-vis         { height: auto; }
       .vis-top             { grid-template-columns: repeat(2, 1fr); }
       .vis-middle          { grid-template-columns: 1fr; }
@@ -1374,6 +1582,7 @@
       <li><a href="#s-como">Como funciona</a></li>
       <li><a href="#s-diff">Diferencial</a></li>
       <li><a href="#s-quem">Para quem</a></li>
+      <li><a href="#s-planos">Planos</a></li>
     </ul>
     <a href="#s-cta" class="nav-cta">Agendar demonstração</a>
   </div>
@@ -2133,6 +2342,179 @@
 <div class="sep"></div>
 
 <!-- ============================================================
+     PRICING
+============================================================ -->
+<section class="section s-pricing" id="s-planos">
+  <div class="container">
+
+    <div class="pricing-header reveal">
+      <div class="pricing-header-copy">
+        <span class="eyebrow">Planos</span>
+        <h2 class="sh-title">Escolha o plano que combina com o tamanho da sua operação.</h2>
+        <p class="sh-sub">Cada plano entrega mais do que funcionalidades — entrega estrutura. O Pro é o ponto ideal para quem quer sair do improviso e organizar atendimento, planejamento e comercial de verdade.</p>
+      </div>
+      <div class="billing-toggle" aria-label="Forma de cobrança">
+        <button class="active" data-billing="monthly" type="button">Mensal</button>
+        <button data-billing="annual" type="button">Anual · 15% off</button>
+      </div>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- ── STARTER ─────────────────────────────── -->
+      <article class="p-card reveal-scale" data-d="1" data-plan="starter" data-monthly="790" data-annual-equivalent="672" data-annual-total="8040">
+        <div class="p-tag-row">
+          <span class="p-chip">Entrada com posicionamento premium</span>
+          <span class="p-pill">Starter</span>
+        </div>
+        <h3>Starter</h3>
+        <p class="p-desc">Para times que querem sair do improviso sem cair numa stack cara e fragmentada. Organização real desde o primeiro dia.</p>
+        <div class="p-price">
+          <div class="p-price-value">
+            <span class="p-currency">R$</span>
+            <span class="p-amount" data-role="amount">790</span>
+          </div>
+          <small class="p-billing-copy" data-role="billing-copy">por mês, com cobrança mensal</small>
+        </div>
+        <div class="p-meta">
+          <div class="p-meta-item">
+            <span class="p-meta-label">Usuários</span>
+            <span class="p-meta-value">Até 3</span>
+          </div>
+          <div class="p-meta-item">
+            <span class="p-meta-label">Clientes</span>
+            <span class="p-meta-value">Até 10</span>
+          </div>
+        </div>
+        <ul class="p-features">
+          <li>Chamados com kanban, lista e timeline integrados</li>
+          <li>Cadastro e gestão de clientes com visão operacional da carteira</li>
+          <li>Agenda operacional com sincronização de compromissos</li>
+          <li>Documentação centralizada por cliente com pastas e arquivos</li>
+          <li>Relatórios básicos de volume, status e rotina</li>
+          <li>Base sólida para consolidar processo e histórico</li>
+        </ul>
+        <div class="p-result">
+          <span class="p-result-label">Resultado prático</span>
+          <span class="p-result-text">Organização do atendimento e da carteira com muito mais clareza do que planilhas e help desks simples.</span>
+        </div>
+        <div class="p-cta-row">
+          <a class="btn-ghost" href="mailto:ricardo@falcotec.com.br?subject=Interesse%20no%20plano%20Starter%20FalcoDesk">Falar com o time</a>
+        </div>
+      </article>
+
+      <!-- ── PRO (ANCHOR) ─────────────────────────── -->
+      <article class="p-card featured reveal-scale" data-d="2" data-plan="pro" data-monthly="1290" data-annual-equivalent="1097" data-annual-total="13158">
+        <div class="p-tag-row">
+          <span class="p-pill">⭐ Plano recomendado</span>
+          <span class="p-chip">Âncora comercial</span>
+        </div>
+        <h3>Pro</h3>
+        <p class="p-desc">O melhor plano para quem quer mais do que atendimento. Aqui o FalcoDesk vira uma plataforma de operação e entrega completa.</p>
+        <div class="p-price">
+          <div class="p-price-value">
+            <span class="p-currency">R$</span>
+            <span class="p-amount" data-role="amount">1.290</span>
+          </div>
+          <small class="p-billing-copy" data-role="billing-copy">por mês, com cobrança mensal</small>
+        </div>
+        <div class="p-meta">
+          <div class="p-meta-item">
+            <span class="p-meta-label">Usuários</span>
+            <span class="p-meta-value">Até 8</span>
+          </div>
+          <div class="p-meta-item">
+            <span class="p-meta-label">Clientes</span>
+            <span class="p-meta-value">Até 30</span>
+          </div>
+        </div>
+        <ul class="p-features">
+          <li>Tudo do Starter + planejamento visual completo</li>
+          <li>Gantt interativo com drag, resize e trava por janela de execução</li>
+          <li>Calendário operacional com dependências visuais entre tickets</li>
+          <li>Assistente de planejamento com briefing técnico e IA</li>
+          <li>Geração de tickets a partir do planejamento por IA</li>
+          <li>Prospecção, pipeline comercial e propostas com IA e PDF</li>
+          <li>Relatórios gerenciais e leitura de capacidade do time</li>
+        </ul>
+        <div class="p-result">
+          <span class="p-result-label">Resultado prático</span>
+          <span class="p-result-text">O cliente não compra apenas atendimento. Compra previsibilidade, coordenação e capacidade de entrega.</span>
+        </div>
+        <div class="p-cta-row">
+          <a class="btn-primary" href="mailto:ricardo@falcotec.com.br?subject=Interesse%20no%20plano%20Pro%20FalcoDesk">Começar com o Pro</a>
+          <a class="btn-ghost" href="#s-cta">Agendar demo</a>
+        </div>
+      </article>
+
+      <!-- ── SCALE ─────────────────────────────── -->
+      <article class="p-card reveal-scale" data-d="3" data-plan="scale" data-monthly="2690" data-annual-equivalent="2287" data-annual-total="27438">
+        <div class="p-tag-row">
+          <span class="p-chip">Para operação maior e mais densa</span>
+          <span class="p-pill">Scale</span>
+        </div>
+        <h3>Scale</h3>
+        <p class="p-desc">Voltado para operações com múltiplas frentes, volume maior de clientes e necessidade de governança mais madura.</p>
+        <div class="p-price">
+          <div class="p-price-value">
+            <span class="p-currency">R$</span>
+            <span class="p-amount" data-role="amount">2.690</span>
+          </div>
+          <small class="p-billing-copy" data-role="billing-copy">por mês, com cobrança mensal</small>
+        </div>
+        <div class="p-meta">
+          <div class="p-meta-item">
+            <span class="p-meta-label">Usuários</span>
+            <span class="p-meta-value">Até 20</span>
+          </div>
+          <div class="p-meta-item">
+            <span class="p-meta-label">Clientes</span>
+            <span class="p-meta-value">Até 100</span>
+          </div>
+        </div>
+        <ul class="p-features">
+          <li>Tudo do Pro com maior fôlego para operação multi-cliente</li>
+          <li>Espaço para organizar squads, responsáveis e carteira maior</li>
+          <li>Camada comercial e operacional unificada para crescimento</li>
+          <li>Ideal para MSPs e consultorias que precisam padronizar gestão</li>
+          <li>Perfeito para sair do combo help desk + planner + CRM</li>
+          <li>Base robusta para onboarding em escala</li>
+        </ul>
+        <div class="p-result">
+          <span class="p-result-label">Resultado prático</span>
+          <span class="p-result-text">Menos troca entre ferramentas, mais visão executiva e capacidade de escalar com processo.</span>
+        </div>
+        <div class="p-cta-row">
+          <a class="btn-ghost" href="mailto:ricardo@falcotec.com.br?subject=Interesse%20no%20plano%20Scale%20FalcoDesk">Falar com o time</a>
+        </div>
+      </article>
+
+    </div><!-- /pricing-grid -->
+
+    <div class="p-addons reveal">
+      <div class="p-addon">
+        <span class="eyebrow">Implantação</span>
+        <strong>Onboarding a partir de R$ 2.500</strong>
+        <p>Configuração, estruturação inicial e treinamento para seu time começar a operar com segurança desde o primeiro dia.</p>
+      </div>
+      <div class="p-addon">
+        <span class="eyebrow">Crescimento</span>
+        <strong>Usuário extra a partir de R$ 99/mês</strong>
+        <p>Adicione membros à plataforma sem precisar subir de plano. O crescimento acompanha o ritmo da sua operação.</p>
+      </div>
+      <div class="p-addon">
+        <span class="eyebrow">Compromisso anual</span>
+        <strong>Até 15% de desconto no plano anual</strong>
+        <p>Mais previsibilidade para os dois lados. Menos churn, mais caixa e planejamento financeiro mais sólido.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============================================================
      PERCEIVED GAIN
 ============================================================ -->
 <section class="section s-gain" id="s-ganho">
@@ -2348,6 +2730,32 @@
       if (!raf) raf = requestAnimationFrame(animateMockup);
     });
   }
+
+  // ── BILLING TOGGLE ──────────────────────────────────────────
+  const billingBtns = Array.from(document.querySelectorAll('[data-billing]'));
+  const planCards   = Array.from(document.querySelectorAll('.p-card[data-plan]'));
+  const priceFmt    = new Intl.NumberFormat('pt-BR');
+
+  function updateBilling(mode) {
+    billingBtns.forEach(b => b.classList.toggle('active', b.dataset.billing === mode));
+    planCards.forEach(card => {
+      const amountEl = card.querySelector('[data-role="amount"]');
+      const copyEl   = card.querySelector('[data-role="billing-copy"]');
+      if (!amountEl || !copyEl) return;
+      const monthly   = Number(card.dataset.monthly || 0);
+      const annualEq  = Number(card.dataset.annualEquivalent || 0);
+      const annualTot = Number(card.dataset.annualTotal || 0);
+      if (mode === 'annual') {
+        amountEl.textContent = priceFmt.format(annualEq);
+        copyEl.textContent   = 'equivalente mensal no anual · total de R$ ' + priceFmt.format(annualTot) + ' por ano';
+      } else {
+        amountEl.textContent = priceFmt.format(monthly);
+        copyEl.textContent   = 'por mês, com cobrança mensal';
+      }
+    });
+  }
+  billingBtns.forEach(b => b.addEventListener('click', () => updateBilling(b.dataset.billing)));
+  updateBilling('monthly');
 
   // ── SMOOTH SCROLL ───────────────────────────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(a => {
