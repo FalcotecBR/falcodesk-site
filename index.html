@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Falcodesk — Central Operacional para Serviços Técnicos</title>
-  <meta name="description" content="Centralize chamados, serviços, documentos e acompanhamento do cliente em um único ambiente operacional.">
+  <title>Falcodesk — Plataforma Operacional para Serviços Técnicos</title>
+  <meta name="description" content="A Falcodesk centraliza chamados, serviços, documentação e planejamento em um único ambiente operacional — para empresas de TI, MSPs e prestadores de serviço técnico que precisam de estrutura, histórico e visibilidade real.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
@@ -127,28 +127,11 @@
       text-decoration: none;
       flex-shrink: 0;
     }
-    .nav-logo-mark {
-      width: 34px; height: 34px;
-      background: linear-gradient(135deg, var(--accent), var(--teal));
-      border-radius: 9px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Raleway', sans-serif;
-      font-weight: 800;
-      font-size: 13px;
-      color: #020817;
-      letter-spacing: -0.04em;
-      flex-shrink: 0;
+    .nav-logo svg {
+      height: 14px;
+      width: auto;
+      display: block;
     }
-    .nav-logo-text {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
-      color: var(--text-primary);
-      letter-spacing: -0.03em;
-    }
-    .nav-logo-text span { color: var(--accent); }
     .nav-links {
       display: flex;
       align-items: center;
@@ -1261,11 +1244,16 @@
       margin-bottom: 52px;
     }
     .footer-logo-wrap {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 10px;
       margin-bottom: 14px;
       text-decoration: none;
+    }
+    .footer-logo-wrap svg {
+      height: 12px;
+      width: auto;
+      display: block;
+      opacity: 0.85;
     }
     .footer-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; max-width: 270px; }
     .footer-eco  { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
@@ -1348,7 +1336,34 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
-      align-items: start;
+      align-items: stretch;
+    }
+    .p-card.suite-center { grid-column: 2; }
+    .suite-sep {
+      grid-column: 1 / -1;
+      display: flex; align-items: center; gap: 16px;
+      margin: 8px 0;
+      color: var(--text-muted);
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .suite-sep::before, .suite-sep::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-mid), transparent);
+    }
+    .p-guide {
+      margin-top: 56px; padding: 36px 40px;
+      border-radius: var(--r-panel);
+      border: 1px solid var(--border-mid);
+      background: var(--bg-elevated);
+    }
+    .p-guide-title {
+      font-size: 18px; font-weight: 700;
+      color: var(--text-primary); margin-bottom: 14px;
+    }
+    .p-guide-text {
+      font-size: 14px; color: var(--text-secondary);
+      line-height: 1.9;
     }
     .p-card {
       background: var(--bg-surface);
@@ -1517,6 +1532,181 @@
     }
 
     /* ============================================================
+       HERO — RISK / MICROCOPY
+    ============================================================ */
+    .s-howit { padding: 120px 0; }
+    .howit-list { max-width: 720px; margin: 56px auto 0; display: flex; flex-direction: column; gap: 0; }
+    .howit-step { display: flex; align-items: flex-start; gap: 28px; padding: 28px 0; border-bottom: 1px solid var(--border); }
+    .howit-step:last-child { border-bottom: none; }
+    .howit-num { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--accent); min-width: 28px; margin-top: 3px; }
+    .howit-title { font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; }
+    .howit-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.65; }
+
+    .hero-risk {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 14px;
+      letter-spacing: 0.01em;
+    }
+
+    /* ============================================================
+       SECTION — SCENARIO (NA PRÁTICA)
+    ============================================================ */
+    .s-scenario { padding: 120px 0; }
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .sc-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 28px 26px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .sc-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(6,182,212,0.25), transparent);
+    }
+    .sc-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-card);
+    }
+    .sc-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .sc-title {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      line-height: 1.38;
+    }
+    .sc-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.72;
+    }
+    .sc-close {
+      margin-top: 36px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.68;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ============================================================
+       SECTION — NOT FOR WHOM
+    ============================================================ */
+    .s-notwho { padding: 120px 0; }
+    .notwho-grid {
+      display: flex;
+      flex-direction: column;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .nw-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .nw-item:last-child { border-bottom: none; }
+    .nw-num {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      padding-top: 2px;
+      min-width: 28px;
+    }
+    .nw-title {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 7px;
+      line-height: 1.35;
+    }
+    .nw-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.68;
+    }
+    .notwho-close {
+      margin-top: 44px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.72;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 28px 36px;
+      border-radius: var(--r-card);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-mid);
+    }
+    .notwho-close em { font-style: normal; color: var(--accent); }
+
+    /* ============================================================
+       SECTION — FAQ
+    ============================================================ */
+    .s-faq { padding: 120px 0; }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .faq-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 26px 28px;
+      transition: border-color 0.25s ease;
+    }
+    .faq-item:hover { border-color: var(--border-accent); }
+    .faq-q {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      line-height: 1.38;
+    }
+    .faq-a {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.72;
+    }
+
+    /* ============================================================
+       CTA — MICROCOPY
+    ============================================================ */
+    .cta-risk {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 18px;
+      position: relative;
+      z-index: 1;
+      letter-spacing: 0.01em;
+    }
+
+    /* ============================================================
        RESPONSIVE
     ============================================================ */
     @media (max-width: 1100px) {
@@ -1537,9 +1727,16 @@
       .vg-block.rev .vg-copy { order: 1; }
       .vg-block.rev .vg-mock { order: 2; }
     }
+    @media (max-width: 1100px) {
+      .scenario-grid { grid-template-columns: 1fr 1fr; }
+      .faq-grid      { grid-template-columns: 1fr; }
+      .pricing-grid          { grid-template-columns: repeat(2, 1fr); }
+      .p-card.suite-center   { grid-column: auto; }
+    }
     @media (max-width: 768px) {
       .nav-links           { display: none; }
       .pain-grid           { grid-template-columns: 1fr; }
+      .scenario-grid       { grid-template-columns: 1fr; }
       .benefits-grid       { grid-template-columns: repeat(2, 1fr); }
       .how-grid            { grid-template-columns: repeat(2, 1fr); }
       .how-grid::before    { display: none; }
@@ -1574,15 +1771,14 @@
 <nav class="nav" id="mainNav">
   <div class="nav-inner">
     <a href="#" class="nav-logo">
-      <div class="nav-logo-mark">FD</div>
-      <span class="nav-logo-text">Falco<span>desk</span></span>
+      <svg width="160" height="9" viewBox="0 0 160 9" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip-nav)"><path d="M159.542 0.201172C159.791 0.201172 159.977 0.403482 159.977 0.636916C159.977 0.776977 159.915 0.901476 159.806 0.994851L155.448 4.37187C155.386 4.41856 155.386 4.5275 155.448 4.57418L159.806 7.93564C159.915 8.02902 159.977 8.15351 159.977 8.29358C159.977 8.54257 159.791 8.72932 159.542 8.72932H158.81C158.452 8.72932 158.109 8.62038 157.83 8.40251L153.908 5.38342C153.861 5.33674 153.799 5.32117 153.736 5.32117H147.481C147.403 5.32117 147.341 5.38342 147.341 5.46124V7.92008C147.341 8.37139 146.982 8.72932 146.531 8.72932H146.033C145.877 8.72932 145.769 8.62038 145.769 8.46476V0.465731C145.769 0.32567 145.877 0.201172 146.033 0.201172H146.531C146.982 0.201172 147.341 0.559105 147.341 1.01041V3.48482C147.341 3.56263 147.403 3.60932 147.481 3.60932H153.752C153.814 3.60932 153.877 3.59376 153.923 3.56263L157.814 0.543542C158.094 0.32567 158.452 0.201172 158.81 0.201172C158.965 0.201172 159.292 0.201172 159.542 0.201172Z" fill="white"/><path d="M140.541 1.08822C140.541 1.53953 140.168 1.91303 139.717 1.91303H128.885C128.418 1.91303 128.029 2.42658 128.029 2.89345C128.029 3.37589 128.418 3.74938 128.885 3.74938H138.114C139.529 3.74938 140.666 4.76093 140.666 6.1771C140.666 7.59327 139.529 8.72932 138.114 8.72932H126.862C126.706 8.72932 126.582 8.62038 126.582 8.46476V7.84227C126.582 7.39096 126.956 7.03303 127.407 7.03303H138.238C138.705 7.03303 139.094 6.64397 139.094 6.1771C139.094 5.71023 138.705 5.32117 138.238 5.32117H129.01C127.594 5.32117 126.457 4.30962 126.457 2.89345C126.457 1.47728 127.594 0.201172 129.01 0.201172H140.261C140.417 0.201172 140.541 0.32567 140.541 0.465731V1.08822Z" fill="white"/><path d="M111.745 5.18111C111.325 5.18111 110.998 4.8543 110.998 4.43412C110.998 3.98282 111.356 3.60932 111.808 3.60932H120.196C120.351 3.60932 120.476 3.73382 120.476 3.88944V4.37187C120.476 4.82318 120.102 5.18111 119.651 5.18111H111.745ZM121.238 1.91303H111.776C110.469 1.91303 109.411 2.97127 109.411 4.26294V4.66756C109.411 5.97479 110.469 7.03303 111.776 7.03303H121.238C121.69 7.03303 122.047 7.39096 122.047 7.84227V8.46476C122.047 8.62038 121.938 8.72932 121.782 8.72932H111.901C109.66 8.72932 107.839 6.90853 107.839 4.66756V4.2785C107.839 2.02196 109.66 0.201172 111.901 0.201172H121.782C121.938 0.201172 122.047 0.32567 122.047 0.465731V1.08822C122.047 1.53953 121.69 1.91303 121.238 1.91303Z" fill="white"/><path d="M98.8275 0.184082C101.069 0.184082 102.889 2.00487 102.889 4.26141V4.65047C102.889 6.89144 101.069 8.71223 98.8275 8.71223H88.9455C88.7898 8.71223 88.6809 8.60329 88.6809 8.44767V3.87235C88.6809 3.71673 88.7898 3.59223 88.9455 3.59223H89.4435C89.8948 3.59223 90.2527 3.96572 90.2527 4.41703V6.87588C90.2527 6.95369 90.3149 7.01594 90.3928 7.01594H98.952C100.259 7.01594 101.318 5.9577 101.318 4.65047V4.24585C101.318 2.95417 100.259 1.89594 98.952 1.89594H89.4901C89.0388 1.89594 88.6809 1.52244 88.6809 1.07113V0.448641C88.6809 0.308581 88.7898 0.184082 88.9455 0.184082H98.8275Z" fill="white"/><path d="M69.5227 4.26141C69.5227 2.00487 71.3435 0.184082 73.5845 0.184082H79.6693C81.9103 0.184082 83.7311 2.00487 83.7311 4.26141V4.65047C83.7311 6.89144 81.9103 8.71223 79.6693 8.71223H73.5845C71.3435 8.71223 69.5227 6.89144 69.5227 4.65047V4.26141ZM79.7938 7.01594C81.1011 7.01594 82.1593 5.9577 82.1593 4.65047V4.24585C82.1593 2.95417 81.1011 1.89594 79.7938 1.89594H73.46C72.1527 1.89594 71.0945 2.95417 71.0945 4.24585V4.65047C71.0945 5.9577 72.1527 7.01594 73.46 7.01594H79.7938Z" fill="white"/><path d="M55.1167 1.89594C53.8095 1.89594 52.7512 2.95417 52.7512 4.24585V4.65047C52.7512 5.9577 53.8095 7.01594 55.1167 7.01594H64.5786C65.0299 7.01594 65.3878 7.37387 65.3878 7.82518V8.44767C65.3878 8.60329 65.2789 8.71223 65.1233 8.71223H55.2412C53.0002 8.71223 51.1794 6.89144 51.1794 4.65047V4.26141C51.1794 2.00487 53.0002 0.184082 55.2412 0.184082H65.1233C65.2789 0.184082 65.3878 0.308581 65.3878 0.448641V1.07113C65.3878 1.52244 65.0299 1.89594 64.5786 1.89594H55.1167Z" fill="white"/><path d="M36.6931 4.65047C36.6931 5.9577 37.7514 7.01594 39.0586 7.01594H46.9331C47.3844 7.01594 47.7579 7.37387 47.7579 7.82518V8.44767C47.7579 8.60329 47.6334 8.71223 47.4778 8.71223H39.1831C36.9421 8.71223 35.1213 6.89144 35.1213 4.65047V0.448641C35.1213 0.308581 35.2303 0.184082 35.3859 0.184082H35.8839C36.3352 0.184082 36.6931 0.542015 36.6931 0.993322V4.65047Z" fill="white"/><path d="M17.2933 8.71223C17.1221 8.71223 17.0288 8.52548 17.1221 8.40098L22.7401 0.822137C23.0358 0.417517 23.6272 0.184082 24.1252 0.184082C24.6232 0.184082 25.2301 0.417517 25.5258 0.822137L31.1282 8.40098C31.2372 8.52548 31.1438 8.71223 30.9726 8.71223H29.9299C29.5876 8.71223 29.2607 8.5566 29.0584 8.27648L24.2341 1.77144C24.1874 1.69363 24.0785 1.69363 24.0162 1.77144L19.2075 8.27648C18.9896 8.5566 18.6784 8.71223 18.336 8.71223H17.2933Z" fill="white"/><path d="M9.81935e-05 4.26141C-0.0154644 2.00487 1.82089 0.184082 4.06186 0.184082H13.944C14.0996 0.184082 14.2085 0.308581 14.2085 0.448641V1.07113C14.2085 1.52244 13.8506 1.89594 13.3993 1.89594H3.93736C2.63013 1.89594 1.57189 2.95417 1.57189 4.24585V7.90299C1.57189 8.35429 1.21396 8.71223 0.762652 8.71223H0.264658C0.109034 8.71223 9.81935e-05 8.60329 9.81935e-05 8.44767V4.26141ZM3.15925 4.41703C3.15925 3.96572 3.51718 3.59223 3.96849 3.59223H12.3566C12.5122 3.59223 12.6367 3.71673 12.6367 3.87235V4.35478C12.6367 4.80609 12.2632 5.16402 11.8119 5.16402H3.42381C3.26818 5.16402 3.15925 5.05509 3.15925 4.89946V4.41703Z" fill="white"/></g><defs><clipPath id="clip-nav"><rect width="160" height="9" fill="white"/></clipPath></defs></svg>
     </a>
     <ul class="nav-links">
       <li><a href="#s-valor">Plataforma</a></li>
-      <li><a href="#s-como">Como funciona</a></li>
-      <li><a href="#s-diff">Diferencial</a></li>
-      <li><a href="#s-quem">Para quem</a></li>
+      <li><a href="#s-howit">Como funciona</a></li>
+      <li><a href="#s-quem">Para quem é</a></li>
       <li><a href="#s-planos">Planos</a></li>
+      <li><a href="#s-faq">FAQ</a></li>
     </ul>
     <a href="#s-cta" class="nav-cta">Agendar demonstração</a>
   </div>
@@ -1599,19 +1795,20 @@
       <!-- LEFT: copy -->
       <div class="hero-content">
         <div class="hero-chips reveal" data-d="1">
-          <span class="chip"><span class="chip-dot"></span>operação centralizada</span>
-          <span class="chip"><span class="chip-dot"></span>histórico confiável</span>
-          <span class="chip"><span class="chip-dot"></span>controle institucional</span>
-          <span class="chip"><span class="chip-dot"></span>transparência com o cliente</span>
+          <span class="chip"><span class="chip-dot"></span>operação multi-cliente organizada</span>
+          <span class="chip"><span class="chip-dot"></span>menos cobrança por mensagem</span>
+          <span class="chip"><span class="chip-dot"></span>histórico e contexto em um só lugar</span>
+          <span class="chip"><span class="chip-dot"></span>mais previsibilidade para a gestão</span>
         </div>
         <h1 class="hero-title reveal" data-d="2">
-          Sua operação não precisa mais viver espalhada em <em>WhatsApp</em>, planilhas, tarefas soltas e cobrança sem contexto.
+          A plataforma operacional para empresas de serviços técnicos que atendem múltiplos clientes e perderam visibilidade da rotina.
         </h1>
         <p class="hero-subtitle reveal" data-d="3">
-          Centralize chamados, serviços, documentos e acompanhamento do cliente em um único ambiente operacional. A Falcodesk organiza a rotina técnica da sua empresa com mais clareza, histórico, controle e transparência.
+          Organize chamados, contratos, documentos, planejamento e acompanhamento do cliente em um único ambiente.
+          Sem depender de WhatsApp, planilhas, tarefas soltas e memória da equipe para fazer a operação funcionar.
         </p>
         <p class="hero-complement reveal" data-d="4">
-          Tudo em uma interface pensada para leitura rápida, execução contínua e tomada de decisão.
+          A Falcodesk foi pensada para operações que precisam de mais do que controle de tarefa: precisam de contexto, rastreabilidade e leitura real da operação.
         </p>
         <div class="hero-actions reveal" data-d="5">
           <a href="#s-cta" class="btn-primary">
@@ -1620,6 +1817,7 @@
           </a>
           <a href="#s-cta" class="btn-ghost">Falar com o time →</a>
         </div>
+        <p class="hero-risk reveal" data-d="6">Em poucos minutos você entende se a Falcodesk faz sentido para sua operação ou não. Sem apresentação genérica.</p>
       </div>
 
       <!-- RIGHT: mockup -->
@@ -1782,43 +1980,43 @@
   <div class="container">
     <div class="s-pain-header">
       <span class="eyebrow reveal">Problema real</span>
-      <h2 class="s-pain-title reveal" data-d="1">Quando a operação cresce, a desorganização cresce junto.</h2>
+      <h2 class="s-pain-title reveal" data-d="1">Quando a operação cresce, a desorganização deixa de ser detalhe e começa a custar tempo, margem e confiança.</h2>
     </div>
     <div class="pain-grid">
       <div class="pain-card reveal-scale" data-d="1">
         <div class="pain-icon">📨</div>
-        <div class="pain-card-title">Chamados por múltiplos canais</div>
-        <div class="pain-card-desc">WhatsApp, e-mail, Telegram e ligação ao mesmo tempo. Sem rastreabilidade, sem histórico, sem controle real sobre o que está aberto.</div>
+        <div class="pain-card-title">Chamados chegando por todos os lados</div>
+        <div class="pain-card-desc">WhatsApp, e-mail, ligação e mensagens soltas. A demanda entra, mas ninguém tem uma leitura confiável do que está aberto, atrasado ou crítico.</div>
       </div>
       <div class="pain-card reveal-scale" data-d="2">
         <div class="pain-icon">🌀</div>
-        <div class="pain-card-title">Demandas sem contexto</div>
-        <div class="pain-card-desc">A equipe executa sem saber o histórico. O que foi feito antes? Por quem? Com qual resultado? Ninguém tem a resposta completa.</div>
+        <div class="pain-card-title">Equipe executando sem contexto</div>
+        <div class="pain-card-desc">O time resolve o que está na frente, mas sem histórico completo, sem clareza do que já foi feito e sem continuidade entre as etapas.</div>
       </div>
       <div class="pain-card reveal-scale" data-d="3">
         <div class="pain-icon">📂</div>
-        <div class="pain-card-title">Documentos espalhados</div>
-        <div class="pain-card-desc">Google Drive, e-mail, pastas locais. Cada cliente num lugar diferente. Localizar uma informação leva tempo que não existe.</div>
+        <div class="pain-card-title">Documentos e informações espalhados</div>
+        <div class="pain-card-desc">Contrato em um lugar, evidência em outro, anotação em outro. Encontrar contexto vira esforço manual.</div>
       </div>
       <div class="pain-card reveal-scale" data-d="4">
         <div class="pain-icon">❓</div>
-        <div class="pain-card-title">Cliente cobrando status</div>
-        <div class="pain-card-desc">O cliente não tem visibilidade. Cobra por mensagem, gera retrabalho e desgasta o relacionamento sem necessidade.</div>
+        <div class="pain-card-title">Cliente cobrando status o tempo todo</div>
+        <div class="pain-card-desc">Quando o cliente não tem visibilidade, ele recorre à mensagem. Isso gera retrabalho e passa sensação de operação improvisada.</div>
       </div>
       <div class="pain-card reveal-scale" data-d="5">
         <div class="pain-icon">🔲</div>
-        <div class="pain-card-title">Equipe sem visão completa</div>
-        <div class="pain-card-desc">Cada um trabalha no próprio quadrado. Sem leitura do todo, os gargalos só aparecem quando já viraram problema crítico.</div>
+        <div class="pain-card-title">Gestão sem leitura do todo</div>
+        <div class="pain-card-desc">Sem um ambiente central, o gestor só descobre gargalos quando eles já viraram problema.</div>
       </div>
       <div class="pain-card reveal-scale" data-d="6">
         <div class="pain-icon">📊</div>
-        <div class="pain-card-title">Gestão no meio do ruído</div>
-        <div class="pain-card-desc">Sem painel operacional, a gestão não consegue medir, priorizar ou antecipar. Só reage quando o cliente já está insatisfeito.</div>
+        <div class="pain-card-title">Muito esforço, pouca previsibilidade</div>
+        <div class="pain-card-desc">A equipe trabalha, mas a operação continua frágil porque depende demais de alinhamento manual e ferramentas desconectadas.</div>
       </div>
     </div>
     <div class="pain-close reveal">
       <p class="pain-close-text">
-        O problema não é só falta de ferramenta. É operar sem <em>um ambiente central confiável</em>.
+        O problema não é só falta de ferramenta.<br>É operar sem <em>um ambiente central confiável</em>.
       </p>
     </div>
   </div>
@@ -1834,8 +2032,8 @@
 
     <div class="sh-center reveal">
       <span class="eyebrow">Plataforma</span>
-      <h2 class="sh-title">Três dimensões que organizam sua operação técnica inteira.</h2>
-      <p class="sh-sub">A Falcodesk não é um conjunto de funcionalidades soltas. É uma estrutura construída em torno de três grandezas operacionais — cada uma resolve uma camada diferente. Juntas, formam o ambiente que sua operação precisa para funcionar de verdade.</p>
+      <h2 class="sh-title">A Falcodesk conecta atendimento, execução, documentação e acompanhamento em um único fluxo operacional.</h2>
+      <p class="sh-sub">Não é um conjunto de módulos soltos.<br>É uma estrutura para empresas que precisam organizar a rotina técnica, reduzir ruído e dar mais clareza para equipe, gestão e cliente.</p>
     </div>
 
     <div class="value-grandeza">
@@ -1843,17 +2041,18 @@
       <!-- ── GRANDEZA 01: EXECUÇÃO ─────────────────────────── -->
       <div class="vg-block reveal">
         <div class="vg-copy">
-          <span class="vg-label">Grandeza 01 &mdash; Execução</span>
-          <h3 class="vg-title">Chamados registrados, priorizados e serviços em andamento com visão total.</h3>
-          <p class="vg-desc">Toda demanda que chega tem um lugar — com status, responsável e prioridade definidos. Os chamados ficam rastreáveis do início ao fechamento, e os serviços ativos ficam visíveis para toda a equipe. Sem depender de mensagem. Sem contexto perdido no meio da execução.</p>
+          <span class="vg-label">Camada 01 &mdash; Execução</span>
+          <h3 class="vg-title">Chamados e serviços organizados com prioridade, responsável e histórico claro.</h3>
+          <p class="vg-desc">Toda demanda que entra precisa virar contexto operacional, não mensagem perdida.
+          Na Falcodesk, chamados, serviços e execução contínua ficam visíveis do início ao fechamento, com leitura rápida para quem faz e para quem acompanha.</p>
           <div class="vg-feats">
             <div class="vg-feat">
               <div class="vg-feat-ico">🎫</div>
-              <div class="vg-feat-body"><strong>Chamados com prioridade, SLA e histórico completo</strong> — do primeiro contato ao fechamento, com linha do tempo clara e rastreável.</div>
+              <div class="vg-feat-body"><strong>Chamados com prioridade, SLA e timeline</strong> — rastreabilidade do primeiro contato ao fechamento.</div>
             </div>
             <div class="vg-feat">
               <div class="vg-feat-ico">⚙️</div>
-              <div class="vg-feat-body"><strong>Serviços ativos com status, responsável e prazo visível</strong> — contratos e execução contínua em leitura imediata para a equipe.</div>
+              <div class="vg-feat-body"><strong>Serviços ativos por cliente com status claro</strong> — menos dependência de mensagem para coordenar o time.</div>
             </div>
           </div>
         </div>
@@ -1932,17 +2131,18 @@
       <!-- ── GRANDEZA 02: BASE ─────────────────────────────── -->
       <div class="vg-block rev reveal">
         <div class="vg-copy">
-          <span class="vg-label">Grandeza 02 &mdash; Base</span>
-          <h3 class="vg-title">Documentação organizada e planejamento com previsibilidade real.</h3>
-          <p class="vg-desc">Cada cliente tem sua própria base documental — contratos, relatórios, evidências e registros — localizáveis em segundos, não em horas. O planejamento de entregas e atividades fica estruturado com linha do tempo clara para quem executa e para quem toma decisão.</p>
+          <span class="vg-label">Camada 02 &mdash; Base</span>
+          <h3 class="vg-title">Documentação e planejamento em um lugar que faz sentido para a operação.</h3>
+          <p class="vg-desc">Contrato, relatório, escopo, evidência e atividade planejada não podem viver separados.
+          A Falcodesk organiza a base documental por cliente e conecta isso ao planejamento da rotina, dando mais previsibilidade para a execução.</p>
           <div class="vg-feats">
             <div class="vg-feat">
               <div class="vg-feat-ico">📋</div>
-              <div class="vg-feat-body"><strong>Documentos por cliente, sempre organizados e localizáveis</strong> — contratos, relatórios e evidências em um único lugar por contexto.</div>
+              <div class="vg-feat-body"><strong>Documentos por cliente com contexto</strong> — contratos, relatórios e evidências localizáveis em segundos.</div>
             </div>
             <div class="vg-feat">
               <div class="vg-feat-ico">🗓️</div>
-              <div class="vg-feat-body"><strong>Planejamento de atividades com linha do tempo</strong> — entregas e agendamentos visíveis antes de virarem problema.</div>
+              <div class="vg-feat-body"><strong>Planejamento visual da operação</strong> — cronograma, agenda e linha do tempo integrados. Menos tempo procurando informação.</div>
             </div>
           </div>
         </div>
@@ -2021,17 +2221,19 @@
       <!-- ── GRANDEZA 03: CONTROLE ─────────────────────────── -->
       <div class="vg-block reveal">
         <div class="vg-copy">
-          <span class="vg-label">Grandeza 03 &mdash; Controle</span>
-          <h3 class="vg-title">O gestor lê a operação. O cliente acompanha o próprio contrato.</h3>
-          <p class="vg-desc">A gestão tem um painel com visão real do que está acontecendo agora — atividade da equipe, volume de chamados e status por cliente. E o cliente acessa um portal dedicado com chamados, documentos e histórico do próprio contrato, sem precisar cobrar ninguém por mensagem.</p>
+          <span class="vg-label">Camada 03 &mdash; Controle</span>
+          <h3 class="vg-title">Mais leitura para a gestão. Mais transparência para o cliente.</h3>
+          <p class="vg-desc">O gestor precisa entender a operação sem interromper o time.
+          E o cliente precisa acompanhar o que importa sem cobrar status por mensagem.
+          A Falcodesk cria essa camada de visibilidade de forma institucional.</p>
           <div class="vg-feats">
             <div class="vg-feat">
               <div class="vg-feat-ico">👥</div>
-              <div class="vg-feat-body"><strong>Painel gerencial com leitura da equipe e métricas reais</strong> — sem precisar interromper ninguém para entender o que está acontecendo.</div>
+              <div class="vg-feat-body"><strong>Painel gerencial com leitura operacional</strong> — acompanhamento por cliente e menos ruído na gestão.</div>
             </div>
             <div class="vg-feat">
               <div class="vg-feat-ico">🔗</div>
-              <div class="vg-feat-body"><strong>Portal do cliente com visibilidade do próprio contrato</strong> — chamados, documentos e histórico em acesso dedicado e institucional.</div>
+              <div class="vg-feat-body"><strong>Portal com visibilidade do contrato</strong> — menos ruído e mais confiança na relação com o cliente.</div>
             </div>
           </div>
         </div>
@@ -2141,39 +2343,75 @@
 <div class="sep"></div>
 
 <!-- ============================================================
+     SCENARIO — NA PRÁTICA
+============================================================ -->
+<section class="section s-scenario" id="s-scenario">
+  <div class="container">
+    <div class="sh-center reveal">
+      <span class="eyebrow">No dia a dia</span>
+      <h2 class="sh-title">Onde a Falcodesk entra na rotina da operação</h2>
+    </div>
+    <div class="scenario-grid">
+      <div class="sc-card reveal-scale" data-d="1">
+        <div class="sc-num">01</div>
+        <div class="sc-title">Quando um chamado entra sem contexto</div>
+        <div class="sc-desc">A equipe registra, classifica, prioriza e passa a trabalhar com histórico centralizado, não com memória solta.</div>
+      </div>
+      <div class="sc-card reveal-scale" data-d="2">
+        <div class="sc-num">02</div>
+        <div class="sc-title">Quando o cliente quer acompanhar sem depender do time</div>
+        <div class="sc-desc">Em vez de cobrar atualização por mensagem, ele acessa um ambiente com mais visibilidade do que está em andamento.</div>
+      </div>
+      <div class="sc-card reveal-scale" data-d="3">
+        <div class="sc-num">03</div>
+        <div class="sc-title">Quando o gestor precisa entender a operação rápido</div>
+        <div class="sc-desc">A leitura deixa de depender de perguntas e alinhamentos paralelos. O cenário fica visível na própria plataforma.</div>
+      </div>
+      <div class="sc-card reveal-scale" data-d="4" style="grid-column: 2;">
+        <div class="sc-num">04</div>
+        <div class="sc-title">Quando um novo projeto precisa virar execução</div>
+        <div class="sc-desc">Briefing, documentos e planejamento deixam de nascer espalhados e passam a seguir um fluxo mais claro.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============================================================
      BENEFITS
 ============================================================ -->
-<section class="section s-benefits" id="s-beneficios">
+<section class="section s-benefits" id="s-benefits">
   <div class="container">
     <div class="sh-center reveal">
       <span class="eyebrow">Benefícios</span>
-      <h2 class="sh-title">Mais controle para quem executa. Mais leitura para quem gerencia. Mais transparência para quem contrata.</h2>
+      <h2 class="sh-title">Menos ruído para quem executa. Mais leitura para quem gerencia. Mais confiança para quem contrata.</h2>
     </div>
-    <div class="benefits-grid">
-      <div class="b-card reveal-scale" data-d="1">
-        <div class="b-icon">🎯</div>
-        <div class="b-title">Centralização operacional</div>
-        <div class="b-desc">Chamados, serviços, documentos e clientes num único ambiente coerente e confiável.</div>
+    <div class="whom-grid">
+      <div class="w-card reveal-scale" data-d="1">
+        <div class="w-icon">⚡</div>
+        <div class="w-title">Menos retrabalho</div>
+        <div class="w-desc">Informação, histórico e contexto no mesmo lugar.</div>
       </div>
-      <div class="b-card reveal-scale" data-d="2">
-        <div class="b-icon">🕐</div>
-        <div class="b-title">Histórico confiável</div>
-        <div class="b-desc">Tudo registrado. O que foi feito, por quem e quando — sem dependência de memória ou mensagem avulsa.</div>
+      <div class="w-card reveal-scale" data-d="2">
+        <div class="w-icon">💬</div>
+        <div class="w-title">Menos cobrança por mensagem</div>
+        <div class="w-desc">O cliente acompanha melhor o que está acontecendo.</div>
       </div>
-      <div class="b-card reveal-scale" data-d="3">
-        <div class="b-icon">📡</div>
-        <div class="b-title">Leitura rápida da operação</div>
-        <div class="b-desc">Painel operacional com visão completa do que está acontecendo agora, sem precisar perguntar à equipe.</div>
+      <div class="w-card reveal-scale" data-d="3">
+        <div class="w-icon">🎯</div>
+        <div class="w-title">Mais clareza para o time</div>
+        <div class="w-desc">A equipe executa com prioridade, contexto e continuidade.</div>
       </div>
-      <div class="b-card reveal-scale" data-d="4">
-        <div class="b-icon">🔍</div>
-        <div class="b-title">Transparência com o cliente</div>
-        <div class="b-desc">Portal dedicado. O cliente vê o que precisa, quando precisa — sem precisar cobrar por mensagem.</div>
+      <div class="w-card reveal-scale" data-d="4">
+        <div class="w-icon">📊</div>
+        <div class="w-title">Mais previsibilidade para a gestão</div>
+        <div class="w-desc">A operação fica legível antes de virar problema.</div>
       </div>
-      <div class="b-card reveal-scale" data-d="5">
-        <div class="b-icon">✦</div>
-        <div class="b-title">Mais organização, menos ruído</div>
-        <div class="b-desc">Menos mensagens paralelas, menos retrabalho, menos tempo perdido localizando informação crítica.</div>
+      <div class="w-card reveal-scale" data-d="5">
+        <div class="w-icon">🏢</div>
+        <div class="w-title">Mais percepção de estrutura</div>
+        <div class="w-desc">O serviço deixa de parecer improvisado e passa a transmitir organização.</div>
       </div>
     </div>
   </div>
@@ -2184,37 +2422,47 @@
 <!-- ============================================================
      HOW IT WORKS
 ============================================================ -->
-<section class="section s-how" id="s-como">
+<section class="section s-howit" id="s-howit">
   <div class="container">
     <div class="sh-center reveal">
       <span class="eyebrow">Como funciona</span>
       <h2 class="sh-title">Uma estrutura simples para sustentar uma operação mais forte.</h2>
     </div>
-    <div class="how-grid">
-      <div class="h-step reveal" data-d="1">
-        <div class="h-num">01</div>
-        <div class="h-title">Chamados e solicitações</div>
-        <div class="h-desc">Abertura, categorização, prioridade e atribuição. Histórico completo de cada chamado com rastreabilidade total e linha do tempo clara.</div>
+    <div class="howit-list">
+      <div class="howit-step reveal" data-d="1">
+        <div class="howit-num">01</div>
+        <div class="howit-body">
+          <div class="howit-title">A demanda entra</div>
+          <div class="howit-desc">Chamados, solicitações e atividades passam a nascer com registro e prioridade.</div>
+        </div>
       </div>
-      <div class="h-step reveal" data-d="2">
-        <div class="h-num">02</div>
-        <div class="h-title">Serviços e execução contínua</div>
-        <div class="h-desc">Gestão de contratos ativos, entregas recorrentes e acompanhamento de SLAs por cliente — com visão centralizada.</div>
+      <div class="howit-step reveal" data-d="2">
+        <div class="howit-num">02</div>
+        <div class="howit-body">
+          <div class="howit-title">O contexto é centralizado</div>
+          <div class="howit-desc">Cliente, documentos, histórico e execução ficam conectados no mesmo ambiente.</div>
+        </div>
       </div>
-      <div class="h-step reveal" data-d="3">
-        <div class="h-num">03</div>
-        <div class="h-title">Documentos e planejamento</div>
-        <div class="h-desc">Base organizada por cliente com planejamento de atividades, agendamentos e registros estruturados e sempre localizáveis.</div>
+      <div class="howit-step reveal" data-d="3">
+        <div class="howit-num">03</div>
+        <div class="howit-body">
+          <div class="howit-title">A operação é acompanhada</div>
+          <div class="howit-desc">Equipe, serviços, agenda e planejamento seguem uma linha de leitura mais clara.</div>
+        </div>
       </div>
-      <div class="h-step reveal" data-d="4">
-        <div class="h-num">04</div>
-        <div class="h-title">Portal de acompanhamento</div>
-        <div class="h-desc">O cliente acessa um ambiente dedicado com visibilidade do seu contrato, chamados, documentos e histórico — sem cobrar.</div>
+      <div class="howit-step reveal" data-d="4">
+        <div class="howit-num">04</div>
+        <div class="howit-body">
+          <div class="howit-title">O cliente ganha visibilidade</div>
+          <div class="howit-desc">Sem depender de troca manual de status para entender o andamento.</div>
+        </div>
       </div>
-      <div class="h-step reveal" data-d="5">
-        <div class="h-num">05</div>
-        <div class="h-title">Visão gerencial</div>
-        <div class="h-desc">Painel com leitura operacional completa. Métricas, atividade da equipe e status de cada cliente numa só tela.</div>
+      <div class="howit-step reveal" data-d="5">
+        <div class="howit-num">05</div>
+        <div class="howit-body">
+          <div class="howit-title">A gestão passa a ler a operação</div>
+          <div class="howit-desc">Com mais previsibilidade, mais rastreabilidade e menos reação no escuro.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -2238,27 +2486,27 @@
         </div>
         <div class="diff-row">
           <div class="diff-row-ico">✕</div>
-          <div class="diff-row-text">Contexto perdido entre mensagens e ferramentas diferentes</div>
+          <div class="diff-row-text">Contexto se perde entre canais</div>
         </div>
         <div class="diff-row">
           <div class="diff-row-ico">✕</div>
-          <div class="diff-row-text">Demandas espalhadas em múltiplos ambientes sem conexão</div>
+          <div class="diff-row-text">Documentos vivem separados da execução</div>
         </div>
         <div class="diff-row">
           <div class="diff-row-ico">✕</div>
-          <div class="diff-row-text">Cliente sem visibilidade, cobrando status por mensagem</div>
+          <div class="diff-row-text">Cliente cobra status porque não vê nada</div>
         </div>
         <div class="diff-row">
           <div class="diff-row-ico">✕</div>
-          <div class="diff-row-text">Histórico inconsistente e difícil de recuperar depois</div>
+          <div class="diff-row-text">Gestão reage tarde</div>
         </div>
         <div class="diff-row">
           <div class="diff-row-ico">✕</div>
-          <div class="diff-row-text">Dependência de mensagens paralelas para coordenar a equipe</div>
+          <div class="diff-row-text">Histórico fica inconsistente</div>
         </div>
         <div class="diff-row">
           <div class="diff-row-ico">✕</div>
-          <div class="diff-row-text">Dificuldade para medir o que realmente está acontecendo</div>
+          <div class="diff-row-text">Time depende de alinhamento manual demais</div>
         </div>
       </div>
       <div class="diff-vs">vs</div>
@@ -2268,32 +2516,32 @@
         </div>
         <div class="diff-row">
           <div class="diff-row-ico">✓</div>
-          <div class="diff-row-text">Contexto completo em cada chamado — histórico, responsável e timeline integrados</div>
+          <div class="diff-row-text">Contexto operacional em cada demanda</div>
         </div>
         <div class="diff-row">
           <div class="diff-row-ico">✓</div>
-          <div class="diff-row-text">Todas as demandas em um ambiente único, coerente e confiável</div>
+          <div class="diff-row-text">Histórico, documentos e execução conectados</div>
         </div>
         <div class="diff-row">
           <div class="diff-row-ico">✓</div>
-          <div class="diff-row-text">Portal do cliente com visibilidade real — sem precisar cobrar status</div>
+          <div class="diff-row-text">Cliente com mais visibilidade</div>
         </div>
         <div class="diff-row">
           <div class="diff-row-ico">✓</div>
-          <div class="diff-row-text">Histórico estruturado, auditável e sempre acessível por cliente</div>
+          <div class="diff-row-text">Gestão com leitura mais rápida</div>
         </div>
         <div class="diff-row">
           <div class="diff-row-ico">✓</div>
-          <div class="diff-row-text">Coordenação centralizada dentro da própria plataforma operacional</div>
+          <div class="diff-row-text">Operação mais rastreável</div>
         </div>
         <div class="diff-row">
           <div class="diff-row-ico">✓</div>
-          <div class="diff-row-text">Painel gerencial com métricas, leitura e dados reais da operação</div>
+          <div class="diff-row-text">Menos dependência de improviso para funcionar</div>
         </div>
       </div>
     </div>
     <div class="diff-footer reveal">
-      <p class="diff-footer-line">A Falcodesk une <em>execução</em>, <em>gestão</em> e <em>transparência</em> em um mesmo ambiente.</p>
+      <p class="diff-footer-line">A Falcodesk une execução, gestão e transparência em <em>um mesmo ambiente</em>.</p>
     </div>
   </div>
 </section>
@@ -2307,34 +2555,74 @@
   <div class="container">
     <div class="sh-center reveal">
       <span class="eyebrow">Para quem é</span>
-      <h2 class="sh-title">Indicada para operações que precisam de clareza, histórico e acompanhamento contínuo.</h2>
+      <h2 class="sh-title">Indicada para operações que atendem múltiplos clientes e precisam de mais clareza, histórico e continuidade.</h2>
     </div>
     <div class="whom-grid">
       <div class="w-card reveal-scale" data-d="1">
         <div class="w-icon">🎫</div>
         <div class="w-title">Suporte e chamados</div>
-        <div class="w-desc">Times que gerenciam demandas de múltiplos clientes com rastreabilidade, histórico e SLA.</div>
+        <div class="w-desc">Para times que precisam rastrear demanda, SLA e histórico sem espalhar contexto.</div>
       </div>
       <div class="w-card reveal-scale" data-d="2">
         <div class="w-icon">🔧</div>
         <div class="w-title">Manutenção e sustentação</div>
-        <div class="w-desc">Operações com contratos de manutenção recorrente que precisam de visibilidade e controle contínuo.</div>
+        <div class="w-desc">Para contratos recorrentes que exigem execução contínua e visibilidade operacional.</div>
       </div>
       <div class="w-card reveal-scale" data-d="3">
         <div class="w-icon">💻</div>
         <div class="w-title">Serviços técnicos recorrentes</div>
-        <div class="w-desc">Empresas que entregam serviços técnicos contínuos e precisam organizar a execução com processo claro.</div>
+        <div class="w-desc">Para operações que entregam serviço e precisam de processo, não só boa vontade do time.</div>
       </div>
       <div class="w-card reveal-scale" data-d="4">
         <div class="w-icon">🏢</div>
-        <div class="w-title">Gestão com múltiplos clientes</div>
-        <div class="w-desc">Empresas que gerenciam vários clientes simultaneamente e precisam de leitura operacional clara e rápida.</div>
+        <div class="w-title">Empresas com múltiplos clientes</div>
+        <div class="w-desc">Para quem precisa acompanhar várias frentes sem perder leitura da carteira.</div>
       </div>
       <div class="w-card reveal-scale" data-d="5">
         <div class="w-icon">📊</div>
-        <div class="w-title">Histórico e transparência</div>
-        <div class="w-desc">Operações onde o cliente precisa de visibilidade e onde o histórico é parte do serviço entregue.</div>
+        <div class="w-title">Operações que precisam de transparência</div>
+        <div class="w-desc">Para empresas em que histórico e visibilidade já fazem parte da qualidade percebida.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============================================================
+     NOT FOR WHOM
+============================================================ -->
+<section class="section s-notwho" id="s-notwho">
+  <div class="container">
+    <div class="sh-center reveal" style="margin-bottom: 52px;">
+      <span class="eyebrow">Filtro de aderência</span>
+      <h2 class="sh-title">A Falcodesk não é para toda operação. E isso é bom.</h2>
+    </div>
+    <div class="notwho-grid reveal">
+      <div class="nw-item">
+        <span class="nw-num">01</span>
+        <div class="nw-body">
+          <div class="nw-title">Não é para equipes que só querem um gerenciador simples de tarefas.</div>
+          <div class="nw-desc">Se o problema é apenas marcar atividade, a Falcodesk provavelmente é mais estrutura do que você precisa hoje.</div>
+        </div>
+      </div>
+      <div class="nw-item">
+        <span class="nw-num">02</span>
+        <div class="nw-body">
+          <div class="nw-title">Não é para quem opera bem com tudo separado.</div>
+          <div class="nw-desc">Se sua empresa já consegue integrar atendimento, documentação, planejamento e cliente sem ruído, talvez o ganho percebido seja menor.</div>
+        </div>
+      </div>
+      <div class="nw-item">
+        <span class="nw-num">03</span>
+        <div class="nw-body">
+          <div class="nw-title">Não é para quem busca só uma ferramenta de disparo ou CRM isolado.</div>
+          <div class="nw-desc">A proposta da Falcodesk é maior: conectar a operação, não resolver só uma ponta.</div>
+        </div>
+      </div>
+    </div>
+    <div class="notwho-close reveal">
+      Se nenhuma dessas condições se aplica à sua operação — vale <em>ver a Falcodesk de perto</em>.
     </div>
   </div>
 </section>
@@ -2350,165 +2638,177 @@
     <div class="pricing-header reveal">
       <div class="pricing-header-copy">
         <span class="eyebrow">Planos</span>
-        <h2 class="sh-title">Escolha o plano que combina com o tamanho da sua operação.</h2>
-        <p class="sh-sub">Cada plano entrega mais do que funcionalidades — entrega estrutura. O Pro é o ponto ideal para quem quer sair do improviso e organizar atendimento, planejamento e comercial de verdade.</p>
-      </div>
-      <div class="billing-toggle" aria-label="Forma de cobrança">
-        <button class="active" data-billing="monthly" type="button">Mensal</button>
-        <button data-billing="annual" type="button">Anual · 15% off</button>
+        <h2 class="sh-title">Escolha a entrada que faz mais sentido para o momento da sua operação.</h2>
+        <p class="sh-sub">A Falcodesk pode entrar pela dor mais urgente da sua empresa e evoluir junto com a operação. Cada plano foi organizado para resolver uma camada diferente do fluxo: comercial, operação, gestão ou tudo integrado.</p>
       </div>
     </div>
 
     <div class="pricing-grid">
 
-      <!-- ── STARTER ─────────────────────────────── -->
-      <article class="p-card reveal-scale" data-d="1" data-plan="starter" data-monthly="790" data-annual-equivalent="672" data-annual-total="8040">
+      <!-- ── COMERCIAL ─────────────────────────────── -->
+      <article class="p-card reveal-scale" data-d="1">
         <div class="p-tag-row">
-          <span class="p-chip">Entrada com posicionamento premium</span>
-          <span class="p-pill">Starter</span>
+          <span class="p-chip">Para organizar a frente comercial</span>
+          <span class="p-pill">Comercial</span>
         </div>
-        <h3>Starter</h3>
-        <p class="p-desc">Para times que querem sair do improviso sem cair numa stack cara e fragmentada. Organização real desde o primeiro dia.</p>
-        <div class="p-price">
-          <div class="p-price-value">
-            <span class="p-currency">R$</span>
-            <span class="p-amount" data-role="amount">790</span>
-          </div>
-          <small class="p-billing-copy" data-role="billing-copy">por mês, com cobrança mensal</small>
-        </div>
-        <div class="p-meta">
-          <div class="p-meta-item">
-            <span class="p-meta-label">Usuários</span>
-            <span class="p-meta-value">Até 3</span>
-          </div>
-          <div class="p-meta-item">
-            <span class="p-meta-label">Clientes</span>
-            <span class="p-meta-value">Até 10</span>
-          </div>
-        </div>
+        <h3>Comercial</h3>
+        <p class="p-desc">Ideal para operações que querem estruturar melhor a frente comercial, gerar oportunidades com mais processo e reduzir a dependência de ferramentas soltas para prospecção.</p>
         <ul class="p-features">
-          <li>Chamados com kanban, lista e timeline integrados</li>
-          <li>Cadastro e gestão de clientes com visão operacional da carteira</li>
-          <li>Agenda operacional com sincronização de compromissos</li>
-          <li>Documentação centralizada por cliente com pastas e arquivos</li>
-          <li>Relatórios básicos de volume, status e rotina</li>
-          <li>Base sólida para consolidar processo e histórico</li>
+          <li>prospecção mais organizada</li>
+          <li>geração de oportunidades com mais controle</li>
+          <li>comunicação comercial mais centralizada</li>
+          <li>menos improviso na entrada de novos clientes</li>
         </ul>
         <div class="p-result">
           <span class="p-result-label">Resultado prático</span>
-          <span class="p-result-text">Organização do atendimento e da carteira com muito mais clareza do que planilhas e help desks simples.</span>
+          <span class="p-result-text">Sua operação comercial ganha mais consistência, previsibilidade e capacidade de ativação.</span>
         </div>
         <div class="p-cta-row">
-          <a class="btn-ghost" href="mailto:ricardo@falcotec.com.br?subject=Interesse%20no%20plano%20Starter%20FalcoDesk">Falar com o time</a>
+          <a class="btn-ghost" href="mailto:comercial@falcotec.com.br?subject=Interesse%20no%20plano%20Comercial%20Falcodesk">Quero falar sobre o plano Comercial</a>
         </div>
       </article>
 
-      <!-- ── PRO (ANCHOR) ─────────────────────────── -->
-      <article class="p-card featured reveal-scale" data-d="2" data-plan="pro" data-monthly="1290" data-annual-equivalent="1097" data-annual-total="13158">
+      <!-- ── OPERAÇÃO ─────────────────────────────── -->
+      <article class="p-card reveal-scale" data-d="2">
         <div class="p-tag-row">
-          <span class="p-pill">⭐ Plano recomendado</span>
-          <span class="p-chip">Âncora comercial</span>
+          <span class="p-chip">Para organizar chamados e rotina</span>
+          <span class="p-pill">Operação</span>
         </div>
-        <h3>Pro</h3>
-        <p class="p-desc">O melhor plano para quem quer mais do que atendimento. Aqui o FalcoDesk vira uma plataforma de operação e entrega completa.</p>
-        <div class="p-price">
-          <div class="p-price-value">
-            <span class="p-currency">R$</span>
-            <span class="p-amount" data-role="amount">1.290</span>
-          </div>
-          <small class="p-billing-copy" data-role="billing-copy">por mês, com cobrança mensal</small>
-        </div>
-        <div class="p-meta">
-          <div class="p-meta-item">
-            <span class="p-meta-label">Usuários</span>
-            <span class="p-meta-value">Até 8</span>
-          </div>
-          <div class="p-meta-item">
-            <span class="p-meta-label">Clientes</span>
-            <span class="p-meta-value">Até 30</span>
-          </div>
-        </div>
+        <h3>Operação</h3>
+        <p class="p-desc">Esse é o plano para operações que já sentem o peso da desorganização no dia a dia e precisam centralizar atendimento, execução e histórico em um ambiente confiável.</p>
         <ul class="p-features">
-          <li>Tudo do Starter + planejamento visual completo</li>
-          <li>Gantt interativo com drag, resize e trava por janela de execução</li>
-          <li>Calendário operacional com dependências visuais entre tickets</li>
-          <li>Assistente de planejamento com briefing técnico e IA</li>
-          <li>Geração de tickets a partir do planejamento por IA</li>
-          <li>Prospecção, pipeline comercial e propostas com IA e PDF</li>
-          <li>Relatórios gerenciais e leitura de capacidade do time</li>
+          <li>chamados e serviços em um só fluxo</li>
+          <li>documentação por cliente com mais contexto</li>
+          <li>menos informação espalhada</li>
+          <li>mais clareza para o time que executa</li>
         </ul>
         <div class="p-result">
           <span class="p-result-label">Resultado prático</span>
-          <span class="p-result-text">O cliente não compra apenas atendimento. Compra previsibilidade, coordenação e capacidade de entrega.</span>
+          <span class="p-result-text">Sua operação deixa de depender de mensagem, memória e planilha para funcionar bem.</span>
         </div>
         <div class="p-cta-row">
-          <a class="btn-primary" href="mailto:ricardo@falcotec.com.br?subject=Interesse%20no%20plano%20Pro%20FalcoDesk">Começar com o Pro</a>
-          <a class="btn-ghost" href="#s-cta">Agendar demo</a>
+          <a class="btn-ghost" href="mailto:comercial@falcotec.com.br?subject=Interesse%20no%20plano%20Operacao%20Falcodesk">Quero ver o plano Operação</a>
         </div>
       </article>
 
-      <!-- ── SCALE ─────────────────────────────── -->
-      <article class="p-card reveal-scale" data-d="3" data-plan="scale" data-monthly="2690" data-annual-equivalent="2287" data-annual-total="27438">
+      <!-- ── GESTÃO ─────────────────────────────── -->
+      <article class="p-card reveal-scale" data-d="3">
         <div class="p-tag-row">
-          <span class="p-chip">Para operação maior e mais densa</span>
-          <span class="p-pill">Scale</span>
+          <span class="p-chip">Para previsibilidade e leitura gerencial</span>
+          <span class="p-pill">Gestão</span>
         </div>
-        <h3>Scale</h3>
-        <p class="p-desc">Voltado para operações com múltiplas frentes, volume maior de clientes e necessidade de governança mais madura.</p>
-        <div class="p-price">
-          <div class="p-price-value">
-            <span class="p-currency">R$</span>
-            <span class="p-amount" data-role="amount">2.690</span>
-          </div>
-          <small class="p-billing-copy" data-role="billing-copy">por mês, com cobrança mensal</small>
-        </div>
-        <div class="p-meta">
-          <div class="p-meta-item">
-            <span class="p-meta-label">Usuários</span>
-            <span class="p-meta-value">Até 20</span>
-          </div>
-          <div class="p-meta-item">
-            <span class="p-meta-label">Clientes</span>
-            <span class="p-meta-value">Até 100</span>
-          </div>
-        </div>
+        <h3>Gestão</h3>
+        <p class="p-desc">Indicado para gestores e operações que precisam acompanhar capacidade do time, planejamento, produtividade e andamento real da rotina sem operar no escuro.</p>
         <ul class="p-features">
-          <li>Tudo do Pro com maior fôlego para operação multi-cliente</li>
-          <li>Espaço para organizar squads, responsáveis e carteira maior</li>
-          <li>Camada comercial e operacional unificada para crescimento</li>
-          <li>Ideal para MSPs e consultorias que precisam padronizar gestão</li>
-          <li>Perfeito para sair do combo help desk + planner + CRM</li>
-          <li>Base robusta para onboarding em escala</li>
+          <li>planejamento mais estruturado</li>
+          <li>mais previsibilidade da execução</li>
+          <li>visão gerencial da operação</li>
+          <li>acompanhamento mais claro da equipe e das entregas</li>
         </ul>
         <div class="p-result">
           <span class="p-result-label">Resultado prático</span>
-          <span class="p-result-text">Menos troca entre ferramentas, mais visão executiva e capacidade de escalar com processo.</span>
+          <span class="p-result-text">A gestão passa a entender o que está acontecendo sem depender de alinhamento manual o tempo todo.</span>
         </div>
         <div class="p-cta-row">
-          <a class="btn-ghost" href="mailto:ricardo@falcotec.com.br?subject=Interesse%20no%20plano%20Scale%20FalcoDesk">Falar com o time</a>
+          <a class="btn-ghost" href="mailto:comercial@falcotec.com.br?subject=Interesse%20no%20plano%20Gestao%20Falcodesk">Quero conhecer o plano Gestão</a>
+        </div>
+      </article>
+
+      <!-- ── SEPARADOR ─────────────────────────── -->
+      <div class="suite-sep">ou combine todos os módulos</div>
+
+      <!-- ── SUITE (centrado) ───────────────────── -->
+      <article class="p-card featured suite-center reveal-scale" data-d="4">
+        <div class="p-tag-row">
+          <span class="p-pill">⭐ Tudo integrado</span>
+          <span class="p-chip">Suite completa</span>
+        </div>
+        <h3>Suite</h3>
+        <p class="p-desc">A Suite reúne toda a lógica da Falcodesk em uma estrutura integrada, ideal para operações que já entendem que o problema não está em uma etapa isolada, mas na desconexão entre elas.</p>
+        <ul class="p-features">
+          <li>entrada comercial conectada à operação</li>
+          <li>atendimento, execução e documentação centralizados</li>
+          <li>gestão com mais leitura e previsibilidade</li>
+          <li>menos fragmentação entre áreas e ferramentas</li>
+        </ul>
+        <div class="p-result">
+          <span class="p-result-label">Resultado prático</span>
+          <span class="p-result-text">Sua empresa passa a operar com mais clareza, menos ruído e mais percepção de estrutura.</span>
+        </div>
+        <div class="p-cta-row">
+          <a class="btn-primary" href="mailto:comercial@falcotec.com.br?subject=Interesse%20na%20Falcodesk%20Suite">Quero ver a Falcodesk completa</a>
         </div>
       </article>
 
     </div><!-- /pricing-grid -->
 
+    <div class="p-guide reveal">
+      <h3 class="p-guide-title">Qual plano faz mais sentido para você?</h3>
+      <p class="p-guide-text">Se hoje sua maior dor está em gerar demanda, comece pelo Comercial.<br>Se o gargalo está na rotina e no atendimento, o melhor ponto de entrada é Operação.<br>Se o problema já é previsibilidade, acompanhamento e leitura gerencial, vá para Gestão.<br>Se sua empresa precisa conectar tudo isso em um só fluxo, a escolha certa é a Suite.</p>
+    </div>
+
     <div class="p-addons reveal">
       <div class="p-addon">
-        <span class="eyebrow">Implantação</span>
-        <strong>Onboarding a partir de R$ 2.500</strong>
-        <p>Configuração, estruturação inicial e treinamento para seu time começar a operar com segurança desde o primeiro dia.</p>
+        <span class="eyebrow">Onboarding assistido</span>
+        <strong>Configuração inicial · a partir de R$ 2.500</strong>
+        <p>Configuração inicial, estruturação da operação e treinamento do time.</p>
       </div>
       <div class="p-addon">
-        <span class="eyebrow">Crescimento</span>
-        <strong>Usuário extra a partir de R$ 99/mês</strong>
-        <p>Adicione membros à plataforma sem precisar subir de plano. O crescimento acompanha o ritmo da sua operação.</p>
+        <span class="eyebrow">Usuários adicionais</span>
+        <strong>Crescimento gradual · a partir de R$ 99/mês por usuário</strong>
+        <p>Crescimento gradual sem obrigar mudança brusca de plano.</p>
       </div>
       <div class="p-addon">
         <span class="eyebrow">Compromisso anual</span>
         <strong>Até 15% de desconto no plano anual</strong>
-        <p>Mais previsibilidade para os dois lados. Menos churn, mais caixa e planejamento financeiro mais sólido.</p>
+        <p>Mais previsibilidade financeira e melhor condição comercial.</p>
       </div>
     </div>
 
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============================================================
+     FAQ
+============================================================ -->
+<section class="section s-faq" id="s-faq">
+  <div class="container">
+    <div class="sh-center reveal">
+      <span class="eyebrow">Perguntas frequentes</span>
+      <h2 class="sh-title">O que um visitante frio normalmente quer entender antes de pedir demo</h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item reveal" data-d="1">
+        <div class="faq-q">A Falcodesk substitui meu sistema atual?</div>
+        <div class="faq-a">Depende da sua operação. Em alguns casos, ela pode substituir ferramentas isoladas. Em outros, entra primeiro como camada de organização operacional e depois evolui.</div>
+      </div>
+      <div class="faq-item reveal" data-d="2">
+        <div class="faq-q">Funciona para empresas pequenas?</div>
+        <div class="faq-a">Sim, desde que a dor já exista. Se sua operação já sofre com contexto perdido, múltiplos clientes e rotina espalhada, a Falcodesk pode fazer sentido mesmo em times menores.</div>
+      </div>
+      <div class="faq-item reveal" data-d="3">
+        <div class="faq-q">Serve para empresas com múltiplos clientes?</div>
+        <div class="faq-a">Sim. Esse é um dos cenários em que a plataforma mais faz sentido, porque centraliza cliente, histórico, demanda e acompanhamento em um único ambiente.</div>
+      </div>
+      <div class="faq-item reveal" data-d="4">
+        <div class="faq-q">Preciso migrar tudo de uma vez?</div>
+        <div class="faq-a">Não necessariamente. A implantação pode começar por uma frente mais crítica da operação e crescer com o uso.</div>
+      </div>
+      <div class="faq-item reveal" data-d="5">
+        <div class="faq-q">O cliente final vê o quê?</div>
+        <div class="faq-a">O cliente pode acompanhar o que for relevante para o contrato dele, com mais transparência e menos necessidade de cobrança manual.</div>
+      </div>
+      <div class="faq-item reveal" data-d="6">
+        <div class="faq-q">Como funciona a implantação?</div>
+        <div class="faq-a">A implantação depende do plano e da complexidade da operação. O onboarding pode incluir configuração inicial, organização da estrutura e treinamento do time.</div>
+      </div>
+      <div class="faq-item reveal" data-d="1">
+        <div class="faq-q">A Falcodesk é mais comercial ou mais operacional?</div>
+        <div class="faq-a">Ela foi pensada para conectar as etapas da operação. Então pode começar por um ponto, mas a tese central é integrar fluxo, não isolar módulo.</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -2525,35 +2825,35 @@
       <div>
         <span class="eyebrow reveal">Resultado</span>
         <h2 class="sh-title reveal" data-d="1" style="text-align:left; max-width:100%; margin:12px 0 44px;">
-          O resultado não é só organização interna. É percepção de estrutura.
+          O ganho não é só organização interna. É percepção de estrutura.
         </h2>
         <div class="gain-items">
           <div class="g-item reveal" data-d="2">
             <div class="g-icon">⚡</div>
             <div>
               <div class="g-title">Mais clareza para o time</div>
-              <div class="g-desc">A equipe sabe o que fazer, em qual ordem e com qual contexto. Menos tempo perdido, mais execução real.</div>
+              <div class="g-desc">A equipe sabe o que fazer, com qual contexto e em qual prioridade.</div>
             </div>
           </div>
           <div class="g-item reveal" data-d="3">
             <div class="g-icon">🎯</div>
             <div>
-              <div class="g-title">Mais controle para a gestão</div>
-              <div class="g-desc">Visão clara da operação. O gestor lê o que está acontecendo sem precisar perguntar para a equipe.</div>
+              <div class="g-title">Mais leitura para a gestão</div>
+              <div class="g-desc">O gestor entende a operação sem depender de alinhamento manual a todo momento.</div>
             </div>
           </div>
           <div class="g-item reveal" data-d="4">
             <div class="g-icon">🤝</div>
             <div>
               <div class="g-title">Mais confiança para o cliente</div>
-              <div class="g-desc">O cliente vê o que está sendo feito. Isso reduz cobranças, aumenta confiança e fortalece o relacionamento.</div>
+              <div class="g-desc">A experiência deixa de parecer improvisada e passa a transmitir estabilidade.</div>
             </div>
           </div>
           <div class="g-item reveal" data-d="5">
             <div class="g-icon">📈</div>
             <div>
-              <div class="g-title">Crescimento com processo</div>
-              <div class="g-desc">A operação cresce sem perder o controle. A estrutura sustenta o volume sem gerar caos ou dependência de pessoas.</div>
+              <div class="g-title">Mais base para crescer com processo</div>
+              <div class="g-desc">A operação aguenta volume sem depender tanto da cabeça de poucas pessoas.</div>
             </div>
           </div>
         </div>
@@ -2561,9 +2861,9 @@
 
       <!-- Right: statement panel -->
       <div class="gain-statement reveal" data-d="2">
-        <span class="eyebrow">O impacto real</span>
+        <span class="eyebrow">O que muda de verdade</span>
         <p class="gain-quote">
-          A operação deixa de parecer <em>improvisada</em>. E começa a transmitir <em>estrutura</em>, <em>estabilidade</em> e <em>profissionalismo</em>.
+          A Falcodesk ajuda sua operação a parecer tão estruturada quanto ela precisa ser.
         </p>
       </div>
 
@@ -2581,20 +2881,21 @@
     <div class="cta-panel reveal">
       <span class="eyebrow" style="display:block; margin-bottom:22px;">Próximo passo</span>
       <h2 class="cta-panel-title">
-        Sua operação precisa de mais do que tarefas soltas. Precisa de um ambiente confiável para funcionar bem.
+        Se sua operação já cresceu a ponto de perder visibilidade, a Falcodesk pode fazer sentido para você.
       </h2>
       <p class="cta-panel-sub">
-        Conheça a Falcodesk e veja como centralizar chamados, serviços, documentos e acompanhamento em uma estrutura pensada para rotina técnica real.
+        Agende uma demonstração e entenda, com base na sua realidade, se faz sentido centralizar chamados, documentos, planejamento, cliente e acompanhamento em um único ambiente.
       </p>
       <div class="cta-actions">
-        <a href="#" class="btn-primary" style="font-size:15.5px; padding:15px 30px;">
+        <a href="mailto:comercial@falcotec.com.br?subject=Solicitação%20de%20demonstração%20Falcodesk" class="btn-primary" style="font-size:15.5px; padding:15px 30px;">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          Quero agendar uma demonstração
+          Agendar demonstração →
         </a>
-        <a href="#" class="btn-ghost" style="font-size:15.5px; padding:15px 30px;">
+        <a href="mailto:comercial@falcotec.com.br?subject=Contato%20Falcodesk" class="btn-ghost" style="font-size:15.5px; padding:15px 30px;">
           Falar com o time da Falcotec →
         </a>
       </div>
+      <p class="cta-risk">Conversa orientada ao seu cenário. Sem apresentação genérica.</p>
     </div>
   </div>
 </section>
@@ -2608,10 +2909,9 @@
 
       <div>
         <a href="#" class="footer-logo-wrap">
-          <div class="nav-logo-mark">FD</div>
-          <span class="nav-logo-text">Falco<span>desk</span></span>
+          <svg width="160" height="9" viewBox="0 0 160 9" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip-footer)"><path d="M159.542 0.201172C159.791 0.201172 159.977 0.403482 159.977 0.636916C159.977 0.776977 159.915 0.901476 159.806 0.994851L155.448 4.37187C155.386 4.41856 155.386 4.5275 155.448 4.57418L159.806 7.93564C159.915 8.02902 159.977 8.15351 159.977 8.29358C159.977 8.54257 159.791 8.72932 159.542 8.72932H158.81C158.452 8.72932 158.109 8.62038 157.83 8.40251L153.908 5.38342C153.861 5.33674 153.799 5.32117 153.736 5.32117H147.481C147.403 5.32117 147.341 5.38342 147.341 5.46124V7.92008C147.341 8.37139 146.982 8.72932 146.531 8.72932H146.033C145.877 8.72932 145.769 8.62038 145.769 8.46476V0.465731C145.769 0.32567 145.877 0.201172 146.033 0.201172H146.531C146.982 0.201172 147.341 0.559105 147.341 1.01041V3.48482C147.341 3.56263 147.403 3.60932 147.481 3.60932H153.752C153.814 3.60932 153.877 3.59376 153.923 3.56263L157.814 0.543542C158.094 0.32567 158.452 0.201172 158.81 0.201172C158.965 0.201172 159.292 0.201172 159.542 0.201172Z" fill="white"/><path d="M140.541 1.08822C140.541 1.53953 140.168 1.91303 139.717 1.91303H128.885C128.418 1.91303 128.029 2.42658 128.029 2.89345C128.029 3.37589 128.418 3.74938 128.885 3.74938H138.114C139.529 3.74938 140.666 4.76093 140.666 6.1771C140.666 7.59327 139.529 8.72932 138.114 8.72932H126.862C126.706 8.72932 126.582 8.62038 126.582 8.46476V7.84227C126.582 7.39096 126.956 7.03303 127.407 7.03303H138.238C138.705 7.03303 139.094 6.64397 139.094 6.1771C139.094 5.71023 138.705 5.32117 138.238 5.32117H129.01C127.594 5.32117 126.457 4.30962 126.457 2.89345C126.457 1.47728 127.594 0.201172 129.01 0.201172H140.261C140.417 0.201172 140.541 0.32567 140.541 0.465731V1.08822Z" fill="white"/><path d="M111.745 5.18111C111.325 5.18111 110.998 4.8543 110.998 4.43412C110.998 3.98282 111.356 3.60932 111.808 3.60932H120.196C120.351 3.60932 120.476 3.73382 120.476 3.88944V4.37187C120.476 4.82318 120.102 5.18111 119.651 5.18111H111.745ZM121.238 1.91303H111.776C110.469 1.91303 109.411 2.97127 109.411 4.26294V4.66756C109.411 5.97479 110.469 7.03303 111.776 7.03303H121.238C121.69 7.03303 122.047 7.39096 122.047 7.84227V8.46476C122.047 8.62038 121.938 8.72932 121.782 8.72932H111.901C109.66 8.72932 107.839 6.90853 107.839 4.66756V4.2785C107.839 2.02196 109.66 0.201172 111.901 0.201172H121.782C121.938 0.201172 122.047 0.32567 122.047 0.465731V1.08822C122.047 1.53953 121.69 1.91303 121.238 1.91303Z" fill="white"/><path d="M98.8275 0.184082C101.069 0.184082 102.889 2.00487 102.889 4.26141V4.65047C102.889 6.89144 101.069 8.71223 98.8275 8.71223H88.9455C88.7898 8.71223 88.6809 8.60329 88.6809 8.44767V3.87235C88.6809 3.71673 88.7898 3.59223 88.9455 3.59223H89.4435C89.8948 3.59223 90.2527 3.96572 90.2527 4.41703V6.87588C90.2527 6.95369 90.3149 7.01594 90.3928 7.01594H98.952C100.259 7.01594 101.318 5.9577 101.318 4.65047V4.24585C101.318 2.95417 100.259 1.89594 98.952 1.89594H89.4901C89.0388 1.89594 88.6809 1.52244 88.6809 1.07113V0.448641C88.6809 0.308581 88.7898 0.184082 88.9455 0.184082H98.8275Z" fill="white"/><path d="M69.5227 4.26141C69.5227 2.00487 71.3435 0.184082 73.5845 0.184082H79.6693C81.9103 0.184082 83.7311 2.00487 83.7311 4.26141V4.65047C83.7311 6.89144 81.9103 8.71223 79.6693 8.71223H73.5845C71.3435 8.71223 69.5227 6.89144 69.5227 4.65047V4.26141ZM79.7938 7.01594C81.1011 7.01594 82.1593 5.9577 82.1593 4.65047V4.24585C82.1593 2.95417 81.1011 1.89594 79.7938 1.89594H73.46C72.1527 1.89594 71.0945 2.95417 71.0945 4.24585V4.65047C71.0945 5.9577 72.1527 7.01594 73.46 7.01594H79.7938Z" fill="white"/><path d="M55.1167 1.89594C53.8095 1.89594 52.7512 2.95417 52.7512 4.24585V4.65047C52.7512 5.9577 53.8095 7.01594 55.1167 7.01594H64.5786C65.0299 7.01594 65.3878 7.37387 65.3878 7.82518V8.44767C65.3878 8.60329 65.2789 8.71223 65.1233 8.71223H55.2412C53.0002 8.71223 51.1794 6.89144 51.1794 4.65047V4.26141C51.1794 2.00487 53.0002 0.184082 55.2412 0.184082H65.1233C65.2789 0.184082 65.3878 0.308581 65.3878 0.448641V1.07113C65.3878 1.52244 65.0299 1.89594 64.5786 1.89594H55.1167Z" fill="white"/><path d="M36.6931 4.65047C36.6931 5.9577 37.7514 7.01594 39.0586 7.01594H46.9331C47.3844 7.01594 47.7579 7.37387 47.7579 7.82518V8.44767C47.7579 8.60329 47.6334 8.71223 47.4778 8.71223H39.1831C36.9421 8.71223 35.1213 6.89144 35.1213 4.65047V0.448641C35.1213 0.308581 35.2303 0.184082 35.3859 0.184082H35.8839C36.3352 0.184082 36.6931 0.542015 36.6931 0.993322V4.65047Z" fill="white"/><path d="M17.2933 8.71223C17.1221 8.71223 17.0288 8.52548 17.1221 8.40098L22.7401 0.822137C23.0358 0.417517 23.6272 0.184082 24.1252 0.184082C24.6232 0.184082 25.2301 0.417517 25.5258 0.822137L31.1282 8.40098C31.2372 8.52548 31.1438 8.71223 30.9726 8.71223H29.9299C29.5876 8.71223 29.2607 8.5566 29.0584 8.27648L24.2341 1.77144C24.1874 1.69363 24.0785 1.69363 24.0162 1.77144L19.2075 8.27648C18.9896 8.5566 18.6784 8.71223 18.336 8.71223H17.2933Z" fill="white"/><path d="M9.81935e-05 4.26141C-0.0154644 2.00487 1.82089 0.184082 4.06186 0.184082H13.944C14.0996 0.184082 14.2085 0.308581 14.2085 0.448641V1.07113C14.2085 1.52244 13.8506 1.89594 13.3993 1.89594H3.93736C2.63013 1.89594 1.57189 2.95417 1.57189 4.24585V7.90299C1.57189 8.35429 1.21396 8.71223 0.762652 8.71223H0.264658C0.109034 8.71223 9.81935e-05 8.60329 9.81935e-05 8.44767V4.26141ZM3.15925 4.41703C3.15925 3.96572 3.51718 3.59223 3.96849 3.59223H12.3566C12.5122 3.59223 12.6367 3.71673 12.6367 3.87235V4.35478C12.6367 4.80609 12.2632 5.16402 11.8119 5.16402H3.42381C3.26818 5.16402 3.15925 5.05509 3.15925 4.89946V4.41703Z" fill="white"/></g><defs><clipPath id="clip-footer"><rect width="160" height="9" fill="white"/></clipPath></defs></svg>
         </a>
-        <p class="footer-desc">Central operacional para empresas que prestam serviços técnicos com clareza, histórico e transparência.</p>
+        <p class="footer-desc">Central operacional para empresas que prestam serviços técnicos com processo, histórico e transparência.</p>
         <p class="footer-eco">Parte do ecossistema <strong>Falcotec</strong></p>
       </div>
 
