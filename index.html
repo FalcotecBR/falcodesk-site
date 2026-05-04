@@ -1459,6 +1459,27 @@
       font-size: 12px; color: var(--text-muted);
       line-height: 1.55;
     }
+    .p-from {
+      display: block; margin-bottom: 4px;
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+    .p-users {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 8px; margin-top: 14px; padding: 10px 14px;
+      border-radius: 12px;
+      background: var(--bg-inset);
+      border: 1px solid var(--border);
+    }
+    .p-users-incl {
+      font-size: 12px; font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .p-users-add {
+      font-size: 11px; color: var(--text-muted);
+      text-align: right;
+    }
     .p-meta {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 10px; margin: 20px 0 22px;
@@ -2946,7 +2967,7 @@
     <div class="pricing-grid">
 
       <!-- ── COMERCIAL ─────────────────────────────── -->
-      <article class="p-card reveal-scale" data-d="1" data-plan="comercial" data-monthly="497" data-annual-equivalent="422" data-annual-total="5064">
+      <article class="p-card reveal-scale" data-d="1" data-plan="comercial" data-monthly="147" data-annual-equivalent="125" data-annual-total="1499">
         <div class="p-tag-row">
           <span class="p-chip">Para organizar a frente comercial</span>
           <span class="p-pill">Comercial</span>
@@ -2954,13 +2975,18 @@
         <h3>Falcodesk Comercial</h3>
         <div class="p-price">
           <div class="p-price-value">
+            <span class="p-from">a partir de</span>
             <span class="p-currency">R$</span>
-            <span class="p-amount" data-role="amount">497</span>
+            <span class="p-amount" data-role="amount">147</span>
             <span class="p-per">/mês</span>
           </div>
           <span class="p-billing-copy" data-role="billing-copy">por mês, com cobrança mensal</span>
         </div>
-        <p class="p-desc">Ideal para operações que querem estruturar melhor a frente comercial, gerar oportunidades com mais processo e reduzir a dependência de ferramentas soltas para prospecção.</p>
+        <div class="p-users">
+          <span class="p-users-incl">Inclui 3 usuários</span>
+          <span class="p-users-add">R$ 49/mês por usuário adicional</span>
+        </div>
+        <p class="p-desc">Para empresas que precisam organizar prospecção, ativação e entrada de novos clientes com mais processo e menos dependência de ferramentas soltas.</p>
         <ul class="p-features">
           <li>prospecção mais organizada</li>
           <li>geração de oportunidades com mais controle</li>
@@ -2977,7 +3003,7 @@
       </article>
 
       <!-- ── OPERAÇÃO ─────────────────────────────── -->
-      <article class="p-card reveal-scale" data-d="2" data-plan="operacao" data-monthly="997" data-annual-equivalent="847" data-annual-total="10164">
+      <article class="p-card reveal-scale" data-d="2" data-plan="operacao" data-monthly="395" data-annual-equivalent="336" data-annual-total="4028">
         <div class="p-tag-row">
           <span class="p-chip">Para organizar chamados e rotina</span>
           <span class="p-pill">Operação</span>
@@ -2985,13 +3011,18 @@
         <h3>Falcodesk Operação</h3>
         <div class="p-price">
           <div class="p-price-value">
+            <span class="p-from">a partir de</span>
             <span class="p-currency">R$</span>
-            <span class="p-amount" data-role="amount">997</span>
+            <span class="p-amount" data-role="amount">395</span>
             <span class="p-per">/mês</span>
           </div>
           <span class="p-billing-copy" data-role="billing-copy">por mês, com cobrança mensal</span>
         </div>
-        <p class="p-desc">Esse é o plano para operações que já sentem o peso da desorganização no dia a dia e precisam centralizar atendimento, execução e histórico em um ambiente confiável.</p>
+        <div class="p-users">
+          <span class="p-users-incl">Inclui 5 usuários</span>
+          <span class="p-users-add">R$ 79/mês por usuário adicional</span>
+        </div>
+        <p class="p-desc">Para empresas que precisam organizar chamados, serviços, documentação e rotina multi-cliente em um ambiente confiável e centralizado.</p>
         <ul class="p-features">
           <li>chamados e serviços em um só fluxo</li>
           <li>documentação por cliente com mais contexto</li>
@@ -3008,7 +3039,7 @@
       </article>
 
       <!-- ── GESTÃO ─────────────────────────────── -->
-      <article class="p-card reveal-scale" data-d="3" data-plan="gestao" data-monthly="1497" data-annual-equivalent="1272" data-annual-total="15264">
+      <article class="p-card reveal-scale" data-d="3" data-plan="gestao" data-monthly="595" data-annual-equivalent="506" data-annual-total="6069">
         <div class="p-tag-row">
           <span class="p-chip">Para previsibilidade e leitura gerencial</span>
           <span class="p-pill">Gestão</span>
@@ -3016,13 +3047,18 @@
         <h3>Falcodesk Gestão</h3>
         <div class="p-price">
           <div class="p-price-value">
+            <span class="p-from">a partir de</span>
             <span class="p-currency">R$</span>
-            <span class="p-amount" data-role="amount">1.497</span>
+            <span class="p-amount" data-role="amount">595</span>
             <span class="p-per">/mês</span>
           </div>
           <span class="p-billing-copy" data-role="billing-copy">por mês, com cobrança mensal</span>
         </div>
-        <p class="p-desc">Indicado para gestores e operações que precisam acompanhar capacidade do time, planejamento, produtividade e andamento real da rotina sem operar no escuro.</p>
+        <div class="p-users">
+          <span class="p-users-incl">Inclui 5 usuários</span>
+          <span class="p-users-add">R$ 119/mês por usuário adicional</span>
+        </div>
+        <p class="p-desc">Para empresas que precisam de planejamento, previsibilidade e leitura gerencial da operação — sem depender de alinhamento manual o tempo todo.</p>
         <ul class="p-features">
           <li>planejamento mais estruturado</li>
           <li>mais previsibilidade da execução</li>
@@ -3049,8 +3085,8 @@
         </div>
         <h3>Falcodesk Suite</h3>
         <div class="p-price">
-          <div class="p-price-custom">Sob consulta</div>
-          <span class="p-billing-copy">orçamento personalizado para a sua operação</span>
+          <div class="p-price-custom">Orçamento personalizado</div>
+          <span class="p-billing-copy">Comercial, operação e gestão conectados em um único ambiente.</span>
         </div>
         <p class="p-desc">A Suite reúne toda a lógica da Falcodesk em uma estrutura integrada, ideal para operações que já entendem que o problema não está em uma etapa isolada, mas na desconexão entre elas.</p>
         <ul class="p-features">
@@ -3077,14 +3113,14 @@
 
     <div class="p-addons reveal">
       <div class="p-addon">
-        <span class="eyebrow">Onboarding assistido</span>
-        <strong>Configuração inicial · a partir de R$ 2.500</strong>
-        <p>Configuração inicial, estruturação da operação e treinamento do time.</p>
+        <span class="eyebrow">Implantação assistida</span>
+        <strong>Configuração inicial · a partir de R$ 490</strong>
+        <p>Configuração inicial, estruturação da operação e treinamento do time conforme o plano contratado.</p>
       </div>
       <div class="p-addon">
         <span class="eyebrow">Usuários adicionais</span>
-        <strong>Crescimento gradual · a partir de R$ 99/mês por usuário</strong>
-        <p>Crescimento gradual sem obrigar mudança brusca de plano.</p>
+        <strong>Crescimento gradual · por plano contratado</strong>
+        <p>Cada plano tem seu valor por usuário adicional — cresça no ritmo da operação sem mudar de plano.</p>
       </div>
       <div class="p-addon">
         <span class="eyebrow">Compromisso anual</span>
