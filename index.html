@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Falcodesk — Plataforma Operacional para Serviços Técnicos</title>
   <meta name="description" content="A Falcodesk centraliza chamados, serviços, documentação e planejamento em um único ambiente operacional — para empresas de TI, MSPs e prestadores de serviço técnico que precisam de estrutura, histórico e visibilidade real.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
@@ -128,7 +129,7 @@
       flex-shrink: 0;
     }
     .nav-logo svg {
-      height: 14px;
+      height: 8px;
       width: auto;
       display: block;
     }
@@ -176,7 +177,7 @@
       padding: 14px 28px;
       background: var(--accent);
       color: #020817;
-      font-family: 'Inter', sans-serif;
+      font-family: inherit;
       font-weight: 600;
       font-size: 15px;
       border-radius: var(--r-btn);
@@ -208,7 +209,7 @@
       padding: 14px 28px;
       background: transparent;
       color: var(--text-secondary);
-      font-family: 'Inter', sans-serif;
+      font-family: inherit;
       font-weight: 500;
       font-size: 15px;
       border-radius: var(--r-btn);
@@ -1250,7 +1251,7 @@
       text-decoration: none;
     }
     .footer-logo-wrap svg {
-      height: 12px;
+      height: 7px;
       width: auto;
       display: block;
       opacity: 0.85;
@@ -1258,6 +1259,7 @@
     .footer-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; max-width: 270px; }
     .footer-eco  { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
     .footer-eco strong { color: var(--text-secondary); }
+    .footer-cnpj { font-size: 11px; color: var(--text-muted); margin-top: 10px; opacity: 0.6; letter-spacing: 0.03em; }
     .f-col-title {
       font-size: 11px;
       font-weight: 700;
@@ -1418,12 +1420,13 @@
       color: var(--text-accent);
     }
     .p-card h3 {
-      font-size: 22px; font-weight: 700;
+      font-size: 18px; font-weight: 700;
       margin-bottom: 8px;
+      letter-spacing: -0.02em;
     }
     .p-card .p-desc {
       font-size: 13.5px; color: var(--text-secondary);
-      line-height: 1.65; margin-bottom: 0;
+      line-height: 1.65; margin-bottom: 0; margin-top: 18px;
     }
     .p-price { margin-top: 20px; }
     .p-price-value {
@@ -1441,6 +1444,16 @@
       color: var(--text-primary);
     }
     .p-card.featured .p-amount { color: var(--text-accent); }
+    .p-per {
+      font-size: 14px; color: var(--text-muted);
+      padding-bottom: 10px; align-self: flex-end;
+    }
+    .p-price-custom {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 800; letter-spacing: -0.03em;
+      color: var(--text-accent); line-height: 1;
+      margin-bottom: 4px;
+    }
     .p-billing-copy {
       display: block; margin-top: 8px;
       font-size: 12px; color: var(--text-muted);
@@ -1467,7 +1480,7 @@
     .p-features {
       list-style: none; display: flex;
       flex-direction: column; gap: 10px;
-      margin: 0; padding: 0;
+      margin: 18px 0 0; padding: 0;
     }
     .p-features li {
       position: relative; padding-left: 18px;
@@ -1599,6 +1612,7 @@
       color: var(--text-secondary);
       line-height: 1.72;
     }
+    .sc-card--center { grid-column: 2; }
     .sc-close {
       margin-top: 36px;
       text-align: center;
@@ -1669,29 +1683,71 @@
     ============================================================ */
     .s-faq { padding: 120px 0; }
     .faq-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-width: 780px;
+      margin: 0 auto;
     }
     .faq-item {
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: var(--r-card);
-      padding: 26px 28px;
+      overflow: hidden;
       transition: border-color 0.25s ease;
     }
     .faq-item:hover { border-color: var(--border-accent); }
+    .faq-item.open { border-color: var(--border-accent); }
     .faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
       font-size: 14px;
       font-weight: 600;
       color: var(--text-primary);
-      margin-bottom: 10px;
       line-height: 1.38;
+      padding: 22px 26px;
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
     }
+    .faq-q::-webkit-details-marker { display: none; }
+    .faq-q-icon {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid var(--border-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, border-color 0.2s, transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .faq-q-icon svg {
+      width: 10px;
+      height: 10px;
+      stroke: var(--text-secondary);
+      transition: stroke 0.2s;
+    }
+    .faq-item.open .faq-q-icon {
+      background: var(--accent-glow);
+      border-color: var(--border-accent);
+      transform: rotate(45deg);
+    }
+    .faq-item.open .faq-q-icon svg { stroke: var(--accent-light); }
     .faq-a {
       font-size: 13px;
       color: var(--text-secondary);
       line-height: 1.72;
+      padding: 0 26px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.38s cubic-bezier(0.16,1,0.3,1), padding 0.3s ease;
+    }
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      padding: 0 26px 22px;
     }
 
     /* ============================================================
@@ -1707,7 +1763,92 @@
     }
 
     /* ============================================================
-       RESPONSIVE
+       NAV HAMBURGER
+    ============================================================ */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 40px; height: 40px;
+      border: 1px solid var(--border-mid);
+      border-radius: 10px;
+      background: transparent;
+      cursor: pointer;
+      gap: 5px;
+      flex-shrink: 0;
+      padding: 0;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 18px; height: 1.5px;
+      background: var(--text-secondary);
+      border-radius: 2px;
+      transition: all 0.28s cubic-bezier(0.16,1,0.3,1);
+      transform-origin: center;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); background: var(--text-primary); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); background: var(--text-primary); }
+
+    .mobile-nav {
+      position: fixed;
+      inset: 0;
+      z-index: 190;
+      background: rgba(2, 8, 23, 0.97);
+      backdrop-filter: blur(28px) saturate(1.4);
+      -webkit-backdrop-filter: blur(28px) saturate(1.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 96px 28px 48px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .mobile-nav.open {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0);
+    }
+    .mobile-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 32px;
+    }
+    .mobile-nav-links li { border-bottom: 1px solid var(--border); }
+    .mobile-nav-links a {
+      display: block;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 16px 0;
+      transition: color 0.2s, padding-left 0.2s;
+      letter-spacing: -0.025em;
+    }
+    .mobile-nav-links a:hover,
+    .mobile-nav-links a:active { color: var(--text-primary); padding-left: 6px; }
+    .mobile-nav-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 28px;
+      background: var(--accent);
+      color: #020817;
+      font-weight: 700;
+      font-size: 15px;
+      border-radius: var(--r-btn);
+      text-decoration: none;
+      margin-top: 8px;
+    }
+
+    /* ============================================================
+       RESPONSIVE — 1100px (tablet wide)
     ============================================================ */
     @media (max-width: 1100px) {
       .hero-inner          { grid-template-columns: 1fr; }
@@ -1718,48 +1859,186 @@
       .diff-table          { grid-template-columns: 1fr; gap: 20px; }
       .diff-vs             { display: none; }
       .gain-grid           { grid-template-columns: 1fr; gap: 40px; }
-      .pricing-grid        { grid-template-columns: 1fr; max-width: 480px; }
+      .pricing-grid        { grid-template-columns: repeat(2, 1fr); }
+      .p-card.suite-center { grid-column: auto; }
       .p-card.featured     { transform: none; }
-      .p-addons            { grid-template-columns: 1fr; }
+      .p-addons            { grid-template-columns: 1fr 1fr; }
       .footer-grid         { grid-template-columns: 1fr 1fr; }
       .vg-block,
       .vg-block.rev        { grid-template-columns: 1fr; gap: 40px; }
       .vg-block.rev .vg-copy { order: 1; }
       .vg-block.rev .vg-mock { order: 2; }
+      .scenario-grid       { grid-template-columns: 1fr 1fr; }
+      .sc-card--center     { grid-column: auto; }
     }
-    @media (max-width: 1100px) {
-      .scenario-grid { grid-template-columns: 1fr 1fr; }
-      .faq-grid      { grid-template-columns: 1fr; }
-      .pricing-grid          { grid-template-columns: repeat(2, 1fr); }
-      .p-card.suite-center   { grid-column: auto; }
-    }
+
+    /* ============================================================
+       RESPONSIVE — 768px (tablet)
+    ============================================================ */
     @media (max-width: 768px) {
-      .nav-links           { display: none; }
-      .pain-grid           { grid-template-columns: 1fr; }
-      .scenario-grid       { grid-template-columns: 1fr; }
-      .benefits-grid       { grid-template-columns: repeat(2, 1fr); }
-      .how-grid            { grid-template-columns: repeat(2, 1fr); }
-      .how-grid::before    { display: none; }
-      .whom-grid           { grid-template-columns: repeat(2, 1fr); }
-      .cta-panel           { padding: 52px 28px; }
-      .footer-grid         { grid-template-columns: 1fr; gap: 36px; }
+      /* Container */
       .container           { padding: 0 20px; }
-      .sv-body             { height: auto; min-height: 260px; }
-      .pricing-header      { flex-direction: column; align-items: start; }
+
+      /* Section padding */
+      .s-pain, .s-value, .s-benefits, .s-howit,
+      .s-diff, .s-whom, .s-gain, .s-cta, .s-pricing,
+      .s-scenario, .s-notwho, .s-faq { padding: 80px 0; }
+      .hero                { padding: 120px 0 72px; }
+
+      /* Nav */
+      .nav-inner           { padding: 0 20px; }
+      .nav-links           { display: none; }
+      .nav-cta             { display: none; }
+      .nav-hamburger       { display: flex; }
+
+      /* Typography */
+      .sh-title            { font-size: clamp(20px, 5.5vw, 30px); }
+      .sh-sub              { font-size: 14px; margin-top: 12px; }
+      .sh-center           { margin-bottom: 44px; }
+      .hero-subtitle       { font-size: 14.5px; }
+      .hero-complement     { font-size: 13px; }
+      .s-pain-title        { font-size: clamp(22px, 5vw, 32px); }
+      .pain-close-text     { font-size: clamp(15px, 4vw, 19px); }
+
+      /* Hero actions — stack on mobile */
+      .hero-actions        { flex-direction: column; align-items: stretch; }
+      .hero-actions .btn-primary,
+      .hero-actions .btn-ghost { justify-content: center; width: 100%; }
+
+      /* Grids */
+      .pain-grid           { grid-template-columns: 1fr; gap: 12px; }
+      .scenario-grid       { grid-template-columns: 1fr; gap: 12px; }
+      .sc-card--center     { grid-column: auto; }
+      .benefits-grid       { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .how-grid            { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .how-grid::before    { display: none; }
+      .whom-grid           { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+      /* Card padding consistency */
+      .pain-card           { padding: 22px 20px; border-radius: 20px; }
+      .b-card              { padding: 22px 16px; border-radius: 20px; }
+      .w-card              { padding: 22px 14px; border-radius: 20px; }
+      .h-step              { padding: 22px 14px; border-radius: 20px; }
+      .sc-card             { padding: 22px 20px; border-radius: 20px; }
+      .faq-item            { border-radius: 20px; }
+      .faq-q               { padding: 18px 20px; font-size: 13px; }
+      .faq-item.open .faq-a { padding: 0 20px 18px; }
+      .g-item              { padding: 14px 16px; border-radius: 16px; }
+
+      /* Disable hover transforms on touch */
+      @media (hover: none) {
+        .pain-card:hover, .b-card:hover, .w-card:hover,
+        .h-step:hover, .sc-card:hover, .g-item:hover,
+        .faq-item:hover, .p-card:hover, .p-addon:hover { transform: none; }
+      }
+
+      /* Pricing */
+      .pricing-grid        { grid-template-columns: 1fr; max-width: 100%; }
+      .pricing-header      { flex-direction: column; align-items: flex-start; }
       .p-cta-row           { flex-direction: column; }
+      .p-cta-row .btn-primary,
+      .p-cta-row .btn-ghost { justify-content: center; }
+      .p-addons            { grid-template-columns: 1fr; }
+      .p-card              { padding: 24px 20px; border-radius: 24px; }
+      .p-guide             { padding: 28px 22px; border-radius: 24px; }
+      .suite-sep           { margin: 4px 0; }
+
+      /* CTA panel */
+      .cta-panel           { padding: 52px 24px; }
+      .cta-actions         { flex-direction: column; align-items: stretch; }
+      .cta-actions .btn-primary,
+      .cta-actions .btn-ghost { justify-content: center; }
+
+      /* Gain */
+      .gain-statement      { padding: 36px 28px; border-radius: 24px; }
+
+      /* Pain close */
+      .pain-close          { padding: 28px 24px; border-radius: 20px; }
+
+      /* Footer */
+      .footer-grid         { grid-template-columns: 1fr; gap: 32px; }
+
+      /* Mockups */
+      .sv-body             { height: auto; min-height: 260px; }
       .sv-body-vis         { height: auto; }
       .vis-top             { grid-template-columns: repeat(2, 1fr); }
       .vis-middle          { grid-template-columns: 1fr; }
       .vis-team            { border-right: none; border-bottom: 1px solid var(--border); }
+
+      /* Diff */
+      .diff-footer-line    { font-size: clamp(15px, 4vw, 20px); }
+      .diff-footer         { margin-top: 36px; }
+
+      /* Notwho */
+      .notwho-close        { padding: 20px 20px; }
+      .howit-step          { padding: 22px 0; gap: 20px; }
+      .howit-title         { font-size: 15px; }
+      .howit-desc          { font-size: 13.5px; }
+      .nw-item             { gap: 16px; padding: 22px 0; }
     }
+
+    /* ============================================================
+       RESPONSIVE — 480px (mobile)
+    ============================================================ */
     @media (max-width: 480px) {
-      .benefits-grid { grid-template-columns: 1fr; }
-      .how-grid      { grid-template-columns: 1fr; }
-      .whom-grid     { grid-template-columns: 1fr 1fr; }
-      .hero          { padding: 140px 0 72px; }
-      .sv-body-exec,
-      .sv-body-doc   { grid-template-columns: 1fr; }
-      .sv-sidebar    { display: none; }
+      /* Section padding */
+      .s-pain, .s-value, .s-benefits, .s-howit,
+      .s-diff, .s-whom, .s-gain, .s-cta, .s-pricing,
+      .s-scenario, .s-notwho, .s-faq { padding: 60px 0; }
+      .hero                { padding: 100px 0 56px; }
+
+      /* Typography */
+      .hero-title          { font-size: clamp(23px, 7.5vw, 32px); line-height: 1.2; }
+      .hero-chips          { margin-bottom: 22px; }
+      .sh-center           { margin-bottom: 36px; }
+
+      /* Grids */
+      .benefits-grid       { grid-template-columns: 1fr; }
+      .how-grid            { grid-template-columns: 1fr; }
+      .whom-grid           { grid-template-columns: 1fr 1fr; }
+      .sc-card             { grid-column: auto !important; }
+      .faq-grid            { gap: 10px; }
+
+      /* Card sizing on small mobile */
+      .b-icon              { width: 46px; height: 46px; border-radius: 13px; font-size: 20px; }
+      .w-icon              { width: 44px; height: 44px; border-radius: 12px; font-size: 20px; }
+      .h-num               { width: 40px; height: 40px; font-size: 13px; }
+
+      /* Pricing */
+      .p-amount            { font-size: 36px; }
+      .p-meta              { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .p-card              { padding: 20px 16px; }
+      .p-guide             { padding: 22px 18px; }
+
+      /* CTA */
+      .cta-panel           { padding: 40px 20px; }
+
+      /* Footer */
+      .footer-grid         { gap: 28px; }
+      .footer              { padding: 48px 0 32px; }
+
+      /* Mockups */
+      .sv-body-exec, .sv-body-doc { grid-template-columns: 1fr; }
+      .sv-sidebar          { display: none; }
+      .sv-body             { height: auto; }
+
+      /* Howit & Notwho */
+      .howit-step          { gap: 14px; padding: 18px 0; }
+      .nw-item             { gap: 14px; padding: 18px 0; }
+    }
+
+    /* ============================================================
+       RESPONSIVE — 375px (small mobile)
+    ============================================================ */
+    @media (max-width: 375px) {
+      .container           { padding: 0 16px; }
+      .pain-card, .sc-card { padding: 18px 16px; }
+      .faq-q               { padding: 16px 16px; }
+      .faq-item.open .faq-a { padding: 0 16px 16px; }
+      .b-card, .w-card, .h-step       { padding: 18px 14px; }
+      .cta-panel           { padding: 36px 16px; }
+      .hero-chips          { gap: 5px; }
+      .chip                { font-size: 10px; padding: 3px 9px; }
     }
   </style>
 </head>
@@ -1781,8 +2060,25 @@
       <li><a href="#s-faq">FAQ</a></li>
     </ul>
     <a href="#s-cta" class="nav-cta">Agendar demonstração</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- ============================================================
+     MOBILE NAV DRAWER
+============================================================ -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <ul class="mobile-nav-links">
+    <li><a href="#s-valor">Plataforma</a></li>
+    <li><a href="#s-howit">Como funciona</a></li>
+    <li><a href="#s-quem">Para quem é</a></li>
+    <li><a href="#s-planos">Planos</a></li>
+    <li><a href="#s-faq">FAQ</a></li>
+  </ul>
+  <a href="#s-cta" class="mobile-nav-cta">Agendar demonstração →</a>
+</div>
 
 <!-- ============================================================
      HERO
@@ -2367,7 +2663,7 @@
         <div class="sc-title">Quando o gestor precisa entender a operação rápido</div>
         <div class="sc-desc">A leitura deixa de depender de perguntas e alinhamentos paralelos. O cenário fica visível na própria plataforma.</div>
       </div>
-      <div class="sc-card reveal-scale" data-d="4" style="grid-column: 2;">
+      <div class="sc-card sc-card--center reveal-scale" data-d="4">
         <div class="sc-num">04</div>
         <div class="sc-title">Quando um novo projeto precisa virar execução</div>
         <div class="sc-desc">Briefing, documentos e planejamento deixam de nascer espalhados e passam a seguir um fluxo mais claro.</div>
@@ -2641,17 +2937,29 @@
         <h2 class="sh-title">Escolha a entrada que faz mais sentido para o momento da sua operação.</h2>
         <p class="sh-sub">A Falcodesk pode entrar pela dor mais urgente da sua empresa e evoluir junto com a operação. Cada plano foi organizado para resolver uma camada diferente do fluxo: comercial, operação, gestão ou tudo integrado.</p>
       </div>
+      <div class="billing-toggle">
+        <button data-billing="monthly" class="active">Mensal</button>
+        <button data-billing="annual">Anual&nbsp;<span style="font-size:10px;opacity:0.8;color:var(--accent)">−15%</span></button>
+      </div>
     </div>
 
     <div class="pricing-grid">
 
       <!-- ── COMERCIAL ─────────────────────────────── -->
-      <article class="p-card reveal-scale" data-d="1">
+      <article class="p-card reveal-scale" data-d="1" data-plan="comercial" data-monthly="497" data-annual-equivalent="422" data-annual-total="5064">
         <div class="p-tag-row">
           <span class="p-chip">Para organizar a frente comercial</span>
           <span class="p-pill">Comercial</span>
         </div>
-        <h3>Comercial</h3>
+        <h3>Falcodesk Comercial</h3>
+        <div class="p-price">
+          <div class="p-price-value">
+            <span class="p-currency">R$</span>
+            <span class="p-amount" data-role="amount">497</span>
+            <span class="p-per">/mês</span>
+          </div>
+          <span class="p-billing-copy" data-role="billing-copy">por mês, com cobrança mensal</span>
+        </div>
         <p class="p-desc">Ideal para operações que querem estruturar melhor a frente comercial, gerar oportunidades com mais processo e reduzir a dependência de ferramentas soltas para prospecção.</p>
         <ul class="p-features">
           <li>prospecção mais organizada</li>
@@ -2664,17 +2972,25 @@
           <span class="p-result-text">Sua operação comercial ganha mais consistência, previsibilidade e capacidade de ativação.</span>
         </div>
         <div class="p-cta-row">
-          <a class="btn-ghost" href="mailto:comercial@falcotec.com.br?subject=Interesse%20no%20plano%20Comercial%20Falcodesk">Quero falar sobre o plano Comercial</a>
+          <a class="btn-ghost" href="https://api.whatsapp.com/send/?phone=551151999549&text=Ol%C3%A1!%20Tenho%20interesse%20no%20plano%20Falcodesk%20Comercial%20e%20gostaria%20de%20saber%20mais.&type=phone_number&app_absent=0" target="_blank" rel="noopener">Quero falar sobre o plano Comercial</a>
         </div>
       </article>
 
       <!-- ── OPERAÇÃO ─────────────────────────────── -->
-      <article class="p-card reveal-scale" data-d="2">
+      <article class="p-card reveal-scale" data-d="2" data-plan="operacao" data-monthly="997" data-annual-equivalent="847" data-annual-total="10164">
         <div class="p-tag-row">
           <span class="p-chip">Para organizar chamados e rotina</span>
           <span class="p-pill">Operação</span>
         </div>
-        <h3>Operação</h3>
+        <h3>Falcodesk Operação</h3>
+        <div class="p-price">
+          <div class="p-price-value">
+            <span class="p-currency">R$</span>
+            <span class="p-amount" data-role="amount">997</span>
+            <span class="p-per">/mês</span>
+          </div>
+          <span class="p-billing-copy" data-role="billing-copy">por mês, com cobrança mensal</span>
+        </div>
         <p class="p-desc">Esse é o plano para operações que já sentem o peso da desorganização no dia a dia e precisam centralizar atendimento, execução e histórico em um ambiente confiável.</p>
         <ul class="p-features">
           <li>chamados e serviços em um só fluxo</li>
@@ -2687,17 +3003,25 @@
           <span class="p-result-text">Sua operação deixa de depender de mensagem, memória e planilha para funcionar bem.</span>
         </div>
         <div class="p-cta-row">
-          <a class="btn-ghost" href="mailto:comercial@falcotec.com.br?subject=Interesse%20no%20plano%20Operacao%20Falcodesk">Quero ver o plano Operação</a>
+          <a class="btn-ghost" href="https://api.whatsapp.com/send/?phone=551151999549&text=Ol%C3%A1!%20Tenho%20interesse%20no%20plano%20Falcodesk%20Opera%C3%A7%C3%A3o.%20Posso%20saber%20mais%3F&type=phone_number&app_absent=0" target="_blank" rel="noopener">Quero ver o plano Operação</a>
         </div>
       </article>
 
       <!-- ── GESTÃO ─────────────────────────────── -->
-      <article class="p-card reveal-scale" data-d="3">
+      <article class="p-card reveal-scale" data-d="3" data-plan="gestao" data-monthly="1497" data-annual-equivalent="1272" data-annual-total="15264">
         <div class="p-tag-row">
           <span class="p-chip">Para previsibilidade e leitura gerencial</span>
           <span class="p-pill">Gestão</span>
         </div>
-        <h3>Gestão</h3>
+        <h3>Falcodesk Gestão</h3>
+        <div class="p-price">
+          <div class="p-price-value">
+            <span class="p-currency">R$</span>
+            <span class="p-amount" data-role="amount">1.497</span>
+            <span class="p-per">/mês</span>
+          </div>
+          <span class="p-billing-copy" data-role="billing-copy">por mês, com cobrança mensal</span>
+        </div>
         <p class="p-desc">Indicado para gestores e operações que precisam acompanhar capacidade do time, planejamento, produtividade e andamento real da rotina sem operar no escuro.</p>
         <ul class="p-features">
           <li>planejamento mais estruturado</li>
@@ -2710,7 +3034,7 @@
           <span class="p-result-text">A gestão passa a entender o que está acontecendo sem depender de alinhamento manual o tempo todo.</span>
         </div>
         <div class="p-cta-row">
-          <a class="btn-ghost" href="mailto:comercial@falcotec.com.br?subject=Interesse%20no%20plano%20Gestao%20Falcodesk">Quero conhecer o plano Gestão</a>
+          <a class="btn-ghost" href="https://api.whatsapp.com/send/?phone=551151999549&text=Ol%C3%A1!%20Quero%20conhecer%20o%20plano%20Falcodesk%20Gest%C3%A3o%20e%20entender%20se%20faz%20sentido%20para%20minha%20opera%C3%A7%C3%A3o.&type=phone_number&app_absent=0" target="_blank" rel="noopener">Quero conhecer o plano Gestão</a>
         </div>
       </article>
 
@@ -2718,12 +3042,16 @@
       <div class="suite-sep">ou combine todos os módulos</div>
 
       <!-- ── SUITE (centrado) ───────────────────── -->
-      <article class="p-card featured suite-center reveal-scale" data-d="4">
+      <article class="p-card featured suite-center reveal-scale" data-d="4" data-plan="suite">
         <div class="p-tag-row">
           <span class="p-pill">⭐ Tudo integrado</span>
           <span class="p-chip">Suite completa</span>
         </div>
-        <h3>Suite</h3>
+        <h3>Falcodesk Suite</h3>
+        <div class="p-price">
+          <div class="p-price-custom">Sob consulta</div>
+          <span class="p-billing-copy">orçamento personalizado para a sua operação</span>
+        </div>
         <p class="p-desc">A Suite reúne toda a lógica da Falcodesk em uma estrutura integrada, ideal para operações que já entendem que o problema não está em uma etapa isolada, mas na desconexão entre elas.</p>
         <ul class="p-features">
           <li>entrada comercial conectada à operação</li>
@@ -2736,7 +3064,7 @@
           <span class="p-result-text">Sua empresa passa a operar com mais clareza, menos ruído e mais percepção de estrutura.</span>
         </div>
         <div class="p-cta-row">
-          <a class="btn-primary" href="mailto:comercial@falcotec.com.br?subject=Interesse%20na%20Falcodesk%20Suite">Quero ver a Falcodesk completa</a>
+          <a class="btn-primary" href="https://api.whatsapp.com/send/?phone=551151999549&text=Ol%C3%A1!%20Quero%20ver%20a%20Falcodesk%20Suite%20completa%20e%20entender%20como%20funciona%20para%20a%20minha%20opera%C3%A7%C3%A3o.&type=phone_number&app_absent=0" target="_blank" rel="noopener">Quero ver a Falcodesk completa</a>
         </div>
       </article>
 
@@ -2781,31 +3109,52 @@
     </div>
     <div class="faq-grid">
       <div class="faq-item reveal" data-d="1">
-        <div class="faq-q">A Falcodesk substitui meu sistema atual?</div>
+        <div class="faq-q">
+          A Falcodesk substitui meu sistema atual?
+          <span class="faq-q-icon"><svg viewBox="0 0 10 10" fill="none" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+        </div>
         <div class="faq-a">Depende da sua operação. Em alguns casos, ela pode substituir ferramentas isoladas. Em outros, entra primeiro como camada de organização operacional e depois evolui.</div>
       </div>
       <div class="faq-item reveal" data-d="2">
-        <div class="faq-q">Funciona para empresas pequenas?</div>
+        <div class="faq-q">
+          Funciona para empresas pequenas?
+          <span class="faq-q-icon"><svg viewBox="0 0 10 10" fill="none" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+        </div>
         <div class="faq-a">Sim, desde que a dor já exista. Se sua operação já sofre com contexto perdido, múltiplos clientes e rotina espalhada, a Falcodesk pode fazer sentido mesmo em times menores.</div>
       </div>
       <div class="faq-item reveal" data-d="3">
-        <div class="faq-q">Serve para empresas com múltiplos clientes?</div>
+        <div class="faq-q">
+          Serve para empresas com múltiplos clientes?
+          <span class="faq-q-icon"><svg viewBox="0 0 10 10" fill="none" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+        </div>
         <div class="faq-a">Sim. Esse é um dos cenários em que a plataforma mais faz sentido, porque centraliza cliente, histórico, demanda e acompanhamento em um único ambiente.</div>
       </div>
       <div class="faq-item reveal" data-d="4">
-        <div class="faq-q">Preciso migrar tudo de uma vez?</div>
+        <div class="faq-q">
+          Preciso migrar tudo de uma vez?
+          <span class="faq-q-icon"><svg viewBox="0 0 10 10" fill="none" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+        </div>
         <div class="faq-a">Não necessariamente. A implantação pode começar por uma frente mais crítica da operação e crescer com o uso.</div>
       </div>
       <div class="faq-item reveal" data-d="5">
-        <div class="faq-q">O cliente final vê o quê?</div>
+        <div class="faq-q">
+          O cliente final vê o quê?
+          <span class="faq-q-icon"><svg viewBox="0 0 10 10" fill="none" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+        </div>
         <div class="faq-a">O cliente pode acompanhar o que for relevante para o contrato dele, com mais transparência e menos necessidade de cobrança manual.</div>
       </div>
       <div class="faq-item reveal" data-d="6">
-        <div class="faq-q">Como funciona a implantação?</div>
+        <div class="faq-q">
+          Como funciona a implantação?
+          <span class="faq-q-icon"><svg viewBox="0 0 10 10" fill="none" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+        </div>
         <div class="faq-a">A implantação depende do plano e da complexidade da operação. O onboarding pode incluir configuração inicial, organização da estrutura e treinamento do time.</div>
       </div>
       <div class="faq-item reveal" data-d="1">
-        <div class="faq-q">A Falcodesk é mais comercial ou mais operacional?</div>
+        <div class="faq-q">
+          A Falcodesk é mais comercial ou mais operacional?
+          <span class="faq-q-icon"><svg viewBox="0 0 10 10" fill="none" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+        </div>
         <div class="faq-a">Ela foi pensada para conectar as etapas da operação. Então pode começar por um ponto, mas a tese central é integrar fluxo, não isolar módulo.</div>
       </div>
     </div>
@@ -2887,11 +3236,11 @@
         Agende uma demonstração e entenda, com base na sua realidade, se faz sentido centralizar chamados, documentos, planejamento, cliente e acompanhamento em um único ambiente.
       </p>
       <div class="cta-actions">
-        <a href="mailto:comercial@falcotec.com.br?subject=Solicitação%20de%20demonstração%20Falcodesk" class="btn-primary" style="font-size:15.5px; padding:15px 30px;">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <a href="https://api.whatsapp.com/send/?phone=551151999549&text=Ol%C3%A1!%20Quero%20agendar%20uma%20demonstra%C3%A7%C3%A3o%20da%20Falcodesk.%20Pode%20me%20ajudar%3F&type=phone_number&app_absent=0" class="btn-primary" target="_blank" rel="noopener" style="font-size:15.5px; padding:15px 30px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           Agendar demonstração →
         </a>
-        <a href="mailto:comercial@falcotec.com.br?subject=Contato%20Falcodesk" class="btn-ghost" style="font-size:15.5px; padding:15px 30px;">
+        <a href="https://api.whatsapp.com/send/?phone=551151999549&text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20o%20time%20da%20Falcotec%20sobre%20a%20Falcodesk.&type=phone_number&app_absent=0" class="btn-ghost" target="_blank" rel="noopener" style="font-size:15.5px; padding:15px 30px;">
           Falar com o time da Falcotec →
         </a>
       </div>
@@ -2913,6 +3262,7 @@
         </a>
         <p class="footer-desc">Central operacional para empresas que prestam serviços técnicos com processo, histórico e transparência.</p>
         <p class="footer-eco">Parte do ecossistema <strong>Falcotec</strong></p>
+        <p class="footer-cnpj">CNPJ 50.782.463/0001-20</p>
       </div>
 
       <div>
@@ -3056,6 +3406,37 @@
   }
   billingBtns.forEach(b => b.addEventListener('click', () => updateBilling(b.dataset.billing)));
   updateBilling('monthly');
+
+  // ── MOBILE NAV HAMBURGER ────────────────────────────────────
+  const hamburger = document.getElementById('navHamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  if (hamburger && mobileNav) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+      mobileNav.setAttribute('aria-hidden', !isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileNav.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileNav.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  // ── FAQ ACCORDION ───────────────────────────────────────────
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o => o.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
 
   // ── SMOOTH SCROLL ───────────────────────────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(a => {
