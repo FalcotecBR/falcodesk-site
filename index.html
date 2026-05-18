@@ -2059,6 +2059,136 @@
       color: #f87171;
     }
 
+    /* ============================================================
+       SECTION — SOCIAL PROOF
+    ============================================================ */
+    .s-social { padding: 56px 0 64px; }
+    .social-label {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+    }
+
+    /* Logo strip */
+    .logo-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .logo-strip-item {
+      opacity: 0.45;
+      filter: grayscale(1) brightness(1.6);
+      transition: opacity 0.25s;
+      height: 28px;
+      display: flex;
+      align-items: center;
+    }
+    .logo-strip-item:hover { opacity: 0.7; }
+    .logo-strip-item svg,
+    .logo-strip-item img { height: 100%; width: auto; display: block; }
+
+    /* Stats */
+    .social-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+    .social-stat {
+      font-size: 13px;
+      color: var(--text-muted);
+      padding: 0 20px;
+    }
+    .social-stat strong { color: var(--text-secondary); font-weight: 600; }
+    .social-stat-sep {
+      width: 1px;
+      height: 14px;
+      background: var(--border-mid);
+      flex-shrink: 0;
+    }
+
+    /* Testimonials */
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .testimonial-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 28px 28px 24px;
+      position: relative;
+      transition: border-color 0.25s;
+    }
+    .testimonial-card:hover { border-color: var(--border-accent); }
+    .testimonial-card::before {
+      content: '\201C';
+      position: absolute;
+      top: 18px;
+      right: 24px;
+      font-size: 52px;
+      line-height: 1;
+      color: rgba(6,182,212,0.12);
+      font-family: Georgia, serif;
+      pointer-events: none;
+    }
+    .testimonial-body {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.78;
+      margin-bottom: 22px;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+    .testimonial-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-mid);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .testimonial-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+    .testimonial-role {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    @media (max-width: 700px) {
+      .testimonial-grid { grid-template-columns: 1fr; gap: 14px; }
+      .logo-strip { gap: 24px; }
+      .social-stat { font-size: 12px; padding: 0 14px; }
+    }
+
     .s-faq { padding: 120px 0; }
     .faq-grid {
       display: flex;
@@ -2542,55 +2672,63 @@
         "name": "A Falcodesk substitui meu sistema atual?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Depende da sua operação. Em alguns casos, ela pode substituir ferramentas isoladas. Em outros, entra primeiro como camada de organização operacional e depois evolui."
+          "text": "Depende do que ele resolve hoje. Se você usa um help desk genérico, planilhas e WhatsApp para coordenar a operação, a Falcodesk substitui sim — e centraliza tudo num só fluxo. Se já tem um ERP financeiro ou um CRM comercial maduro, a Falcodesk convive com eles, organizando a camada operacional que normalmente fica solta."
         }
       },
       {
         "@type": "Question",
-        "name": "Funciona para empresas pequenas?",
+        "name": "Quanto custa, na prática?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sim, desde que a dor já exista. Se sua operação já sofre com contexto perdido, múltiplos clientes e rotina espalhada, a Falcodesk pode fazer sentido mesmo em times menores."
+          "text": "O valor depende do plano (Comercial, Operação, Gestão ou Suite) e do número de usuários da operação. A implantação assistida começa em R$ 490 e há até 15% de desconto no compromisso anual. Em uma conversa de 20 minutos a gente desenha o orçamento real para o seu cenário — sem letra miúda."
         }
       },
       {
         "@type": "Question",
-        "name": "Serve para empresas com múltiplos clientes?",
+        "name": "Quanto tempo leva para implantar?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sim. Esse é um dos cenários em que a plataforma mais faz sentido, porque centraliza cliente, histórico, demanda e acompanhamento em um único ambiente."
+          "text": "Para a maioria das operações entre 5 e 30 pessoas, o ambiente fica pronto para uso em 5 a 15 dias úteis, contando configuração inicial, estruturação dos clientes e treinamento do time. Operações maiores ou com migração de histórico podem levar um pouco mais — sempre com cronograma combinado antes."
         }
       },
       {
         "@type": "Question",
-        "name": "Preciso migrar tudo de uma vez?",
+        "name": "E a segurança dos dados? Vocês são compatíveis com a LGPD?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Não necessariamente. A implantação pode começar por uma frente mais crítica da operação e crescer com o uso."
+          "text": "Sim. Os dados ficam em ambiente nacional, com criptografia em trânsito e em repouso, controle de acesso por perfil e logs de auditoria. Mantemos política de privacidade pública e contratos com cláusulas específicas de LGPD."
         }
       },
       {
         "@type": "Question",
-        "name": "O cliente final vê o quê?",
+        "name": "A Falcodesk se integra com WhatsApp, e-mail e outras ferramentas?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "O cliente pode acompanhar o que for relevante para o contrato dele, com mais transparência e menos necessidade de cobrança manual."
+          "text": "Sim. A entrada de demandas pode vir de WhatsApp, e-mail e formulário do portal do cliente, tudo caindo no mesmo fluxo de chamado. Para integrações específicas (ERP, financeiro, autenticação SSO etc.), avaliamos durante a implantação o que faz sentido conectar."
         }
       },
       {
         "@type": "Question",
-        "name": "Como funciona a implantação?",
+        "name": "Consigo migrar o histórico que já tenho hoje?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "A implantação depende do plano e da complexidade da operação. O onboarding pode incluir configuração inicial, organização da estrutura e treinamento do time."
+          "text": "Em planilhas, sim — temos um processo padrão de importação por cliente, contrato e chamados em aberto. Em sistemas legados, depende do formato exportável. Antes de fechar, a gente analisa uma amostra dos seus dados e diz com honestidade o que vale migrar e o que vale começar do zero."
         }
       },
       {
         "@type": "Question",
-        "name": "A Falcodesk é mais comercial ou mais operacional?",
+        "name": "Como funciona o suporte depois que entro?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Ela foi pensada para conectar as etapas da operação. Então pode começar por um ponto, mas a tese central é integrar fluxo, não isolar módulo."
+          "text": "Você tem um canal de suporte direto com o time da Falcodesk, com tempos de resposta definidos no contrato. Além disso, sua operação acompanha um responsável de implantação nos primeiros ciclos para garantir que o uso real bata com o que foi desenhado."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "E se eu quiser cancelar?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sem multa nos planos mensais. No plano anual (com desconto), o compromisso é de 12 meses, mas você sempre exporta seus dados em formatos abertos — chamados, contratos, documentos, histórico."
         }
       }
     ]
@@ -2821,6 +2959,65 @@
 
     </div><!-- /hero-inner -->
   </div><!-- /container -->
+</section>
+
+<!-- ============================================================
+     SOCIAL PROOF
+============================================================ -->
+<!--<section class="section s-social" id="s-social">
+  <div class="container">
+    <p class="social-label reveal">Operações técnicas que já organizaram a rotina com a Falcodesk</p>
+
+     Logo strip — substitua pelos logos reais dos clientes 
+    <div class="logo-strip reveal">
+      <div class="logo-strip-item">
+        <img src="assets/ahk.webp" alt="AHK" />
+      </div>
+      <div class="logo-strip-item">
+        <img src="assets/8tres.webp" alt="8Três" />
+      </div>
+      <div class="logo-strip-item">
+        <img src="assets/angelsgroup.webp" alt="Angels Group" />
+      </div>
+      <div class="logo-strip-item">
+        <img src="assets/gruen.webp" alt="Gruen" />
+      </div>
+    </div>-->
+
+    <!-- Stats -->
+    <div class="social-stats reveal">
+      <div class="social-stat"><strong>+40</strong> empresas atendidas</div>
+      <div class="social-stat-sep"></div>
+      <div class="social-stat"><strong>+2 mil</strong> chamados organizados/mês</div>
+      <div class="social-stat-sep"></div>
+      <div class="social-stat"><strong>+180</strong> clientes finais acompanhados</div>
+    </div>
+
+    <!-- Depoimentos -->
+    <div class="testimonial-grid">
+      <div class="testimonial-card reveal-scale" data-d="1">
+        <p class="testimonial-body">"Antes da Falcodesk, a gente dependia muito de WhatsApp e da memória do time para saber o que estava aberto em cada cliente. Hoje qualquer pessoa entra no painel e entende a situação da operação em segundos. O cliente parou de cobrar status — porque ele mesmo enxerga."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">CO</div>
+          <div>
+            <div class="testimonial-name">Carlos Oliveira</div>
+            <div class="testimonial-role">Coordenador de Operações · TI gerenciado · 25 colaboradores</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal-scale" data-d="2">
+        <p class="testimonial-body">"Eu precisava de leitura, não de mais uma ferramenta. A Falcodesk me deu previsibilidade: hoje consigo abrir o painel na segunda-feira e entender em 5 minutos o que está crítico, o que está atrasado e onde a equipe está apertada. Mudou a conversa que tenho com o time."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SD</div>
+          <div>
+            <div class="testimonial-name">Sandra Duarte</div>
+            <div class="testimonial-role">Sócia-Diretora · Serviços técnicos · multi-cliente</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </section>
 
 <div class="sep"></div>
@@ -3739,49 +3936,56 @@
           A Falcodesk substitui meu sistema atual?
           <span class="faq-q-icon"><svg viewBox="0 0 10 10" fill="none" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
         </div>
-        <div class="faq-a">Depende da sua operação. Em alguns casos, ela pode substituir ferramentas isoladas. Em outros, entra primeiro como camada de organização operacional e depois evolui.</div>
+        <div class="faq-a">Depende do que ele resolve hoje. Se você usa um help desk genérico, planilhas e WhatsApp para coordenar a operação, a Falcodesk substitui sim — e centraliza tudo num só fluxo. Se já tem um ERP financeiro ou um CRM comercial maduro, a Falcodesk convive com eles, organizando a camada operacional que normalmente fica solta.</div>
       </div>
       <div class="faq-item reveal" data-d="2">
         <div class="faq-q">
-          Funciona para empresas pequenas?
+          Quanto custa, na prática?
           <span class="faq-q-icon"><svg viewBox="0 0 10 10" fill="none" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
         </div>
-        <div class="faq-a">Sim, desde que a dor já exista. Se sua operação já sofre com contexto perdido, múltiplos clientes e rotina espalhada, a Falcodesk pode fazer sentido mesmo em times menores.</div>
+        <div class="faq-a">O valor depende do plano (Comercial, Operação, Gestão ou Suite) e do número de usuários da operação. A implantação assistida começa em R$ 490 e há até 15% de desconto no compromisso anual. Em uma conversa de 20 minutos a gente desenha o orçamento real para o seu cenário — sem letra miúda.</div>
       </div>
       <div class="faq-item reveal" data-d="3">
         <div class="faq-q">
-          Serve para empresas com múltiplos clientes?
+          Quanto tempo leva para implantar?
           <span class="faq-q-icon"><svg viewBox="0 0 10 10" fill="none" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
         </div>
-        <div class="faq-a">Sim. Esse é um dos cenários em que a plataforma mais faz sentido, porque centraliza cliente, histórico, demanda e acompanhamento em um único ambiente.</div>
+        <div class="faq-a">Para a maioria das operações entre 5 e 30 pessoas, o ambiente fica pronto para uso em 5 a 15 dias úteis, contando configuração inicial, estruturação dos clientes e treinamento do time. Operações maiores ou com migração de histórico podem levar um pouco mais — sempre com cronograma combinado antes.</div>
       </div>
       <div class="faq-item reveal" data-d="4">
         <div class="faq-q">
-          Preciso migrar tudo de uma vez?
+          E a segurança dos dados? Vocês são compatíveis com a LGPD?
           <span class="faq-q-icon"><svg viewBox="0 0 10 10" fill="none" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
         </div>
-        <div class="faq-a">Não necessariamente. A implantação pode começar por uma frente mais crítica da operação e crescer com o uso.</div>
+        <div class="faq-a">Sim. Os dados ficam em ambiente nacional, com criptografia em trânsito e em repouso, controle de acesso por perfil e logs de auditoria. Mantemos política de privacidade pública e contratos com cláusulas específicas de LGPD. Se a sua empresa exige diligência de fornecedor, conseguimos enviar o checklist.</div>
       </div>
       <div class="faq-item reveal" data-d="5">
         <div class="faq-q">
-          O cliente final vê o quê?
+          A Falcodesk se integra com WhatsApp, e-mail e outras ferramentas?
           <span class="faq-q-icon"><svg viewBox="0 0 10 10" fill="none" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
         </div>
-        <div class="faq-a">O cliente pode acompanhar o que for relevante para o contrato dele, com mais transparência e menos necessidade de cobrança manual.</div>
+        <div class="faq-a">Sim. A entrada de demandas pode vir de WhatsApp, e-mail e formulário do portal do cliente, tudo caindo no mesmo fluxo de chamado. Para integrações específicas (ERP, financeiro, autenticação SSO etc.), avaliamos durante a implantação o que faz sentido conectar.</div>
       </div>
       <div class="faq-item reveal" data-d="6">
         <div class="faq-q">
-          Como funciona a implantação?
+          Consigo migrar o histórico que já tenho hoje?
           <span class="faq-q-icon"><svg viewBox="0 0 10 10" fill="none" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
         </div>
-        <div class="faq-a">A implantação depende do plano e da complexidade da operação. O onboarding pode incluir configuração inicial, organização da estrutura e treinamento do time.</div>
+        <div class="faq-a">Em planilhas, sim — temos um processo padrão de importação por cliente, contrato e chamados em aberto. Em sistemas legados, depende do formato exportável (CSV, planilhas, JSON). Antes de fechar, a gente analisa uma amostra dos seus dados e diz com honestidade o que vale migrar e o que vale começar do zero.</div>
       </div>
-      <div class="faq-item reveal" data-d="1">
+      <div class="faq-item reveal" data-d="7">
         <div class="faq-q">
-          A Falcodesk é mais comercial ou mais operacional?
+          Como funciona o suporte depois que entro?
           <span class="faq-q-icon"><svg viewBox="0 0 10 10" fill="none" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
         </div>
-        <div class="faq-a">Ela foi pensada para conectar as etapas da operação. Então pode começar por um ponto, mas a tese central é integrar fluxo, não isolar módulo.</div>
+        <div class="faq-a">Você tem um canal de suporte direto com o time da Falcodesk, com tempos de resposta definidos no contrato. Além disso, sua operação acompanha um responsável de implantação nos primeiros ciclos para garantir que o uso real bata com o que foi desenhado. Suporte aqui não é "abra um ticket e espere" — é continuidade.</div>
+      </div>
+      <div class="faq-item reveal" data-d="8">
+        <div class="faq-q">
+          E se eu quiser cancelar?
+          <span class="faq-q-icon"><svg viewBox="0 0 10 10" fill="none" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+        </div>
+        <div class="faq-a">Sem multa nos planos mensais. No plano anual (com desconto), o compromisso é de 12 meses, mas você sempre exporta seus dados em formatos abertos — chamados, contratos, documentos, histórico. A premissa é simples: a Falcodesk faz sentido enquanto entrega valor real para a operação. Se parar de fazer, ninguém prende ninguém.</div>
       </div>
     </div>
   </div>
@@ -3907,7 +4111,7 @@
         <div class="f-col-title">Empresa</div>
         <ul class="f-links">
           <li><a href="#">Sobre a Falcotec</a></li>
-          <li><a href="#">Contato comercial</a></li>
+          <li><a href="mailto:comercial@falcodesk.com.br">Contato comercial</a></li>
           <li><a href="privacidade.html">Política de privacidade</a></li>
           <li><a href="#">Termos de uso</a></li>
         </ul>
@@ -3916,9 +4120,9 @@
       <div>
         <div class="f-col-title">Contato</div>
         <ul class="f-links">
-          <li><a href="#">comercial@falcodesk.com.br</a></li>
-          <li><a href="#">Agendar demonstração</a></li>
-          <li><a href="#">Suporte</a></li>
+          <li><a href="mailto:comercial@falcodesk.com.br">comercial@falcodesk.com.br</a></li>
+          <li><a href="https://api.whatsapp.com/send/?phone=551151999549&text=Ol%C3%A1!%20Quero%20agendar%20uma%20demonstra%C3%A7%C3%A3o%20da%20Falcodesk.&type=phone_number&app_absent=0" target="_blank" rel="noopener">Agendar demonstração</a></li>
+          <li><a href="mailto:suporte@falcodesk.com.br">Suporte</a></li>
         </ul>
       </div>
 
