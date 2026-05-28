@@ -1,11 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://falcodesk.com/</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://falcodesk.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://falcodesk.com/"/>
+    <video:video>
+      <video:thumbnail_loc>https://falcodesk.com/assets/video/chamados-thumb.jpg</video:thumbnail_loc>
+      <video:title>Chamados e operação com contexto na Falcodesk</video:title>
+      <video:description>Demonstração de chamados, status, prioridades e leitura operacional dentro da Falcodesk.</video:description>
+      <video:content_loc>https://falcodesk.com/assets/video/chamados.mp4</video:content_loc>
+      <video:duration>29</video:duration>
+      <video:publication_date>2026-05-28T00:00:00-03:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://falcodesk.com/assets/video/planejamento-thumb.jpg</video:thumbnail_loc>
+      <video:title>Planejamento com IA e geração de itens de projeto</video:title>
+      <video:description>Demonstração do fluxo assistido por IA que transforma briefing em cards, etapas e itens de projeto.</video:description>
+      <video:content_loc>https://falcodesk.com/assets/video/planejamento.mp4</video:content_loc>
+      <video:duration>49</video:duration>
+      <video:publication_date>2026-05-28T00:00:00-03:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://falcodesk.com/assets/video/propectorcamento-thumb.jpg</video:thumbnail_loc>
+      <video:title>Propostas e orçamentos com IA na Falcodesk</video:title>
+      <video:description>Demonstração da geração assistida de propostas, orçamentos e documentos a partir de serviços e escopo.</video:description>
+      <video:content_loc>https://falcodesk.com/assets/video/propectorcamento.mp4</video:content_loc>
+      <video:duration>53</video:duration>
+      <video:publication_date>2026-05-28T00:00:00-03:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://falcodesk.com/privacidade.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://falcodesk.com/privacidade.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://falcodesk.com/privacidade.html"/>
+  </url>
+  <url>
+    <loc>https://falcodesk.com/llms.txt</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://falcodesk.com/llms-full.txt</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

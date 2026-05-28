@@ -1,0 +1,40 @@
+<svg width="1200" height="1200" viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="1200" fill="#020817"/>
+  <path d="M0 0H1200V1200H0V0Z" fill="url(#bg)"/>
+  <g opacity="0.16">
+    <path d="M0 120H1200M0 240H1200M0 360H1200M0 480H1200M0 600H1200M0 720H1200M0 840H1200M0 960H1200M0 1080H1200" stroke="#7DD3FC"/>
+    <path d="M120 0V1200M240 0V1200M360 0V1200M480 0V1200M600 0V1200M720 0V1200M840 0V1200M960 0V1200M1080 0V1200" stroke="#7DD3FC"/>
+  </g>
+  <rect x="84" y="120" width="1032" height="860" rx="48" fill="#070B14" stroke="#1F2A44" stroke-width="2"/>
+  <text x="140" y="215" fill="#DDE6F0" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" letter-spacing="8">FALCODESK</text>
+  <text x="140" y="355" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="72" font-weight="700">Gestão com IA</text>
+  <text x="140" y="445" fill="#67E8F9" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700">Operação + Produtividade</text>
+  <text x="140" y="560" fill="#B7C7D8" font-family="Arial, Helvetica, sans-serif" font-size="34">Fluxo assistido, chamados, documentos</text>
+  <text x="140" y="612" fill="#B7C7D8" font-family="Arial, Helvetica, sans-serif" font-size="34">e leitura gerencial em uma plataforma.</text>
+  <g transform="translate(140 710)">
+    <rect width="306" height="66" rx="33" fill="#06B6D4"/>
+    <text x="32" y="44" fill="#020817" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">Ver plataforma</text>
+  </g>
+  <g transform="translate(140 840)">
+    <rect width="290" height="108" rx="24" fill="#0F172A" stroke="#1E3A5F"/>
+    <text x="28" y="42" fill="#8BA3BE" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="5">GESTÃO</text>
+    <text x="28" y="86" fill="#67E8F9" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700">IA aplicada</text>
+  </g>
+  <g transform="translate(465 840)">
+    <rect width="290" height="108" rx="24" fill="#0F172A" stroke="#1E3A5F"/>
+    <text x="28" y="42" fill="#8BA3BE" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="5">FLUXO</text>
+    <text x="28" y="86" fill="#67E8F9" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700">Assistido</text>
+  </g>
+  <g transform="translate(790 840)">
+    <rect width="270" height="108" rx="24" fill="#0F172A" stroke="#1E3A5F"/>
+    <text x="28" y="42" fill="#8BA3BE" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="5">OPERAÇÃO</text>
+    <text x="28" y="86" fill="#67E8F9" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700">Produtiva</text>
+  </g>
+  <defs>
+    <radialGradient id="bg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(840 160) rotate(130) scale(820 980)">
+      <stop stop-color="#0891B2" stop-opacity="0.44"/>
+      <stop offset="0.55" stop-color="#0F172A" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#020817" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
