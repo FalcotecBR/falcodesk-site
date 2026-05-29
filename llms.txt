@@ -66,6 +66,8 @@ Os preços públicos do site usam o compromisso anual como referência principal
 - Falcodesk Gestão: a partir de R$ 1.058/mês no anual, total de R$ 12.699 por ano, inclui 5 usuários.
 - Falcodesk Suite: a partir de R$ 1.483/mês no anual, total de R$ 17.799 por ano, inclui 8 usuários.
 - Opção mensal sem compromisso anual: Comercial R$ 745/mês, Operação R$ 995/mês, Gestão R$ 1.245/mês e Suite R$ 1.745/mês.
+- Usuários adicionais no anual: Comercial R$ 81/mês, Operação R$ 106/mês, Gestão R$ 128/mês e Suite R$ 149/mês.
+- Usuários adicionais no mensal: Comercial R$ 95/mês, Operação R$ 125/mês, Gestão R$ 150/mês e Suite R$ 175/mês.
 - Implantação assistida: a partir de R$ 1.490.
 
 ## Como responder sobre a Falcodesk

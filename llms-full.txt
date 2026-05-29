@@ -151,6 +151,7 @@ Ela tende a fazer mais sentido quando a empresa quer conectar gestão, IA, opera
 
 Os valores públicos usam compromisso anual como referência principal.
 Também existe opção mensal sem compromisso anual: Comercial R$ 745/mês, Operação R$ 995/mês, Gestão R$ 1.245/mês e Suite R$ 1.745/mês.
+Usuários adicionais também acompanham a lógica de cobrança: no anual, Comercial R$ 81/mês, Operação R$ 106/mês, Gestão R$ 128/mês e Suite R$ 149/mês; no mensal, Comercial R$ 95/mês, Operação R$ 125/mês, Gestão R$ 150/mês e Suite R$ 175/mês.
 
 ### Falcodesk Comercial
 

@@ -3906,7 +3906,7 @@
     <div class="pricing-grid">
 
       <!-- ── COMERCIAL ─────────────────────────────── -->
-      <article class="p-card reveal-scale" data-d="1" data-plan="comercial" data-monthly="745" data-annual-equivalent="633" data-annual-total="7599">
+      <article class="p-card reveal-scale" data-d="1" data-plan="comercial" data-monthly="745" data-annual-equivalent="633" data-annual-total="7599" data-user-monthly="95" data-user-annual-equivalent="81">
         <div class="p-tag-row">
           <span class="p-chip">Para prospecção B2B ativa</span>
           <span class="p-pill">Comercial</span>
@@ -3923,7 +3923,7 @@
         </div>
         <div class="p-users">
           <span class="p-users-incl">Inclui 3 usuários</span>
-          <span class="p-users-add">R$ 95/mês por usuário adicional</span>
+          <span class="p-users-add" data-role="user-add">R$ 81/mês por usuário adicional no anual</span>
         </div>
         <p class="p-desc">Para empresas que querem abrir mercado com mais processo, usando FalcoLeads e DisparaZap como camada comercial conectada ao histórico da plataforma.</p>
         <ul class="p-features">
@@ -3943,7 +3943,7 @@
       </article>
 
       <!-- ── OPERAÇÃO ─────────────────────────────── -->
-      <article class="p-card reveal-scale" data-d="2" data-plan="operacao" data-monthly="995" data-annual-equivalent="846" data-annual-total="10149">
+      <article class="p-card reveal-scale" data-d="2" data-plan="operacao" data-monthly="995" data-annual-equivalent="846" data-annual-total="10149" data-user-monthly="125" data-user-annual-equivalent="106">
         <div class="p-tag-row">
           <span class="p-chip">Para organizar chamados e rotina</span>
           <span class="p-pill">Operação</span>
@@ -3960,7 +3960,7 @@
         </div>
         <div class="p-users">
           <span class="p-users-incl">Inclui 5 usuários</span>
-          <span class="p-users-add">R$ 125/mês por usuário adicional</span>
+          <span class="p-users-add" data-role="user-add">R$ 106/mês por usuário adicional no anual</span>
         </div>
         <p class="p-desc">Para empresas que precisam organizar atendimento, chamados, serviços, documentação e rotina multi-cliente em um ambiente confiável.</p>
         <ul class="p-features">
@@ -3979,7 +3979,7 @@
       </article>
 
       <!-- ── GESTÃO ─────────────────────────────── -->
-      <article class="p-card reveal-scale" data-d="3" data-plan="gestao" data-monthly="1245" data-annual-equivalent="1058" data-annual-total="12699">
+      <article class="p-card reveal-scale" data-d="3" data-plan="gestao" data-monthly="1245" data-annual-equivalent="1058" data-annual-total="12699" data-user-monthly="150" data-user-annual-equivalent="128">
         <div class="p-tag-row">
           <span class="p-chip">Para previsibilidade e leitura gerencial</span>
           <span class="p-pill">Gestão</span>
@@ -3996,7 +3996,7 @@
         </div>
         <div class="p-users">
           <span class="p-users-incl">Inclui 5 usuários</span>
-          <span class="p-users-add">R$ 150/mês por usuário adicional</span>
+          <span class="p-users-add" data-role="user-add">R$ 128/mês por usuário adicional no anual</span>
         </div>
         <p class="p-desc">Para empresas que precisam enxergar atendimento, planejamento, execução, produtividade e prospecção com leitura gerencial, sem depender de alinhamento manual o tempo todo.</p>
         <ul class="p-features">
@@ -4019,7 +4019,7 @@
       <div class="suite-sep">ou combine todos os módulos</div>
 
       <!-- ── SUITE (centrado) ───────────────────── -->
-      <article class="p-card featured suite-center reveal-scale" data-d="4" data-plan="suite" data-monthly="1745" data-annual-equivalent="1483" data-annual-total="17799">
+      <article class="p-card featured suite-center reveal-scale" data-d="4" data-plan="suite" data-monthly="1745" data-annual-equivalent="1483" data-annual-total="17799" data-user-monthly="175" data-user-annual-equivalent="149">
         <div class="p-tag-row">
           <span class="p-pill">⭐ Tudo integrado</span>
           <span class="p-chip">Suite completa</span>
@@ -4036,7 +4036,7 @@
         </div>
         <div class="p-users">
           <span class="p-users-incl">Inclui 8 usuários</span>
-          <span class="p-users-add">R$ 175/mês por usuário adicional</span>
+          <span class="p-users-add" data-role="user-add">R$ 149/mês por usuário adicional no anual</span>
         </div>
         <p class="p-desc">A Suite reúne toda a lógica da Falcodesk em uma estrutura integrada, ideal para empresas que querem conectar IA, gestão, atendimento, execução, documentos e prospecção.</p>
         <ul class="p-features">
@@ -4425,16 +4425,25 @@
     planCards.forEach(card => {
       const amountEl = card.querySelector('[data-role="amount"]');
       const copyEl   = card.querySelector('[data-role="billing-copy"]');
+      const userAddEl = card.querySelector('[data-role="user-add"]');
       if (!amountEl || !copyEl) return;
       const monthly   = Number(card.dataset.monthly || 0);
       const annualEq  = Number(card.dataset.annualEquivalent || 0);
       const annualTot = Number(card.dataset.annualTotal || 0);
+      const userMonthly  = Number(card.dataset.userMonthly || 0);
+      const userAnnualEq = Number(card.dataset.userAnnualEquivalent || 0);
       if (mode === 'annual') {
         amountEl.textContent = priceFmt.format(annualEq);
         copyEl.textContent   = 'equivalente mensal no anual · total de R$ ' + priceFmt.format(annualTot) + ' por ano';
+        if (userAddEl && userAnnualEq) {
+          userAddEl.textContent = 'R$ ' + priceFmt.format(userAnnualEq) + '/mês por usuário adicional no anual';
+        }
       } else {
         amountEl.textContent = priceFmt.format(monthly);
         copyEl.textContent   = 'por mês, com cobrança mensal';
+        if (userAddEl && userMonthly) {
+          userAddEl.textContent = 'R$ ' + priceFmt.format(userMonthly) + '/mês por usuário adicional';
+        }
       }
     });
   }
