@@ -4,7 +4,7 @@
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://falcodesk.com/</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://falcodesk.com/"/>
@@ -38,6 +38,54 @@
     </video:video>
   </url>
   <url>
+    <loc>https://falcodesk.com/gestao-com-ia.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://falcodesk.com/gestao-com-ia.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://falcodesk.com/gestao-com-ia.html"/>
+  </url>
+  <url>
+    <loc>https://falcodesk.com/fluxo-assistido-ia.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://falcodesk.com/fluxo-assistido-ia.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://falcodesk.com/fluxo-assistido-ia.html"/>
+  </url>
+  <url>
+    <loc>https://falcodesk.com/falcoleads-disparazap.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.86</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://falcodesk.com/falcoleads-disparazap.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://falcodesk.com/falcoleads-disparazap.html"/>
+  </url>
+  <url>
+    <loc>https://falcodesk.com/software-para-msp-ti.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://falcodesk.com/software-para-msp-ti.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://falcodesk.com/software-para-msp-ti.html"/>
+  </url>
+  <url>
+    <loc>https://falcodesk.com/precos.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://falcodesk.com/precos.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://falcodesk.com/precos.html"/>
+  </url>
+  <url>
+    <loc>https://falcodesk.com/sobre-a-falcodesk.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://falcodesk.com/sobre-a-falcodesk.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://falcodesk.com/sobre-a-falcodesk.html"/>
+  </url>
+  <url>
     <loc>https://falcodesk.com/privacidade.html</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>yearly</changefreq>
@@ -47,13 +95,13 @@
   </url>
   <url>
     <loc>https://falcodesk.com/llms.txt</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://falcodesk.com/llms-full.txt</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

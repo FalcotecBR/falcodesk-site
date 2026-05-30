@@ -48,7 +48,7 @@
   <meta property="og:image:width"  content="1200">
   <meta property="og:image:height" content="1200">
   <meta property="og:image:alt"   content="Falcodesk — Gestão operacional com IA e produtividade">
-  <meta property="og:updated_time" content="2026-05-28T00:00:00-03:00">
+  <meta property="og:updated_time" content="2026-05-29T00:00:00-03:00">
 
   <!-- ── TWITTER CARD ─────────────────────────────────────────── -->
   <meta name="twitter:card"        content="summary_large_image">
@@ -1658,6 +1658,77 @@
       font-size: 12.5px; color: var(--text-secondary);
       line-height: 1.6; margin: 0;
     }
+    .launch-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      width: fit-content;
+      margin-top: 18px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(103,232,249,0.18);
+      background: rgba(6,182,212,0.07);
+      color: var(--text-secondary);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .launch-note strong {
+      color: var(--text-accent);
+      font-weight: 700;
+    }
+
+    /* ============================================================
+       SECTION — INTENT LINKS
+    ============================================================ */
+    .s-intent { padding: 120px 0; }
+    .intent-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .intent-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 220px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 26px 20px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .intent-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card);
+    }
+    .intent-kicker {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      margin-bottom: 12px;
+    }
+    .intent-title {
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+    .intent-desc {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+    }
+    .intent-link {
+      margin-top: auto;
+      padding-top: 22px;
+      color: var(--text-accent);
+      font-size: 12px;
+      font-weight: 700;
+    }
 
     /* ============================================================
        HERO — RISK / MICROCOPY
@@ -2419,7 +2490,7 @@
 
       /* Section padding */
       .s-pain, .s-value, .s-benefits, .s-howit,
-      .s-diff, .s-whom, .s-gain, .s-cta, .s-pricing,
+      .s-diff, .s-whom, .s-gain, .s-cta, .s-pricing, .s-intent,
       .s-scenario, .s-notwho, .s-faq, .s-contact { padding: 80px 0; }
       .hero                { padding: 120px 0 72px; }
       .contact-wrap        { grid-template-columns: 1fr; gap: 40px; }
@@ -2482,6 +2553,7 @@
       /* Pricing */
       .pricing-grid        { grid-template-columns: 1fr; max-width: 100%; }
       .pricing-header      { flex-direction: column; align-items: flex-start; }
+      .intent-grid         { grid-template-columns: repeat(2, 1fr); }
       .p-cta-row           { flex-direction: column; }
       .p-cta-row .btn-primary,
       .p-cta-row .btn-ghost { justify-content: center; }
@@ -2530,7 +2602,7 @@
     @media (max-width: 480px) {
       /* Section padding */
       .s-pain, .s-value, .s-benefits, .s-howit,
-      .s-diff, .s-whom, .s-gain, .s-cta, .s-pricing,
+      .s-diff, .s-whom, .s-gain, .s-cta, .s-pricing, .s-intent,
       .s-scenario, .s-notwho, .s-faq, .s-contact { padding: 60px 0; }
       .hero                { padding: 100px 0 56px; }
       .form-row            { grid-template-columns: 1fr; }
@@ -2545,6 +2617,7 @@
       .benefits-grid       { grid-template-columns: 1fr; }
       .how-grid            { grid-template-columns: 1fr; }
       .whom-grid           { grid-template-columns: 1fr 1fr; }
+      .intent-grid         { grid-template-columns: 1fr; }
       .faq-grid            { gap: 10px; }
 
       /* Card sizing on small mobile */
@@ -2746,7 +2819,7 @@
           "width": 1200,
           "height": 1200
         },
-        "dateModified": "2026-05-28",
+        "dateModified": "2026-05-29",
         "mainEntity": {
           "@id": "https://falcodesk.com/#software"
         },
@@ -2825,7 +2898,7 @@
         "name": "Quanto custa, na prática?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No compromisso anual, os planos começam em R$ 633/mês no Comercial, R$ 846/mês no Operação, R$ 1.058/mês no Gestão e R$ 1.483/mês na Suite. O valor final depende do plano, do número de usuários e da maturidade operacional da empresa. A implantação assistida começa em R$ 1.490 e há opção mensal sem compromisso anual. Em uma conversa de 20 minutos a gente desenha o orçamento real para o seu cenário — sem letra miúda."
+          "text": "No compromisso anual, os planos começam em R$ 633/mês no Comercial, R$ 846/mês no Operação, R$ 1.058/mês no Gestão e R$ 1.483/mês na Suite, em condição de lançamento para os primeiros clientes Falcodesk. O valor final depende do plano, do número de usuários e da maturidade operacional da empresa. A implantação assistida começa em R$ 1.490 e há opção mensal sem compromisso anual. Em uma conversa de 20 minutos a gente desenha o orçamento real para o seu cenário — sem letra miúda."
         }
       },
       {
@@ -3886,6 +3959,47 @@
 <div class="sep"></div>
 
 <!-- ============================================================
+     INTENT LINKS
+============================================================ -->
+<section class="section s-intent" id="s-intencoes">
+  <div class="container">
+    <div class="sh-center reveal">
+      <span class="eyebrow">Explore por objetivo</span>
+      <h2 class="sh-title">Entre pela dor principal da sua empresa e aprofunde no ponto certo.</h2>
+      <p class="sh-sub">A home apresenta a Falcodesk como plataforma. As páginas específicas detalham gestão, fluxo assistido, comercial, MSPs e preços com mais contexto.</p>
+    </div>
+    <div class="intent-grid">
+      <a class="intent-card reveal-scale" data-d="1" href="gestao-com-ia.html">
+        <span class="intent-kicker">Gestão</span>
+        <span class="intent-title">Gestão operacional com IA</span>
+        <span class="intent-desc">Prioridades, gargalos, produtividade, clientes, responsáveis e leitura gerencial em um só ambiente.</span>
+        <span class="intent-link">Ver gestão com IA</span>
+      </a>
+      <a class="intent-card reveal-scale" data-d="2" href="fluxo-assistido-ia.html">
+        <span class="intent-kicker">IA aplicada</span>
+        <span class="intent-title">Fluxo assistido por IA</span>
+        <span class="intent-desc">Transforme briefing em cards, etapas, itens de projeto, propostas, orçamentos e documentos.</span>
+        <span class="intent-link">Ver fluxo assistido</span>
+      </a>
+      <a class="intent-card reveal-scale" data-d="3" href="falcoleads-disparazap.html">
+        <span class="intent-kicker">Comercial</span>
+        <span class="intent-title">FalcoLeads e DisparaZap</span>
+        <span class="intent-desc">Prospecção B2B com base de empresas, exportação CSV ou Excel e campanhas por WhatsApp.</span>
+        <span class="intent-link">Ver camada comercial</span>
+      </a>
+      <a class="intent-card reveal-scale" data-d="4" href="precos.html">
+        <span class="intent-kicker">Planos</span>
+        <span class="intent-title">Preços e condição inicial</span>
+        <span class="intent-desc">Planos anuais e mensais, usuários adicionais, implantação assistida e pirâmide de evolução.</span>
+        <span class="intent-link">Ver preços</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============================================================
      PRICING
 ============================================================ -->
 <section class="section s-pricing" id="s-planos">
@@ -3896,6 +4010,7 @@
         <span class="eyebrow">Planos</span>
         <h2 class="sh-title">Escolha o degrau certo para ganhar gestão, produtividade e crescimento.</h2>
         <p class="sh-sub">A Falcodesk pode começar pela geração de demanda, pela organização da operação ou pela leitura gerencial. A lógica é a mesma: conectar IA, execução e gestão conforme a maturidade da empresa.</p>
+        <p class="launch-note"><strong>Condição de lançamento</strong> Valores de entrada para os primeiros clientes Falcodesk, mantendo a pirâmide proporcional entre planos.</p>
       </div>
       <div class="billing-toggle">
         <button data-billing="monthly">Mensal</button>
@@ -4074,9 +4189,9 @@
         <p>Cada plano tem seu valor por usuário adicional — cresça no ritmo da operação sem mudar de plano.</p>
       </div>
       <div class="p-addon">
-        <span class="eyebrow">Compromisso anual</span>
-        <strong>Até 15% de desconto no plano anual</strong>
-        <p>Mais previsibilidade financeira e melhor condição comercial.</p>
+        <span class="eyebrow">Condição de lançamento</span>
+        <strong>Valores de entrada para primeiros clientes</strong>
+        <p>Planos reduzidos para começar leve, mantendo a proporção entre Comercial, Operação, Gestão e Suite.</p>
       </div>
     </div>
 
@@ -4107,7 +4222,7 @@
           Quanto custa, na prática?
           <span class="faq-q-icon"><svg viewBox="0 0 10 10" fill="none" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
         </div>
-        <div class="faq-a">No compromisso anual, os planos começam em R$ 633/mês no Comercial, R$ 846/mês no Operação, R$ 1.058/mês no Gestão e R$ 1.483/mês na Suite. O valor final depende do plano, do número de usuários e da maturidade operacional da empresa. A implantação assistida começa em R$ 1.490 e há opção mensal sem compromisso anual. Em uma conversa de 20 minutos a gente desenha o orçamento real para o seu cenário — sem letra miúda.</div>
+        <div class="faq-a">No compromisso anual, os planos começam em R$ 633/mês no Comercial, R$ 846/mês no Operação, R$ 1.058/mês no Gestão e R$ 1.483/mês na Suite, em condição de lançamento para os primeiros clientes Falcodesk. O valor final depende do plano, do número de usuários e da maturidade operacional da empresa. A implantação assistida começa em R$ 1.490 e há opção mensal sem compromisso anual. Em uma conversa de 20 minutos a gente desenha o orçamento real para o seu cenário — sem letra miúda.</div>
       </div>
       <div class="faq-item reveal" data-d="3">
         <div class="faq-q">
@@ -4270,19 +4385,20 @@
       <div>
         <div class="f-col-title">Plataforma</div>
         <ul class="f-links">
-          <li><a href="#s-valor">Gestão com IA</a></li>
-          <li><a href="#s-scenario">Fluxo assistido</a></li>
-          <li><a href="#s-scenario">Planejamento IA</a></li>
-          <li><a href="#s-scenario">Chamados</a></li>
-          <li><a href="#s-valor">Documentos</a></li>
-          <li><a href="#s-planos">FalcoLeads e DisparaZap</a></li>
-          <li><a href="#s-ganho">Visão gerencial</a></li>
+          <li><a href="gestao-com-ia.html">Gestão com IA</a></li>
+          <li><a href="fluxo-assistido-ia.html">Fluxo assistido</a></li>
+          <li><a href="fluxo-assistido-ia.html">Planejamento IA</a></li>
+          <li><a href="software-para-msp-ti.html">Chamados e MSPs</a></li>
+          <li><a href="gestao-com-ia.html">Documentos</a></li>
+          <li><a href="falcoleads-disparazap.html">FalcoLeads e DisparaZap</a></li>
+          <li><a href="precos.html">Preços</a></li>
         </ul>
       </div>
 
       <div>
         <div class="f-col-title">Empresa</div>
         <ul class="f-links">
+          <li><a href="sobre-a-falcodesk.html">Sobre a Falcodesk</a></li>
           <li><a href="https://falcotec.com.br/" target="_blank" rel="noopener">Sobre a Falcotec</a></li>
           <li><a href="https://www.instagram.com/falcotec/" target="_blank" rel="noopener">Instagram da Falcotec</a></li>
           <li><a href="mailto:comercial@falcodesk.com.br">Contato comercial</a></li>

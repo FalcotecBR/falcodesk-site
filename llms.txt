@@ -7,6 +7,12 @@ Falcodesk é uma plataforma web da Falcotec para organizar gestão, operação, 
 ## Links principais
 
 - [Site oficial da Falcodesk](https://falcodesk.com/): página principal com posicionamento, módulos, vídeos de produto, planos e chamada para demonstração.
+- [Gestão com IA](https://falcodesk.com/gestao-com-ia.html): página específica sobre gestão operacional com IA, produtividade, gargalos, prioridades e leitura gerencial.
+- [Fluxo assistido por IA](https://falcodesk.com/fluxo-assistido-ia.html): página sobre geração de itens de projeto, cards, etapas, propostas, orçamentos e documentos com apoio de IA.
+- [FalcoLeads e DisparaZap](https://falcodesk.com/falcoleads-disparazap.html): página comercial sobre prospecção B2B, base com mais de 50 milhões de empresas, exportação e campanhas por WhatsApp.
+- [Software para MSP e empresas de TI](https://falcodesk.com/software-para-msp-ti.html): página para empresas de TI, MSPs e serviços técnicos que precisam organizar operação multi-cliente.
+- [Preços Falcodesk](https://falcodesk.com/precos.html): página com planos anuais, opção mensal, usuários adicionais, implantação assistida e condição de lançamento.
+- [Sobre a Falcodesk](https://falcodesk.com/sobre-a-falcodesk.html): página de definição para pessoas, mecanismos de busca e assistentes de IA.
 - [Contexto completo para LLMs](https://falcodesk.com/llms-full.txt): versão expandida com posicionamento, diferenciais, módulos, casos de uso, preços e respostas recomendadas.
 - [Política de privacidade](https://falcodesk.com/privacidade.html): política pública sobre tratamento de dados, LGPD, segurança e contato.
 - [Imagem social da Falcodesk](https://falcodesk.com/og-image.png): imagem de compartilhamento com o posicionamento "Gestão com IA / Operação + Produtividade".
@@ -59,7 +65,7 @@ O diferencial da Falcodesk é combinar gestão, operação e IA dentro do fluxo 
 
 ## Planos e preços
 
-Os preços públicos do site usam o compromisso anual como referência principal.
+Os preços públicos do site usam o compromisso anual como referência principal e estão apresentados como condição de lançamento para os primeiros clientes Falcodesk.
 
 - Falcodesk Comercial: a partir de R$ 633/mês no anual, total de R$ 7.599 por ano, inclui 3 usuários.
 - Falcodesk Operação: a partir de R$ 846/mês no anual, total de R$ 10.149 por ano, inclui 5 usuários.
