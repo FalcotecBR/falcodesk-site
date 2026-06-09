@@ -16,7 +16,7 @@
     var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
     c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
     })(document);
-    smartlook('init', '8489d7b9d0a0edcb4be58294f348edc359878e08', { region: 'eu' });
+    smartlook('init', 'a9eab07faf91f7457226324bba161d2700f9a631', { region: 'eu' });
 </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -4775,7 +4775,7 @@
 <!-- ============================================================
      COOKIE BANNER
 ============================================================ -->
-<div id="cookieBanner" style="display:none" aria-live="polite" role="region" aria-label="Aviso de cookies">
+<div id="cookieBanner" aria-live="polite" role="region" aria-label="Aviso de cookies">
   <style>
     #cookieBanner {
       position: fixed;
@@ -4791,10 +4791,13 @@
       border: 1px solid rgba(100, 140, 180, 0.14);
       border-radius: 18px;
       padding: 16px 20px;
-      display: flex !important;
+      display: none;
       align-items: center;
       gap: 20px;
       box-shadow: 0 8px 40px rgba(0,0,0,0.55);
+    }
+    #cookieBanner.cookie-visible {
+      display: flex;
       animation: cookie-in 0.4s cubic-bezier(0.22,0.68,0,1.0) both;
     }
     @keyframes cookie-in {
@@ -4872,29 +4875,55 @@
     <a href="privacidade.html#cookies">Saiba mais</a>
   </p>
   <div class="cookie-actions">
-    <button class="cookie-btn cookie-btn-decline" id="cookieDecline">Só essenciais</button>
-    <button class="cookie-btn cookie-btn-accept" id="cookieAccept">Aceitar todos</button>
+    <button class="cookie-btn cookie-btn-decline" id="cookieDecline" type="button">Só essenciais</button>
+    <button class="cookie-btn cookie-btn-accept" id="cookieAccept" type="button">Aceitar todos</button>
   </div>
 </div>
 <script>
   (function () {
     const COOKIE_KEY = 'fcd_cookie_consent';
-    if (localStorage.getItem(COOKIE_KEY)) return;
 
     const banner  = document.getElementById('cookieBanner');
     const accept  = document.getElementById('cookieAccept');
     const decline = document.getElementById('cookieDecline');
+    if (!banner || !accept || !decline) return;
+
+    function getConsent() {
+      try {
+        const storedConsent = localStorage.getItem(COOKIE_KEY);
+        if (storedConsent) return storedConsent;
+      } catch {
+        // localStorage can be unavailable in restricted browsing modes.
+      }
+
+      return document.cookie
+        .split('; ')
+        .find(row => row.startsWith(`${COOKIE_KEY}=`))
+        ?.split('=')[1] || null;
+    }
+
+    function setConsent(value) {
+      try {
+        localStorage.setItem(COOKIE_KEY, value);
+      } catch {
+        document.cookie = `${COOKIE_KEY}=${value}; path=/; max-age=31536000; SameSite=Lax`;
+      }
+    }
+
+    if (getConsent()) return;
 
     function dismiss(value) {
-      localStorage.setItem(COOKIE_KEY, value);
+      setConsent(value);
       banner.classList.add('cookie-out');
-      setTimeout(() => { banner.style.display = 'none'; }, 320);
+      setTimeout(() => {
+        banner.classList.remove('cookie-visible', 'cookie-out');
+      }, 320);
     }
 
     accept.addEventListener('click',  () => dismiss('all'));
     decline.addEventListener('click', () => dismiss('essential'));
 
-    setTimeout(() => { banner.style.display = 'flex'; }, 1200);
+    setTimeout(() => { banner.classList.add('cookie-visible'); }, 1200);
   })();
 </script>
 </body>
